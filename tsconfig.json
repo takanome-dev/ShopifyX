@@ -12,6 +12,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noImplicitThis": true,
+		"noFallthroughCasesInSwitch": true,
 		"esModuleInterop": true,
 		"strictNullChecks": true,
 		"module": "esnext",

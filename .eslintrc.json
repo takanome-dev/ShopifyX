@@ -1,18 +1,19 @@
 {
-	"root": true,
-	"extends": [
-		"next/core-web-vitals",
-		"airbnb",
-		"airbnb-typescript",
-		"plugin:@typescript-eslint/recommended-requiring-type-checking",
-		"plugin:@typescript-eslint/strict"
-		// "eslint:recommended",
-		// "plugin:@typescript-eslint/recommended"
-	],
-	"parser": "@typescript-eslint/parser",
-	"parserOptions": {
-		"tsconfigRootDir": "__dirname",
-		"project": ["./tsconfig.json"]
-	},
-	"plugins": ["@typescript-eslint"]
+  "root": true,
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/strict"
+    // "eslint:recommended",
+    // "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "tsconfigRootDir": "__dirname",
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {}
 }

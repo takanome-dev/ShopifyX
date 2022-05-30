@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@apollo/client': ^3.6.4
+  '@apollo/client': 3.6.5
   '@babel/core': 7.18.2
   '@babel/eslint-parser': ^7.17.0
   '@babel/preset-env': ^7.18.0
@@ -37,7 +37,7 @@ specifiers:
   typescript: 4.7.2
 
 dependencies:
-  '@apollo/client': 3.6.4_7oyq4t3ocdziwagw7zfqg4youi
+  '@apollo/client': 3.6.5_7oyq4t3ocdziwagw7zfqg4youi
   graphql: 16.5.0
   next: 12.1.6_6j5eyi3us3liopewjenwniphpy
   react: 18.1.0
@@ -83,8 +83,8 @@ packages:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.13
 
-  /@apollo/client/3.6.4_7oyq4t3ocdziwagw7zfqg4youi:
-    resolution: {integrity: sha512-2z0dzQpx2HhGK5Pip/rbMM5kkbE4BLZGK2ItSmy2lMPy9/SZGFnw+zWBXSoIook0JT2bDscm+FsdmtV+1AhdJw==}
+  /@apollo/client/3.6.5_7oyq4t3ocdziwagw7zfqg4youi:
+    resolution: {integrity: sha512-xGAZzv1f5abyH45MSU5eOLyGQuP4Ps0OhP36pSCtt6pCICI3n4yDkdftFCPvqDVqVTuciX1kkyeJPfGodz5kwg==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
       graphql-ws: ^5.5.5

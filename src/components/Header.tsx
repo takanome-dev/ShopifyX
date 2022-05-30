@@ -9,7 +9,7 @@ export default function Header() {
   const [navbar, setNavbar] = useState(false);
 
   const changeBgColor = () =>
-    Router.pathname === '/' && window.scrollY >= 480
+    Router.pathname === '/' && window.scrollY >= 500
       ? setNavbar(true)
       : setNavbar(false);
 

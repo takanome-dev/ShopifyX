@@ -1,12 +1,12 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import { HeroImage } from '@/public/assets';
 import { FaArrowCircleRight } from 'react-icons/fa';
 
 const HeroStyle = styled.div`
   padding-top: 2rem;
-  height: 100vh;
+  height: calc(100vh - var(--header-height));
   background: var(--linear1);
 
   .container {

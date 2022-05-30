@@ -12,6 +12,7 @@ const HeaderStyles = styled.header`
   top: 0;
   background: ${({ changeColor }: { changeColor: boolean }) =>
     changeColor ? '#fff' : 'var(--linear1)'};
+  z-index: 2;
 
   .logo {
     background: ${({ changeColor }: { changeColor: boolean }) =>

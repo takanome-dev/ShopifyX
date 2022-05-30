@@ -5,7 +5,7 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"]
+      "@/*": ["src/*"]
     },
     "skipLibCheck": true,
     "strict": true,

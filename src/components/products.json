@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Yeti Hondo",
+    "description": "Great shoes!",
+    "status": "AVAILABLE",
+    "price": 3423,
+    "photo": "https://res.cloudinary.com/wesbos/image/upload/v1576791335/sick-fits-keystone/5dfbed262849d7961377c2c0.jpg"
+  },
+  {
+    "name": "Airmax 270",
+    "description": "soo nice",
+    "status": "AVAILABLE",
+    "price": 5234,
+    "photo": "https://res.cloudinary.com/wesbos/image/upload/v1579815920/sick-fits-keystone/5e2a13f0689b2835ae71d1a5.jpg"
+  },
+  {
+    "name": "KITH Hoodie",
+    "description": "Love this hoodie",
+    "status": "AVAILABLE",
+    "price": 23562,
+    "photo": "https://res.cloudinary.com/wesbos/image/upload/v1579815935/sick-fits-keystone/5e2a13ff689b2835ae71d1a7.jpg"
+  },
+  {
+    "name": "Fanorak",
+    "description": "Super hip. Comes in a number of colors",
+    "status": "AVAILABLE",
+    "price": 252342,
+    "photo": "https://res.cloudinary.com/wesbos/image/upload/v1579815957/sick-fits-keystone/5e2a1413689b2835ae71d1a9.png"
+  },
+  {
+    "name": "Nike Vapormax",
+    "description": "Kind of squeaky on some floors",
+    "status": "AVAILABLE",
+    "price": 83456,
+    "photo": "https://res.cloudinary.com/wesbos/image/upload/v1579815980/sick-fits-keystone/5e2a142c689b2835ae71d1ab.jpg"
+  },
+  {
+    "name": "Yeti Cooler",
+    "description": "Who spends this much on a cooler?!",
+    "status": "AVAILABLE",
+    "price": 75645,
+    "photo": "https://res.cloudinary.com/wesbos/image/upload/v1579815999/sick-fits-keystone/5e2a143f689b2835ae71d1ad.jpg"
+  },
+  {
+    "name": "Naked and Famous Denim",
+    "description": "Japanese Denim, made in Canada",
+    "status": "AVAILABLE",
+    "price": 10000,
+    "photo": "https://res.cloudinary.com/wesbos/image/upload/v1579816030/sick-fits-keystone/5e2a145d689b2835ae71d1af.jpg"
+  },
+  {
+    "name": "Rimowa Luggage",
+    "description": "S T E A L T H",
+    "status": "AVAILABLE",
+    "price": 47000,
+    "photo": "https://res.cloudinary.com/wesbos/image/upload/v1579816060/sick-fits-keystone/5e2a147b689b2835ae71d1b1.png"
+  }
+]

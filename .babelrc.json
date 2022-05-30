@@ -1,4 +1,0 @@
-{
-  "presets": ["next/babel", "@babel/env", "@babel/preset-typescript"],
-  "plugins": ["babel-plugin-styled-components"]
-}

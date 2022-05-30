@@ -1,2 +1,5 @@
 # next config
 next.config.js
+
+# dependencies
+node_modules/

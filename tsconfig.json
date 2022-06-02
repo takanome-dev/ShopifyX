@@ -5,7 +5,10 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@components/*": ["src/components/*"],
+      "@styles/*": ["src/components/styles/*"],
+      "@assets": ["public/assets"],
+      "@lib/*": ["src/lib/*"]
     },
     "skipLibCheck": true,
     "strict": true,

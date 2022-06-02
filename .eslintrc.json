@@ -18,16 +18,17 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-    // "sort-imports": [
-    //   "error",
-    //   {
-    //     "ignoreCase": false,
-    //     "ignoreDeclarationSort": false,
-    //     "ignoreMemberSort": false,
-    //     "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
-    //     "allowSeparatedGroups": false
-    //   }
-    // ]
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": [
+          "function-declaration",
+          "arrow-function",
+          "function-expression"
+        ]
+      }
+    ],
+    "react/prop-types": "off",
     "import/first": "error",
     "import/exports-last": "error",
     "import/newline-after-import": "error",

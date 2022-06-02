@@ -1,16 +1,28 @@
-import React from 'react';
-import { Product } from './types';
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 import { FaCartPlus, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
-import formatMoney from '@/lib/formatMoney';
+
+import formatMoney from '@lib/formatMoney';
+
+import { Product } from './types';
 
 export default function Card({ product }: { product: Product }) {
   return (
     <div className="card">
-      <img src={product.photo} alt={product.name} />
+      <Image
+        src={product.photo}
+        alt={product.name}
+        width={400}
+        height={350}
+        layout="responsive"
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+yHgAFWAJp08sG7wAAAABJRU5ErkJggg=="
+      />
       <div className="description">
         <Link href="#product">{product.name}</Link>
-        <p>{product.description}</p>
+        <p className="desc">{product.description}</p>
         <p className="price">{formatMoney(product.price)}</p>
       </div>
       <div className="buttons">

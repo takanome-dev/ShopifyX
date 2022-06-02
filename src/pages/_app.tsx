@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import Header from '@/components/Header';
-import GlobalStyles from '@/components/styles/Global';
+// import Footer from '@components/Footer';
+import Header from '@components/Header';
+import GlobalStyles from '@styles/Global';
 
 import type { AppProps } from 'next/app';
 
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyles />
       <Header />
       <Component {...pageProps} />
+      {/* <Footer /> */}
     </>
   );
 }

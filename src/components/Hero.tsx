@@ -1,81 +1,39 @@
+// import Image from 'next/image';
 import React from 'react';
-import styled from 'styled-components';
-
-import { HeroImage } from '@/public/assets';
 import { FaArrowCircleRight } from 'react-icons/fa';
 
-const HeroStyle = styled.div`
-  padding-top: 2rem;
-  height: calc(100vh - var(--header-height));
-  background: var(--linear1);
+import HeroImage from '@assets';
 
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    max-width: var(--maxWidth);
-    margin: 0 auto;
-  }
-
-  .desc {
-    h1 {
-      font-size: 5rem;
-      margin: 0;
-    }
-
-    p {
-      font-size: 3rem;
-    }
-
-    button {
-      padding: 1rem 2rem;
-      background: var(--shipGray);
-      color: #fff;
-      border-radius: 0.8rem;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      font-size: 2rem;
-      transition: background 0.3s ease-in-out;
-
-      span {
-        margin-right: 1rem;
-      }
-
-      &:hover {
-        background: var(--linear1);
-        color: var(--shipGray);
-      }
-    }
-  }
-
-  .product {
-    /* width: 500px;
-    height: 600px; */
-    img {
-      width: 100%;
-      object-fit: contain;
-    }
-  }
-`;
+import Button from './common/Button';
+import HeroStyles from './styles/HeroStyles';
 
 export default function Hero() {
+  /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  const image = HeroImage.src;
+
   return (
-    <HeroStyle>
+    <HeroStyles>
       <div className="container">
         <div className="desc">
           <h1>Every Purchase Will Be Made With Pleasure</h1>
           <p>Buying and selling of goods or services using the internet.</p>
-          <button>
-            <span>Start shopping</span>
-            <FaArrowCircleRight />
-          </button>
+          <Button
+            title="Start shopping"
+            Icon={FaArrowCircleRight}
+            bgColor="var(--black)"
+            color="#fff"
+          />
         </div>
         <div className="product">
-          <img src={HeroImage.src} alt="Nike Vapormax" />
+          <img
+            src={image}
+            alt="Nike Vapormax"
+            // width={500}
+            // height={500}
+          />
         </div>
       </div>
-    </HeroStyle>
+    </HeroStyles>
   );
 }

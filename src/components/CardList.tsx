@@ -8,7 +8,7 @@ export default function CardList() {
   return (
     <CardListStyles>
       {products.map((p) => (
-        <Card key={p.price} product={p} />
+        <Card key={p.id} product={p} />
       ))}
     </CardListStyles>
   );

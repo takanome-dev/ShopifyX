@@ -6,17 +6,14 @@ const HeaderStyles = styled.header`
   align-items: center;
   padding: 0 2rem;
   height: var(--header-height);
-  ${({ changeColor }: { changeColor: boolean }) =>
-    changeColor && 'box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);'}
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  background: ${({ changeColor }: { changeColor: boolean }) =>
-    changeColor ? '#fff' : 'var(--linear)'};
+  background: #fff;
   z-index: 2;
 
   .logo {
-    background: ${({ changeColor }: { changeColor: boolean }) =>
-      changeColor ? 'var(--linear)' : 'transparent'};
+    background: var(--linear);
     transform: skew(-10deg);
     font-size: 3rem;
     margin: 0;
@@ -25,10 +22,6 @@ const HeaderStyles = styled.header`
       color: var(--black);
       padding: 1rem;
       text-transform: uppercase;
-    }
-
-    @media (max-width: 400px) {
-      font-size: 2rem;
     }
   }
 
@@ -47,8 +40,7 @@ const HeaderStyles = styled.header`
         height: 3px;
         width: 0;
         content: '';
-        background: ${({ changeColor }: { changeColor: boolean }) =>
-          changeColor ? 'var(--linear)' : '#fff'};
+        background: var(--linear);
         position: absolute;
         left: 0;
         transition: var(--animation-duration);

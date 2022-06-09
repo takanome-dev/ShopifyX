@@ -5,7 +5,6 @@ const GlobalStyles = createGlobalStyle`
     --header-height: 70px;
     --animation-duration: 0.3s;
     /* --linear: linear-gradient(90deg,#FB1834, #FB2B90); */
-
     --red: #ff0000;
     --black: #3E363F;
     --gray: #3A3A3A;
@@ -16,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
     --offWhite: #ededed;
     --maxWidth: 1100px;
     /* --bs: 0 12px 24px 0 rgba(0,0,0,0.09); */
+    --header-bs: 0 0 10px 2px rgba(0, 0, 0, 0.1);
 
     font-size: 10px;
   }

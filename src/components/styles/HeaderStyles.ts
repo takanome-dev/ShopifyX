@@ -26,6 +26,10 @@ const HeaderStyles = styled.header`
       padding: 1rem;
       text-transform: uppercase;
     }
+
+    @media (max-width: 400px) {
+      font-size: 2rem;
+    }
   }
 
   .nav {

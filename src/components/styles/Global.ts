@@ -5,12 +5,16 @@ const GlobalStyles = createGlobalStyle`
     --header-height: 70px;
     --animation-duration: 0.3s;
     /* --linear: linear-gradient(90deg,#FB1834, #FB2B90); */
+    --cyan: #02C5F5;
+    --lime: #92FE9E;
     --red: #ff0000;
     --black: #3E363F;
     --gray: #3A3A3A;
     --grey: var(--gray);
     --lightGray: #e1e1e1;
     --lightGrey: var(--lightGray);
+    --lightestGray: #aaa;
+    --lightestGrey: var(--lightGray);
     --linear: linear-gradient(90deg,#02C5F5, #92FE9E);
     --offWhite: #ededed;
     --maxWidth: 1100px;

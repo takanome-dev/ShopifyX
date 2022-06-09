@@ -1,7 +1,8 @@
-import Products from '@components/Products';
 import React from 'react';
 
-export default function index() {
+import Products from '@components/Products';
+
+export default function ProductPage() {
   return (
     <div>
       <Products />

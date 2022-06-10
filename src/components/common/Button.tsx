@@ -13,7 +13,8 @@ const ButtonStyles = styled.button.attrs((props: ButtonProps) => ({
   bgColor: props.bgColor,
 }))`
   padding: 1rem 3rem;
-  border: 1px solid ${(props) => props.color};
+  /* border: 1px solid ${(props) => props.color}; */
+  border: none;
   color: ${(props) => props.color};
   background: ${(props) => props.bgColor};
   border-radius: 0.8rem;

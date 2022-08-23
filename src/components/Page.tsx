@@ -16,15 +16,13 @@ type Props = {
   children: ReactNode;
 };
 
-const Page: NextPage<Props> = ({ children }) => {
-  return (
-    <>
-      <GlobalStyles />
-      <Header />
-      <Container>{children}</Container>
-      {/* <Footer /> */}
-    </>
-  );
-};
+const Page: NextPage<Props> = ({ children }) => (
+  <>
+    <GlobalStyles />
+    <Header />
+    <Container>{children}</Container>
+    {/* <Footer /> */}
+  </>
+);
 
 export default Page;

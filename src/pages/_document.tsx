@@ -5,6 +5,7 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document';
+import React from 'react';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
@@ -18,6 +19,7 @@ export default class MyDocument extends Document {
         originalRenderPage({
           // Useful for wrapping the whole react tree
           enhanceApp: (App) => (props) =>
+            // eslint-disable-next-line react/jsx-props-no-spreading
             sheet.collectStyles(<App {...props} />),
         });
 

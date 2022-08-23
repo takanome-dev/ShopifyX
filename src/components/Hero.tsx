@@ -1,4 +1,4 @@
-// import Image from 'next/image';
+import Image from 'next/image';
 import React from 'react';
 import { FaArrowCircleRight } from 'react-icons/fa';
 
@@ -8,8 +8,6 @@ import Button from './common/Button';
 import HeroStyles from './styles/HeroStyles';
 
 export default function Hero() {
-  /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   const image = HeroImage.src;
 
   return (
@@ -26,12 +24,7 @@ export default function Hero() {
           />
         </div>
         <div className="product">
-          <img
-            src={image}
-            alt="Nike Vapormax"
-            // width={500}
-            // height={500}
-          />
+          <Image src={image} alt="Nike Vapormax" width={500} height={500} />
         </div>
       </div>
     </HeroStyles>

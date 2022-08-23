@@ -43,13 +43,11 @@ const Button: NextPage<Props> = ({
   color = 'var(--black)',
   Icon,
   title,
-}) => {
-  return (
-    <ButtonStyles type="button" color={color} bgColor={bgColor}>
-      {title}
-      {Icon && <Icon size={20} color={color} />}
-    </ButtonStyles>
-  );
-};
+}) => (
+  <ButtonStyles type="button" color={color} bgColor={bgColor}>
+    {title}
+    {Icon && <Icon size={20} color={color} />}
+  </ButtonStyles>
+);
 
 export default Button;

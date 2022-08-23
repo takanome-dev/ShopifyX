@@ -83,21 +83,19 @@ type Props = {
   error?: string;
 };
 
-const Input: NextPage<Props> = ({ label, name, type = 'text', error }) => {
-  return (
-    <InputStyles>
-      <label htmlFor={name}>
-        <input type={type} name={name} id={name} />
-        <span>{label}</span>
-      </label>
-      {error && (
-        <p className="error">
-          <MdErrorOutline color="var(--red)" size={20} />
-          Error message
-        </p>
-      )}
-    </InputStyles>
-  );
-};
+const Input: NextPage<Props> = ({ label, name, type = 'text', error }) => (
+  <InputStyles>
+    <label htmlFor={name}>
+      <input type={type} name={name} id={name} />
+      <span>{label}</span>
+    </label>
+    {error && (
+      <p className="error">
+        <MdErrorOutline color="var(--red)" size={20} />
+        Error message
+      </p>
+    )}
+  </InputStyles>
+);
 
 export default Input;

@@ -6,3 +6,10 @@ export interface Product {
   price: number;
   photo: string;
 }
+
+export interface InitialValues {
+  image: string;
+  name: string;
+  price: number;
+  description: string;
+}

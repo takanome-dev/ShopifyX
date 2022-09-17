@@ -19,6 +19,8 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "react/function-component-definition": [
       2,
       {

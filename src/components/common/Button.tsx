@@ -3,15 +3,7 @@ import React from 'react';
 import { IconType } from 'react-icons/lib';
 import styled from 'styled-components';
 
-type ButtonProps = {
-  color: string;
-  bgColor: string;
-};
-
-const ButtonStyles = styled.button.attrs((props: ButtonProps) => ({
-  color: props.color,
-  bgColor: props.bgColor,
-}))`
+const ButtonStyles = styled.button`
   padding: 1rem 3rem;
   /* border: 1px solid ${(props) => props.color}; */
   border: none;
@@ -29,22 +21,28 @@ const ButtonStyles = styled.button.attrs((props: ButtonProps) => ({
   svg {
     margin-left: 1rem;
   }
+
+  ${({ disabled }: { disabled: boolean }) =>
+    disabled && 'pointer-events: none;opacity:0.6;'}
 `;
 
-type Props = {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   Icon: IconType;
   title: string;
   bgColor?: string;
   color?: string;
-};
+  disabled?: boolean;
+}
 
-const Button: NextPage<Props> = ({
+const Button: NextPage<ButtonProps> = ({
   bgColor = 'var(--linear)',
   color = 'var(--black)',
   Icon,
   title,
+  type = 'button',
+  disabled = false,
 }) => (
-  <ButtonStyles type="button" color={color} bgColor={bgColor}>
+  <ButtonStyles type={type} color={color} bgColor={bgColor} disabled={disabled}>
     {title}
     {Icon && <Icon size={20} color={color} />}
   </ButtonStyles>

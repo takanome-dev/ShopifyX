@@ -21,6 +21,9 @@ const ButtonStyles = styled.button`
   svg {
     margin-left: 1rem;
   }
+
+  ${({ disabled }: { disabled: boolean }) =>
+    disabled && 'pointer-events: none;opacity:0.6;'}
 `;
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -28,6 +31,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
   bgColor?: string;
   color?: string;
+  disabled?: boolean;
 }
 
 const Button: NextPage<ButtonProps> = ({
@@ -36,8 +40,9 @@ const Button: NextPage<ButtonProps> = ({
   Icon,
   title,
   type = 'button',
+  disabled = false,
 }) => (
-  <ButtonStyles type={type} color={color} bgColor={bgColor}>
+  <ButtonStyles type={type} color={color} bgColor={bgColor} disabled={disabled}>
     {title}
     {Icon && <Icon size={20} color={color} />}
   </ButtonStyles>

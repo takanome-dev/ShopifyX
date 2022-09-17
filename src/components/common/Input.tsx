@@ -1,6 +1,9 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useField } from 'formik';
+
+import { useField, useFormikContext } from 'formik';
 import { NextPage } from 'next';
 import React, { useEffect } from 'react';
 import { MdErrorOutline } from 'react-icons/md';
@@ -100,11 +103,12 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const Input: NextPage<InputProps> = ({ label, ...props }) => {
   const [field, meta] = useField(props);
+  const { values, setFieldValue } = useFormikContext();
 
   useEffect(() => {
     const inputs = document.querySelectorAll('input');
-    inputs.forEach((el) => {
-      el.addEventListener('blur', (e) => {
+    inputs.forEach((el: any) => {
+      el.addEventListener('blur', (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target?.value) {
           e.target?.classList.add('dirty');
         } else {
@@ -118,10 +122,22 @@ const Input: NextPage<InputProps> = ({ label, ...props }) => {
     <InputStyles>
       <LabelStyles
         htmlFor={props.name}
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         error={(meta.error && meta.touched) as any}
       >
-        <input {...field} {...props} />
+        <input
+          {...field}
+          {...props}
+          value={props.name !== 'image' ? (values as any)[props.name] : null}
+          onChange={(e) => {
+            let { type, name, value } = e.currentTarget;
+
+            if (type === 'file') {
+              value = e.currentTarget.files?.[0] as any;
+            }
+
+            setFieldValue(name, value);
+          }}
+        />
         <span className="label">{label}</span>
       </LabelStyles>
       {meta.touched && meta.error && (

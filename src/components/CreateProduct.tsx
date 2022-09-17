@@ -15,15 +15,33 @@ const FormStyles = styled(Form)`
   border-radius: 0.8rem;
 `;
 
+const Fieldset = styled.fieldset`
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  &[disabled='true'] {
+    opacity: 0.5;
+    pointer-events: none;
+
+    input[type='file'] {
+      ::-webkit-file-upload-button {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    }
+  }
+`;
+
 const initialValues = {
-  image: '',
+  image: null,
   name: '',
   price: '',
   description: '',
 };
 
 const validationSchema = Yup.object().shape({
-  image: Yup.string().required(),
+  image: Yup.mixed().required(),
   name: Yup.string().min(4).required(),
   price: Yup.number().integer('price must be a "number"').min(1).required(),
   description: Yup.string().min(10).required(),
@@ -37,10 +55,12 @@ export default function CreateProduct() {
       onSubmit={(values) => console.log({ values })}
     >
       <FormStyles>
-        <Input type="file" name="image" />
-        <Input name="name" label="Name" />
-        <Input name="price" type="text" label="Price" />
-        <Input name="description" label="Description" />
+        <Fieldset>
+          <Input type="file" name="image" />
+          <Input name="name" label="Name" />
+          <Input name="price" type="text" label="Price" />
+          <Input name="description" label="Description" />
+        </Fieldset>
         <Button title="Create product" type="submit" Icon={FaPen} />
       </FormStyles>
     </Formik>

@@ -1,16 +1,8 @@
 import { NextPage } from 'next';
 import React, { ReactNode } from 'react';
-import styled from 'styled-components';
 
 // import Footer from './Footer'
 import Header from './Header';
-import GlobalStyles from './styles/Global';
-
-const Container = styled.main`
-  max-width: var(--maxWidth);
-  margin: 3rem auto;
-  padding: 0 2rem;
-`;
 
 type Props = {
   children: ReactNode;
@@ -18,9 +10,8 @@ type Props = {
 
 const Page: NextPage<Props> = ({ children }) => (
   <>
-    <GlobalStyles />
     <Header />
-    <Container>{children}</Container>
+    <div className="max-w-[1100px] px-8 mx-auto my-12">{children}</div>
     {/* <Footer /> */}
   </>
 );

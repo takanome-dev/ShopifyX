@@ -5,99 +5,21 @@
 
 import { useField, useFormikContext } from 'formik';
 import { NextPage } from 'next';
-import React, { useEffect } from 'react';
-import { MdErrorOutline } from 'react-icons/md';
-// import { TiWarning } from 'react-icons/ti';
-import styled from 'styled-components';
+import React from 'react';
+
+import ErrorMessage from './ErrorMessage';
 
 /**
  * For more information about the input transition
- * See {@link https://www.youtube.com/watch?v=3AK3vspZvvM&t=280s}
+ * @css see {@link https://www.youtube.com/watch?v=3AK3vspZvvM&t=280s}
+ * @tailwind see {@link https://www.youtube.com/watch?v=nJzKi6oIvBA}
  */
-
-const InputStyles = styled.div`
-  margin: 1.5rem 0;
-  /* display: block; */
-
-  input {
-    padding: 1rem 1.5rem;
-    /* border: 1px solid var(--lightGray); */
-    border-radius: 0.8rem;
-    font-size: 1.5rem;
-    outline: none;
-    color: var(--gray);
-    width: 100%;
-    transition: border 0.3s ease;
-
-    &:focus {
-      transition-delay: 0.1s;
-      border-color: var(--cyan);
-    }
-
-    &:focus + span,
-    &.dirty + span {
-      top: -1.3rem;
-      left: 1rem;
-      font-size: 1.2rem;
-      color: var(--black);
-      background: #fff;
-      padding: 0 1rem;
-    }
-
-    ::-webkit-file-upload-button {
-      background: var(--linear);
-      border: none;
-      padding: 1rem;
-      color: var(--black);
-      border-radius: 0.5rem;
-      font-weight: 600;
-      margin-right: 1rem;
-      cursor: pointer;
-    }
-  }
-
-  .label {
-    position: absolute;
-    left: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: all 0.3s ease;
-  }
-
-  .error {
-    display: flex;
-    align-items: center;
-    color: var(--red);
-    font-size: 1.3rem;
-    margin-top: 0.5rem;
-
-    svg {
-      margin-right: 1rem;
-    }
-  }
-`;
-
-const LabelStyles = styled.label`
-  font-size: 1.5rem;
-  position: relative;
-
-  input {
-    ${({ error }: { error: string }) =>
-      error
-        ? 'border: 1px solid var(--red);'
-        : 'border: 1px solid var(--lightGray);'}
-  }
-
-  .label {
-    ${({ error }: { error: string }) =>
-      error ? 'color: var(--red);' : 'color: var(--lightestGray);'}
-  }
-`;
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label?: string;
   type?: string;
+  placeholder?: string;
   error?: string;
 }
 
@@ -105,48 +27,40 @@ const Input: NextPage<InputProps> = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   const { values, setFieldValue } = useFormikContext();
 
-  useEffect(() => {
-    const inputs = document.querySelectorAll('input');
-    inputs.forEach((el: any) => {
-      el.addEventListener('blur', (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target?.value) {
-          e.target?.classList.add('dirty');
-        } else {
-          e.target?.classList.remove('dirty');
-        }
-      });
-    });
-  }, []);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let { type, name, value } = e.currentTarget;
+
+    if (type === 'file') {
+      value = e.currentTarget.files?.[0] as any;
+    }
+
+    setFieldValue(name, value);
+  };
+
+  const error = meta.touched && meta.error;
 
   return (
-    <InputStyles>
-      <LabelStyles
+    <div className="relative my-6">
+      <input
+        {...field}
+        {...props}
+        id={props.name}
+        className={`peer py-4 px-6 placeholder-transparent rounded-xl text-2xl border-2 ${
+          error ? 'border-red' : 'border-gray-300'
+        } outline-none text-gray-700 w-full transition-all duration-[300ms] ease-in-out focus:delay-100 focus:border-cyan file:border-none file:p-4 file:rounded-lg file:font-semibold file:mr- file:cursor-pointer file:bg-gradient-to-r file:from-cyan file:to-teal file:text-gray-700`}
+        value={props.name !== 'image' ? (values as any)[props.name] : null}
+        onChange={handleChange}
+      />
+      <label
+        className={`text-xl ${
+          error ? 'text-red' : 'text-gray-600'
+        } absolute left-6 bg-white px-3 -top-3.5 transition-all duration-[300ms] ease-in-out peer-placeholder-shown:text-2xl peer-placeholder-shown:bg-transparent peer-placeholder-shown:top-5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400`}
         htmlFor={props.name}
-        error={(meta.error && meta.touched) as any}
       >
-        <input
-          {...field}
-          {...props}
-          value={props.name !== 'image' ? (values as any)[props.name] : null}
-          onChange={(e) => {
-            let { type, name, value } = e.currentTarget;
-
-            if (type === 'file') {
-              value = e.currentTarget.files?.[0] as any;
-            }
-
-            setFieldValue(name, value);
-          }}
-        />
-        <span className="label">{label}</span>
-      </LabelStyles>
-      {meta.touched && meta.error && (
-        <p className="error">
-          <MdErrorOutline color="var(--red)" size={20} />
-          {meta.error}
-        </p>
-      )}
-    </InputStyles>
+        {label}
+      </label>
+      <ErrorMessage error={error} />
+    </div>
   );
 };
 

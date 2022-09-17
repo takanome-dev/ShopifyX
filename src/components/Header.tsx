@@ -4,8 +4,6 @@ import { FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
 
 import HeaderLink from './common/HeaderLink';
 
-// import HeaderStyles from './styles/HeaderStyles';
-
 export default function Header() {
   return (
     <header className="grid grid-cols-[auto_1fr_auto] items-center shadow-md sticky top-0 px-10 bg-white z-10">

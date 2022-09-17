@@ -10,7 +10,7 @@ const ButtonStyles = styled.button`
   color: ${(props) => props.color};
   background: ${(props) => props.bgColor};
   border-radius: 0.8rem;
-  align-self: center;
+  /* align-self: center; why */
   margin-top: 2rem;
   font-size: 2rem;
   font-weight: 600;
@@ -26,26 +26,32 @@ const ButtonStyles = styled.button`
     disabled && 'pointer-events: none;opacity:0.6;'}
 `;
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps {
   Icon: IconType;
   title: string;
   bgColor?: string;
   color?: string;
   disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const Button: NextPage<ButtonProps> = ({
-  bgColor = 'var(--linear)',
-  color = 'var(--black)',
+  bgColor = 'bg-gradient-to-r from-cyan to-teal',
+  color = 'text-gray-700',
   Icon,
   title,
   type = 'button',
   disabled = false,
 }) => (
-  <ButtonStyles type={type} color={color} bgColor={bgColor} disabled={disabled}>
+  <button
+    // eslint-disable-next-line react/button-has-type
+    type={type}
+    disabled={disabled}
+    className={`py-4 px-12 border-none ${color} ${bgColor} rounded-lg mt-8 text-3xl font-semibold flex items-center cursor-pointer`}
+  >
     {title}
-    {Icon && <Icon size={20} color={color} />}
-  </ButtonStyles>
+    {Icon && <Icon size={20} className={`${color} ml-4`} />}
+  </button>
 );
 
 export default Button;

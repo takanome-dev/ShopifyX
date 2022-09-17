@@ -8,7 +8,7 @@ import Button from './common/Button';
 import Input from './common/Input';
 
 const initialValues = {
-  image: null,
+  image: '',
   name: '',
   price: '',
   description: '',

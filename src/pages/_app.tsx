@@ -2,7 +2,8 @@
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import React from 'react';
-import '@components/styles/nprogress.css';
+import '@style/nprogress.css';
+import '@style/globals.css';
 
 import Page from '@components/Page';
 

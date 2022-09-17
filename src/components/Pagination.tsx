@@ -21,12 +21,16 @@ const PaginationStyles = styled.div`
 
 export default function Pagination() {
   return (
-    <PaginationStyles>
-      <Link href="/#">⬅ Prev</Link>
-      <p>1</p>
-      <p>..</p>
-      <p>10</p>
-      <Link href="/#"> ➡️ Next</Link>
-    </PaginationStyles>
+    <div className="w-[300px] grid grid-cols-[repeat(5,_auto)] rounded-2xl my-12 mx-auto overflow-hidden border border-gray-300">
+      <Link href="/#">
+        <a className="p-4 text-2xl border-r border-r-gray-300">⬅️ Prev</a>
+      </Link>
+      <p className="p-4 text-2xl border-r border-r-gray-300">1</p>
+      <p className="p-4 text-2xl border-r border-r-gray-300">..</p>
+      <p className="p-4 text-2xl border-r border-r-gray-300">10</p>
+      <Link href="/#">
+        <a className="p-4 text-2xl">➡️ Next</a>
+      </Link>
+    </div>
   );
 }

@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ ! for more information about these css reset properties
+ ! head over to https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  --header-height: 70px;
+  --animation-duration: 0.3s;
+  /* --linear: linear-gradient(90deg,#FB1834, #FB2B90); */
+  --cyan: #02c5f5;
+  --lime: #92fe9e;
+  --red: #ff0000;
+  --black: #3e363f;
+  --gray: #3a3a3a;
+  --grey: var(--gray);
+  --lightGray: #e1e1e1;
+  --lightGrey: var(--lightGray);
+  --lightestGray: #aaa;
+  --lightestGrey: var(--lightGray);
+  --linear: linear-gradient(90deg, #02c5f5, #92fe9e);
+  --offWhite: #ededed;
+  --maxWidth: 1100px;
+  /* --bs: 0 12px 24px 0 rgba(0,0,0,0.09); */
+  --header-bs: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  color: #374151;
+}
+
+#__next {
+  isolation: isolate;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+a {
+  text-decoration: none;
+  color: #374151;
+}

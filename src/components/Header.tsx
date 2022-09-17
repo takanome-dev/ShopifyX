@@ -2,25 +2,33 @@ import Link from 'next/link';
 import React from 'react';
 import { FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
 
-import HeaderStyles from './styles/HeaderStyles';
+import HeaderLink from './common/HeaderLink';
+
+// import HeaderStyles from './styles/HeaderStyles';
 
 export default function Header() {
   return (
-    <HeaderStyles>
-      <h1 className="logo">
+    <header className="grid grid-cols-[auto_1fr_auto] items-center shadow-md sticky top-0 px-10 bg-white z-10">
+      <h1 className="p-4 text-5xl text-gray-900 uppercase bg-gradient-to-r from-cyan to-teal">
         <Link href="/">Click To Buy</Link>
       </h1>
-      <nav className="nav">
-        <Link href="/products">Products</Link>
-        <Link href="/sell">Sell</Link>
-        <Link href="/order">Order</Link>
-        <Link href="/account">Account</Link>
+      <nav className="justify-center hidden md:flex">
+        <HeaderLink name="Products" path="products" />
+        <HeaderLink name="Sell" path="sell" />
+        <HeaderLink name="Order" path="order" />
+        <HeaderLink name="Account" path="account" />
       </nav>
-      <div className="icons">
-        <FaSearch size={20} color="var(--shipGray)" />
-        <FaShoppingCart size={20} color="var(--shipGray)" />
-        <FaBars size={20} color="var(--shipGray)" />
+      <div className="flex justify-end">
+        <FaSearch size={20} className="text-gray-700 cursor-pointer" />
+        <FaShoppingCart
+          size={20}
+          className="ml-8 text-gray-700 cursor-pointer"
+        />
+        <FaBars
+          size={20}
+          className="block ml-8 text-gray-700 cursor-pointer md:hidden"
+        />
       </div>
-    </HeaderStyles>
+    </header>
   );
 }

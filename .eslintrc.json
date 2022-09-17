@@ -65,6 +65,7 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "space-before-blocks": "error",
+    "jsx-a11y/anchor-is-valid": "off",
     "space-before-function-paren": [
       "error",
       {

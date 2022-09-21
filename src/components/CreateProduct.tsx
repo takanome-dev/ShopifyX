@@ -45,7 +45,12 @@ export default function CreateProduct() {
               placeholder="Nice car"
             />
           </fieldset>
-          <Button title="Create product" type="submit" Icon={FaPen} />
+          <Button
+            title="Create product"
+            className="flex py-5 border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+            type="submit"
+            Icon={FaPen}
+          />
         </Form>
       </Formik>
     </div>

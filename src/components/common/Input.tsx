@@ -47,7 +47,7 @@ const Input: NextPage<InputProps> = ({ label, ...props }) => {
         id={props.name}
         className={`peer py-4 px-6 placeholder-transparent rounded-xl text-2xl border-2 ${
           error ? 'border-red' : 'border-gray-300'
-        } outline-none text-gray-700 w-full transition-all duration-[300ms] ease-in-out focus:delay-100 focus:ring-2 focus:ring-cyan file:border-none file:p-4 file:rounded-lg file:font-semibold file:mr- file:cursor-pointer file:bg-gradient-to-r file:from-cyan file:to-teal hover:file:opacity-80 file:text-gray-700`}
+        } outline-none text-gray-700 w-full transition-all duration-[300ms] ease-in-out focus:delay-100 focus:border-cyan focus:ring-2 focus:ring-cyan file:border-none file:p-4 file:rounded-lg file:font-semibold file:mr- file:cursor-pointer file:bg-gradient-to-r file:from-cyan file:to-teal hover:file:opacity-80 file:text-gray-700`}
         value={props.name !== 'image' ? (values as any)[props.name] : undefined}
         onChange={handleChange}
       />

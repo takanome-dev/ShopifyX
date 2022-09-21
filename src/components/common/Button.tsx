@@ -3,32 +3,44 @@ import React from 'react';
 import { IconType } from 'react-icons/lib';
 
 interface ButtonProps {
-  Icon: IconType;
+  Icon?: IconType;
   title: string;
   bgColor?: string;
   color?: string;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  className?: string | undefined;
+  iconPosition?: 'left' | 'right';
 }
 
+// bgColor = 'bg-gradient-to-r from-cyan to-teal',
+// color = 'text-gray-700',
 // TODO: replace cyan2 with cyan and move cyan to primary color
 const Button: NextPage<ButtonProps> = ({
-  bgColor = 'bg-gradient-to-r from-cyan to-teal',
-  color = 'text-gray-700',
   Icon,
   title,
   type = 'button',
+  className,
   disabled = false,
-}) => (
-  <button
-    // eslint-disable-next-line react/button-has-type
-    type={type}
-    disabled={disabled}
-    className={`py-4 px-12 border-none ${color} ${bgColor} hover:opacity-90 rounded-lg mt-8 text-3xl font-semibold flex items-center cursor-pointer shadow-lg shadow-cyan2-500/30`}
-  >
-    {title}
-    {Icon && <Icon size={20} className={`${color} ml-4`} />}
-  </button>
-);
+  iconPosition = 'right',
+}) => {
+  const classes = `${className!} px-12 rounded-lg mt-8 text-3xl font-semibold cursor-pointer`;
+  return (
+    <button
+      // eslint-disable-next-line react/button-has-type
+      type={type}
+      disabled={disabled}
+      className={classes}
+    >
+      {Icon && iconPosition === 'left' && (
+        <Icon size={20} className="mr-4 text-gray-700" />
+      )}
+      {title}
+      {Icon && iconPosition === 'right' && (
+        <Icon size={20} className="ml-4 text-gray-700" />
+      )}
+    </button>
+  );
+};
 
 export default Button;

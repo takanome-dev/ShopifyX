@@ -2,6 +2,8 @@ import React from 'react';
 
 import Button from '@components/common/Button';
 
+// TODO: add border gradient color
+
 const CardOrderHeader = () => (
   <div className="flex items-center justify-between p-8">
     <div className="flex items-center gap-x-20">

@@ -13,7 +13,7 @@ export default function Header() {
       <nav className="justify-center hidden md:flex">
         <HeaderLink name="Products" path="products" />
         <HeaderLink name="Sell" path="sell" />
-        <HeaderLink name="Order" path="order" />
+        <HeaderLink name="Order" path="orders" />
         <HeaderLink name="Account" path="account" />
       </nav>
       <div className="flex justify-end">

@@ -24,7 +24,7 @@ const Button: NextPage<ButtonProps> = ({
   disabled = false,
   iconPosition = 'right',
 }) => {
-  const classes = `${className!} px-12 rounded-lg mt-8 text-3xl font-semibold cursor-pointer`;
+  const classes = `${className!} px-12 rounded-lg text-3xl font-semibold cursor-pointer`;
   return (
     <button
       // eslint-disable-next-line react/button-has-type

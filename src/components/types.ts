@@ -5,6 +5,7 @@ export interface Product {
   status: string;
   price: number;
   photo: string;
+  orderStatus?: 'processing' | 'delivered' | 'failed';
 }
 
 export interface InitialValues {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Formik, Form } from 'formik';
 import React from 'react';
-import { FaPen } from 'react-icons/fa';
+import { FaPen, FaPlusCircle } from 'react-icons/fa';
 import * as Yup from 'yup';
 
 import Button from './common/Button';
@@ -47,9 +47,11 @@ export default function CreateProduct() {
           </fieldset>
           <Button
             title="Create product"
-            className="flex py-5 border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+            className="flex border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
             type="submit"
-            Icon={FaPen}
+            Icon={FaPlusCircle}
+            iconPosition="left"
+            size="lg"
           />
         </Form>
       </Formik>

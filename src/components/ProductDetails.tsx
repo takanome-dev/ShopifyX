@@ -35,12 +35,14 @@ const ProductDetails = () => {
           <p className="mb-8 text-3xl font-semibold">
             {formatMoney(product?.price)}
           </p>
-          <p className="text-2xl">{product?.description}</p>
+          <p className="mb-8 text-2xl">{product?.description}</p>
           <Button
             title="Add to cart"
-            className="flex justify-center w-full py-6 text-center text-gray-700 border-none shadow-md bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/30 hover:opacity-80"
+            className="flex justify-center w-full text-center border-none shadow-md bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/30 hover:opacity-80"
+            // className="flex justify-center w-full py-6 text-center text-gray-700 border-none shadow-md bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/30 hover:opacity-80"
             Icon={FaShoppingBag}
             iconPosition="left"
+            size="lg"
           />
         </div>
       </div>

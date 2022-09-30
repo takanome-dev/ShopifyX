@@ -5,16 +5,13 @@ import { IconType } from 'react-icons/lib';
 interface ButtonProps {
   Icon?: IconType;
   title: string;
-  bgColor?: string;
-  color?: string;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   className?: string | undefined;
   iconPosition?: 'left' | 'right';
+  size?: 'sm' | 'md' | 'lg';
 }
 
-// bgColor = 'bg-gradient-to-r from-cyan to-teal',
-// color = 'text-gray-700',
 // TODO: replace cyan2 with cyan and move cyan to primary color
 const Button: NextPage<ButtonProps> = ({
   Icon,
@@ -23,8 +20,17 @@ const Button: NextPage<ButtonProps> = ({
   className,
   disabled = false,
   iconPosition = 'right',
+  size,
 }) => {
-  const classes = `${className!} px-12 rounded-lg text-3xl font-semibold cursor-pointer`;
+  const padding =
+    size === 'sm'
+      ? 'px-4 py-5 text-2xl'
+      : size === 'md'
+      ? 'px-5 py-6 text-2xl'
+      : 'px-6 py-6 text-3xl';
+
+  const classes = `${className!} ${padding} rounded-lg font-semibold cursor-pointer flex items-center`;
+
   return (
     <button
       // eslint-disable-next-line react/button-has-type
@@ -33,11 +39,11 @@ const Button: NextPage<ButtonProps> = ({
       className={classes}
     >
       {Icon && iconPosition === 'left' && (
-        <Icon size={20} className="mr-4 text-gray-700" />
+        <Icon size={18} className="mr-4 text-gray-700" />
       )}
-      {title}
+      <span>{title}</span>
       {Icon && iconPosition === 'right' && (
-        <Icon size={20} className="ml-4 text-gray-700" />
+        <Icon size={18} className="ml-4 text-gray-700" />
       )}
     </button>
   );

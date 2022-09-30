@@ -25,7 +25,8 @@ const CardOrderHeader = () => (
     <div>
       <Button
         title="View Order"
-        className="px-4 py-5 text-2xl transition border hover:bg-gray-100"
+        className="transition border hover:bg-gray-100"
+        size="sm"
       />
     </div>
   </div>

@@ -2,6 +2,6 @@ import React from 'react';
 
 import Login from '@components/Login';
 
-const LoginPage = () => <Login />;
-
-export default LoginPage;
+export default function LoginPage() {
+  return <Login />;
+}

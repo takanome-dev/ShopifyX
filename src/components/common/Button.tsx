@@ -29,7 +29,7 @@ const Button: NextPage<ButtonProps> = ({
       ? 'px-5 py-6 text-2xl'
       : 'px-6 py-6 text-3xl';
 
-  const classes = `${className!} ${padding} rounded-lg font-semibold cursor-pointer flex items-center`;
+  const classes = `${className!} ${padding} rounded-lg font-semibold cursor-pointer flex items-center justify-center`;
 
   return (
     <button

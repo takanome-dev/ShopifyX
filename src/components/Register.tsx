@@ -8,22 +8,24 @@ import Input from './common/Input';
 import Link from './common/Link';
 
 const initialValues = {
+  username: '',
   email: '',
   password: '',
 };
 
 const validationSchema = Yup.object().shape({
+  username: Yup.string().min(4).required(),
   email: Yup.string().email().required(),
   password: Yup.string().min(8).required(),
 });
 
-const Login = () => (
+const Register = () => (
   <div className="min-h-[550px] flex items-center justify-center">
     <div className="rounded-xl shadow-xl w-[500px] p-8">
       <div className="mb-12">
-        <h2 className="pb-4 text-4xl font-semibold text-center">Sign In</h2>
+        <h2 className="pb-4 text-4xl font-semibold text-center">Register</h2>
         <p className="text-xl text-center">
-          Please sign-in to your account and start shopping 🛒
+          Create an account and start shopping 🛒
         </p>
       </div>
       <Formik
@@ -32,13 +34,11 @@ const Login = () => (
         onSubmit={(values) => console.log({ values })}
       >
         <Form className="">
+          <Input name="username" label="Username" />
           <Input name="email" label="Email" />
           <Input name="password" label="Password" />
-          <div className="my-4 text-right">
-            <Link path="/reset-password" title="Forgot password?" />
-          </div>
           <Button
-            title="Sign in"
+            title="Sign up"
             className="w-full mt-8 border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
             type="submit"
             size="lg"
@@ -46,7 +46,7 @@ const Login = () => (
         </Form>
       </Formik>
       <p className="mt-10 text-2xl text-center">
-        New here? <Link path="/register" title="Create an account" />
+        Already have an account? <Link path="/login" title="Sign in instead" />
       </p>
       <div className="relative flex flex-col items-center mt-8">
         <p className="mb-4 bg-white px-4 text-2xl before:content-[''] before:w-full before:h-1 before:bg-gray-200 before:absolute before:left-0 before:top-3 before:-z-10">
@@ -71,4 +71,4 @@ const Login = () => (
   </div>
 );
 
-export default Login;
+export default Register;

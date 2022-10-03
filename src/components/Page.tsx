@@ -11,7 +11,7 @@ type Props = {
 const Page: NextPage<Props> = ({ children }) => (
   <>
     <Header />
-    <main className="max-w-[1100px] px-8 mx-auto my-12">{children}</main>
+    <main className="max-w-screen-xl px-8 mx-auto my-12">{children}</main>
     {/* <Footer /> */}
   </>
 );

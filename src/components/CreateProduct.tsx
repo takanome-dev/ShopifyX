@@ -23,13 +23,13 @@ const validationSchema = Yup.object().shape({
 
 export default function CreateProduct() {
   return (
-    <div className="pb-20">
+    <div className="min-h-[550px] flex items-center justify-center">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values) => console.log({ values })}
       >
-        <Form className="p-8 border border-gray-300 mt-28 rounded-xl">
+        <Form className="w-full max-w-screen-md p-8 border border-gray-300 rounded-xl">
           <fieldset className="p-0 m-0 border-none disabled:opacity-50 disabled:pointer-events-none">
             <Input type="file" name="image" />
             <Input name="name" label="Name" placeholder="Car" />

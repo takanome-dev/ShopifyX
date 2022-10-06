@@ -4,7 +4,11 @@ import { FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
 
 import HeaderLink from './common/HeaderLink';
 
-export default function Header() {
+interface HeaderProps {
+  handleOpen: () => void;
+}
+
+export default function Header({ handleOpen }: HeaderProps) {
   return (
     <header className="sticky top-0 z-10 bg-white shadow-md bg-opacity-80 backdrop-blur-md">
       <nav className="grid grid-cols-[auto_1fr_auto] items-center max-w-screen-xl mx-auto px-10 xl:px-0">
@@ -22,6 +26,7 @@ export default function Header() {
           <FaShoppingCart
             size={20}
             className="ml-8 text-gray-700 cursor-pointer"
+            onClick={handleOpen}
           />
           <FaBars
             size={20}

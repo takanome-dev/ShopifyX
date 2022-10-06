@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import React, { ReactNode, useState } from 'react';
 
-import Cart from './Cart';
+import { Cart } from './Cart';
 import Header from './Header';
 
 type Props = {

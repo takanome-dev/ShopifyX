@@ -4,8 +4,9 @@
 import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
-import Button from './common/Button';
-import CartProduct from './Product/CartProduct';
+import Button from '../common/Button';
+
+import CartProduct from './CartItem';
 
 interface CartProps {
   handleClose: () => void;

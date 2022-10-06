@@ -5,7 +5,7 @@ export default class MyDocument extends Document {
   //  TODO: remove this file if there is no meta tags added
   render() {
     return (
-      <Html>
+      <Html className="scroll-smooth">
         <Head />
         <body>
           <Main />

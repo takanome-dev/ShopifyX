@@ -12,6 +12,7 @@ interface CartProps {
   cartOpen: boolean;
 }
 
+// TODO: drop pr-2 if cart items > 4
 const Cart = ({ handleClose, cartOpen }: CartProps) => (
   <>
     <div
@@ -35,7 +36,7 @@ const Cart = ({ handleClose, cartOpen }: CartProps) => (
           <AiOutlineClose size={20} />
         </button>
       </div>
-      <div className="max-h-[84%] mt-8 overflow-y-auto border border-red-500">
+      <div className="cart-items-scrollbar max-h-[84%] pr-2 mt-4 overflow-y-auto">
         <CartProduct />
         <CartProduct />
         <CartProduct />
@@ -47,7 +48,7 @@ const Cart = ({ handleClose, cartOpen }: CartProps) => (
         <CartProduct />
         <CartProduct />
       </div>
-      <div className="absolute bottom-0 w-[92%] p-4 bg-white border border-blue-500">
+      <div className="absolute bottom-0 w-[92%] p-4 bg-white">
         <div className="flex items-center justify-between">
           <p className="text-2xl">
             SubTotal: <span className="text-2xl font-semibold">$20,000</span>

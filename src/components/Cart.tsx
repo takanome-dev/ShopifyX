@@ -1,97 +1,65 @@
-import Image from 'next/image';
-import Link from 'next/link';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
 import React from 'react';
-import {
-  AiFillDelete,
-  AiFillHeart,
-  AiOutlineClose,
-  AiOutlineHeart,
-} from 'react-icons/ai';
+import { AiOutlineClose } from 'react-icons/ai';
 
-import formatMoney from '@lib/formatMoney';
+import Button from './common/Button';
+import CartProduct from './Product/CartProduct';
 
-import { Product } from './types';
+interface CartProps {
+  handleClose: () => void;
+  cartOpen: boolean;
+}
 
-const product: Product = {
-  id: 1,
-  name: 'Yeti Hondo',
-  description: 'Great shoes!',
-  status: 'AVAILABLE',
-  price: 3423,
-  photo:
-    'https://res.cloudinary.com/wesbos/image/upload/v1576791335/sick-fits-keystone/5dfbed262849d7961377c2c0.jpg',
-  orderStatus: 'delivered',
-};
-
-const Cart = () => (
-  <div className="absolute top-0 right-0 z-10 w-1/3 h-full p-8 bg-white shadow-2xl">
-    <div className="flex items-center justify-between">
-      <h2 className="text-4xl font-semibold">My Cart</h2>
-      <button type="button" className="p-4 rounded-full hover:bg-gray-100">
-        <AiOutlineClose size={20} />
-      </button>
-    </div>
-    <div className="mt-8">
-      <div className="grid grid-cols-[100px_1fr] gap-x-8 border border-gray-100 shadow-xs p-4 rounded-xl">
-        <div className="overflow-hidden border-2 rounded-xl">
-          <Image
-            src={product.photo}
-            alt={product.name}
-            width="100%"
-            height="100%"
-            className="object-cover"
-            layout="responsive"
-            placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+yHgAFWAJp08sG7wAAAABJRU5ErkJggg=="
+const Cart = ({ handleClose, cartOpen }: CartProps) => (
+  <>
+    <div
+      className={`inset-0 z-10 transition ease-in-out bg-gray-900 ${
+        cartOpen ? 'fixed bg-opacity-40' : 'bg-opacity-0 hidden'
+      }`}
+      onClick={handleClose}
+    />
+    <div
+      className={`fixed top-0 right-0 z-10 w-1/3 h-full p-8 overflow-hidden transition duration-300 ease-in-out bg-white shadow-2xl ${
+        cartOpen ? 'translate-x-0' : 'translate-x-full'
+      }`}
+    >
+      <div className="flex items-center justify-between">
+        <h2 className="text-4xl font-semibold">My Cart</h2>
+        <button
+          type="button"
+          className="p-4 rounded-full hover:bg-gray-100"
+          onClick={handleClose}
+        >
+          <AiOutlineClose size={20} />
+        </button>
+      </div>
+      <div className="max-h-[84%] mt-8 overflow-y-auto border border-red-500">
+        <CartProduct />
+        <CartProduct />
+        <CartProduct />
+        <CartProduct />
+        <CartProduct />
+        <CartProduct />
+        <CartProduct />
+        <CartProduct />
+        <CartProduct />
+        <CartProduct />
+      </div>
+      <div className="absolute bottom-0 w-[92%] p-4 bg-white border border-blue-500">
+        <div className="flex items-center justify-between">
+          <p className="text-2xl">
+            SubTotal: <span className="text-2xl font-semibold">$20,000</span>
+          </p>
+          <Button
+            title="Proceed to checkout"
+            className="border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+            size="sm"
           />
-        </div>
-        <div className="flex flex-col justify-between">
-          <div className="flex items-center justify-between">
-            <Link href={`products/${product.id}`}>
-              <a className="text-3xl font-semibold hover:underline">
-                {product.name}
-              </a>
-            </Link>
-            <p className="text-3xl font-semibold">
-              {formatMoney(product.price)}
-            </p>
-          </div>
-          <div className="flex justify-between">
-            <div className="flex items-center border-2 rounded-xl">
-              <button
-                type="button"
-                className="h-full px-6 py-2 text-2xl transition hover:bg-gray-100"
-              >
-                -
-              </button>
-              <span className="px-6 py-2 text-2xl">1</span>
-              <button
-                type="button"
-                className="h-full px-6 py-2 text-2xl transition hover:bg-gray-100"
-              >
-                +
-              </button>
-            </div>
-            <div className="flex items-center gap-x-4">
-              <button
-                type="button"
-                className="p-4 text-gray-500 rounded-full hover:bg-gray-100"
-              >
-                <AiFillHeart size={20} />
-              </button>
-              <span className='relative before:absolute before:content-[""] before:w-[2px] before:h-6 before:bg-gray-200 before:-top-3 before:bottom-0' />
-              <button
-                type="button"
-                className="p-4 text-red-500 rounded-full hover:bg-gray-100"
-              >
-                <AiFillDelete size={20} />
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
-  </div>
+  </>
 );
-
 export default Cart;

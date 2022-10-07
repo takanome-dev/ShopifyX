@@ -21,6 +21,7 @@
   "rules": {
     "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "comma-dangle": "off",
     "react/function-component-definition": [
       2,
       {

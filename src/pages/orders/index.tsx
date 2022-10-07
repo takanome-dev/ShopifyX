@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Orders from '@components/Order/Orders';
+import Orders from '@components/Order';
 
 export default function OrderPage() {
   return <Orders />;

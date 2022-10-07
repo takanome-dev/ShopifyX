@@ -5,9 +5,9 @@ import { FaShoppingBag } from 'react-icons/fa';
 
 import formatMoney from '@lib/formatMoney';
 
-import CardList from './CardList';
-import Button from './common/Button';
-import products from './products.json';
+import { CardList } from '../Card';
+import Button from '../common/Button';
+import products from '../products.json';
 
 const ProductDetails = () => {
   const router = useRouter();

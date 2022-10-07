@@ -1,7 +1,7 @@
 import React from 'react';
 
-import CardList from './CardList';
-import Pagination from './Pagination';
+import { CardList } from '../Card';
+import Pagination from '../Pagination';
 
 export default function Products() {
   return (

@@ -1,7 +1,8 @@
 import React from 'react';
 
+import products from '../products.json';
+
 import Card from './Card';
-import products from './products.json';
 
 export default function CardList() {
   return (

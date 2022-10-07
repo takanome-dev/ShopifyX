@@ -35,17 +35,17 @@ const product3: Product = {
   orderStatus: 'failed',
 };
 
-const Orders = () => (
-  <div className="pt-5 pb-16">
-    <h1 className="mb-4 text-5xl font-bold">Order History</h1>
-    <p className="mb-8 text-2xl text-gray-500">
-      Check status of recent orders, manage returns and discover similar
-      products
-    </p>
-    <CardOrder product={product2} />
-    <CardOrder product={product1} />
-    <CardOrder product={product3} />
-  </div>
-);
-
-export default Orders;
+export default function Orders() {
+  return (
+    <div className="pt-5 pb-16">
+      <h1 className="mb-4 text-5xl font-bold">Order History</h1>
+      <p className="mb-8 text-2xl text-gray-500">
+        Check status of recent orders, manage returns and discover similar
+        products
+      </p>
+      <CardOrder product={product2} />
+      <CardOrder product={product1} />
+      <CardOrder product={product3} />
+    </div>
+  );
+}

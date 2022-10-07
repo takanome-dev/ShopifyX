@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Formik, Form } from 'formik';
 import React from 'react';
-import { FaPen, FaPlusCircle } from 'react-icons/fa';
+import { FaPlusCircle } from 'react-icons/fa';
 import * as Yup from 'yup';
 
-import Button from './common/Button';
-import Input from './common/Input';
+import Button from '../common/Button';
+import Input from '../common/Input';
 
 const initialValues = {
   image: '',

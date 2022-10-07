@@ -5,7 +5,7 @@ import { FaCartPlus, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 
 import formatMoney from '@lib/formatMoney';
 
-import { Product } from './types';
+import { Product } from '../types';
 
 export default function Card({ product }: { product: Product }) {
   return (

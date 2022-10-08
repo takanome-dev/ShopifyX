@@ -9,7 +9,8 @@
       "@styles/*": ["src/components/styles/*"],
       "@style/*": ["src/styles/*"],
       "@assets": ["public/assets"],
-      "@lib/*": ["src/lib/*"]
+      "@lib/*": ["src/lib/*"],
+      "@hooks/*": ["src/hooks/*"]
     },
     "skipLibCheck": true,
     "strict": true,

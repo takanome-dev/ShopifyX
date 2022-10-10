@@ -6,6 +6,7 @@ import '@style/nprogress.css';
 import '@style/globals.css';
 
 import Page from '@components/Page';
+import AuthProvider from '@context/AuthProvider';
 
 import type { AppProps } from 'next/app';
 
@@ -15,9 +16,11 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Page>
-      <Component {...pageProps} />
-    </Page>
+    <AuthProvider>
+      <Page>
+        <Component {...pageProps} />
+      </Page>
+    </AuthProvider>
   );
 }
 

@@ -11,7 +11,7 @@ export default function Card({ product }: { product: Product }) {
   return (
     <div className="relative border border-gray-300 rounded-2xl">
       <Image
-        src={product.photo}
+        src={product.photo.image.publicUrlTransformed}
         alt={product.name}
         width={400}
         height={350}

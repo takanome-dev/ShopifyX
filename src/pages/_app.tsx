@@ -15,7 +15,9 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 const client = new ApolloClient({
-  uri: process.env.NEXT_PUBLIC_API_URI as string,
+  uri:
+    (process.env.NEXT_PUBLIC_API_URI as string) ??
+    'http://localhost:3000/api/graphql',
   cache: new InMemoryCache(),
 });
 

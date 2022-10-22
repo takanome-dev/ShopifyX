@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import React from 'react';
@@ -13,11 +14,18 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
+const client = new ApolloClient({
+  uri: process.env.NEXT_PUBLIC_API_URI as string,
+  cache: new InMemoryCache(),
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Page>
-      <Component {...pageProps} />
-    </Page>
+    <ApolloProvider client={client}>
+      <Page>
+        <Component {...pageProps} />
+      </Page>
+    </ApolloProvider>
   );
 }
 

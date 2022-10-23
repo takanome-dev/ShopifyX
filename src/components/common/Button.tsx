@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import { IconType } from 'react-icons/lib';
 
@@ -9,27 +9,37 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   className?: string | undefined;
   iconPosition?: 'left' | 'right';
-  size?: 'sm' | 'md' | 'lg';
+  size: 'xs' | 'sm' | 'md' | 'lg';
+  onClick?: React.MouseEventHandler<HTMLButtonElement | undefined>;
 }
 
-// TODO: replace cyan2 with cyan and move cyan to primary color
-const Button: NextPage<ButtonProps> = ({
-  Icon,
-  title,
-  type = 'button',
-  className,
-  disabled = false,
-  iconPosition = 'right',
-  size,
-}) => {
-  const padding =
-    size === 'sm'
-      ? 'px-4 py-5 text-2xl'
-      : size === 'md'
-      ? 'px-5 py-6 text-2xl'
-      : 'px-6 py-6 text-3xl';
+const SIZES = {
+  xs: 'px-3 py-3 text-2xl',
+  sm: 'px-4 py-5 text-2xl',
+  md: 'px-5 py-6 text-2xl',
+  lg: 'px-6 py-6 text-3xl',
+};
 
-  const classes = `${className!} ${padding} rounded-lg font-semibold cursor-pointer flex items-center justify-center`;
+// TODO: replace cyan2 with cyan and move cyan to primary color
+const Button = (props: ButtonProps) => {
+  const {
+    Icon,
+    title,
+    type = 'button',
+    className,
+    disabled = false,
+    iconPosition = 'right',
+    size,
+    onClick,
+  } = props;
+
+  const classes = `${className!} ${
+    SIZES[size]
+  } rounded-lg font-semibold cursor-pointer flex items-center justify-center ${
+    disabled
+      ? 'opacity-50 pointer-events-none'
+      : 'opacity-100 pointer-events-auto'
+  }`;
 
   return (
     <button
@@ -37,6 +47,7 @@ const Button: NextPage<ButtonProps> = ({
       type={type}
       disabled={disabled}
       className={classes}
+      onClick={onClick}
     >
       {Icon && iconPosition === 'left' && (
         <Icon size={18} className="mr-4 text-gray-700" />

@@ -41,6 +41,7 @@
     "@typescript-eslint/no-non-null-assertion": "off",
     "comma-spacing": "error",
     "comma-style": "error",
+    "no-void": "off",
     "curly": ["error", "multi-line", "consistent"],
     "dot-location": ["error", "property"],
     "handle-callback-err": "off",

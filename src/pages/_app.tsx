@@ -17,6 +17,7 @@ Router.events.on('routeChangeError', () => NProgress.done());
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_API_URI as string,
   cache: new InMemoryCache(),
+  credentials: 'include',
 });
 
 function MyApp({ Component, pageProps }: AppProps) {

@@ -4,6 +4,7 @@ import { IconType } from 'react-icons/lib';
 
 interface ButtonProps {
   Icon?: IconType;
+  color?: string;
   title: string;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
@@ -24,6 +25,7 @@ const SIZES = {
 const Button = (props: ButtonProps) => {
   const {
     Icon,
+    color = 'text-gray-700',
     title,
     type = 'button',
     className,
@@ -33,9 +35,9 @@ const Button = (props: ButtonProps) => {
     onClick,
   } = props;
 
-  const classes = `${className!} ${
+  const classes = `rounded-lg font-semibold cursor-pointer flex items-center ${className!} ${
     SIZES[size]
-  } rounded-lg font-semibold cursor-pointer flex items-center justify-center ${
+  } ${
     disabled
       ? 'opacity-50 pointer-events-none'
       : 'opacity-100 pointer-events-auto'
@@ -50,11 +52,11 @@ const Button = (props: ButtonProps) => {
       onClick={onClick}
     >
       {Icon && iconPosition === 'left' && (
-        <Icon size={18} className="mr-4 text-gray-700" />
+        <Icon size={18} className={`mr-4 ${color}`} />
       )}
       <span>{title}</span>
       {Icon && iconPosition === 'right' && (
-        <Icon size={18} className="ml-4 text-gray-700" />
+        <Icon size={18} className={`mr-4 ${color}`} />
       )}
     </button>
   );

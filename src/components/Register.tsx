@@ -1,19 +1,15 @@
-import { gql, useMutation } from '@apollo/client';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
-import { CURRENT_USER_QUERY } from 'src/hooks/useCurrentUser';
 import * as Yup from 'yup';
+
+import { AuthContext } from '@context/AuthProvider';
+import { RegisterReturnType } from '@context/types';
 
 import Button from './common/Button';
 import Input from './common/Input';
 import Link from './common/Link';
-import { User } from './types';
-
-interface CreateUserMutation {
-  createUser: Omit<User, 'password'>;
-}
 
 const initialValues = {
   username: '',
@@ -27,46 +23,29 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().min(8).required(),
 });
 
-const CREATE_USER_MUTATION = gql`
-  mutation CREATE_USER_MUTATION(
-    $username: String!
-    $email: String!
-    $password: String!
-  ) {
-    createUser(
-      data: { username: $username, email: $email, password: $password }
-    ) {
-      __typename
-      id
-      username
-      email
-    }
-  }
-`;
-
 const Register = () => {
-  const router = useRouter();
-  const [createUser, { loading, error }] = useMutation<CreateUserMutation>(
-    CREATE_USER_MUTATION,
-    {
-      refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    }
-  );
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | undefined>();
 
-  const errorMessage = error?.graphQLErrors[0].message
-    ? 'Sorry, this email address is already taken'
-    : undefined;
+  const router = useRouter();
+  const { register } = AuthContext();
 
   const handleSubmit = async (values: typeof initialValues) => {
-    await createUser({
-      variables: {
-        username: values.username,
-        email: values.email,
-        password: values.password,
-      },
-    });
+    const { loading: isLoading, error: isError } = (await register({
+      username: values.username,
+      email: values.email,
+      password: values.password,
+    })) as RegisterReturnType;
 
-    if (!error) {
+    setLoading(isLoading);
+    const errorMessage = isError?.graphQLErrors[0].message
+      ? 'Sorry, this email address is already taken'
+      : undefined;
+
+    setError(errorMessage);
+
+    if (!errorMessage) {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       router.replace('/products');
     }
   };
@@ -87,7 +66,7 @@ const Register = () => {
         >
           <Form className="">
             <Input name="username" label="Username" />
-            <Input name="email" label="Email" error={errorMessage} />
+            <Input name="email" label="Email" error={error} />
             <Input name="password" label="Password" />
             <Button
               title="Sign up"

@@ -1,28 +1,16 @@
 /* eslint-disable no-underscore-dangle */
-import { gql, useMutation } from '@apollo/client';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
-import { CURRENT_USER_QUERY } from 'src/hooks/useCurrentUser';
 import * as Yup from 'yup';
+
+import { AuthContext } from '@context/AuthProvider';
+import { LoginReturnType } from '@context/types';
 
 import Button from './common/Button';
 import Input from './common/Input';
 import Link from './common/Link';
-
-interface AuthMutationType {
-  authenticateUserWithPassword: {
-    message: string;
-    __typename: string;
-    sessionToken: string;
-    item: {
-      id: string;
-      username: string;
-      email: string;
-    };
-  };
-}
 
 const initialValues = {
   email: '',
@@ -34,51 +22,30 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().min(8).required(),
 });
 
-const AUTH_USER_MUTATION = gql`
-  mutation AUTH_USER_MUTATION($email: String!, $password: String!) {
-    authenticateUserWithPassword(email: $email, password: $password) {
-      ... on UserAuthenticationWithPasswordSuccess {
-        item {
-          id
-          username
-          email
-        }
-      }
-
-      ... on UserAuthenticationWithPasswordFailure {
-        __typename
-        message
-      }
-    }
-  }
-`;
-
 const Login = () => {
-  const router = useRouter();
-  const [signin, { loading, data }] = useMutation<AuthMutationType>(
-    AUTH_USER_MUTATION,
-    {
-      refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    }
-  );
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | undefined>();
 
-  const error =
-    // eslint-disable-next-line no-underscore-dangle
-    data?.authenticateUserWithPassword?.__typename ===
-    'UserAuthenticationWithPasswordFailure'
-      ? 'Invalid email or password'
-      : undefined;
+  const router = useRouter();
+  const { login } = AuthContext();
 
   const handleSubmit = async (values: typeof initialValues) => {
-    await signin({
-      variables: {
-        email: values.email,
-        password: values.password,
-      },
-    });
+    const { loading: isLoading, data } = (await login({
+      email: values.email,
+      password: values.password,
+    })) as LoginReturnType;
+
+    setLoading(isLoading);
+    const errorMessage =
+      data?.authenticateUserWithPassword?.__typename ===
+      'UserAuthenticationWithPasswordFailure'
+        ? 'Invalid email or password'
+        : undefined;
+    setError(errorMessage);
 
     setTimeout(() => {
-      if (!error) {
+      if (!errorMessage) {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         router.replace('/products');
       }
     }, 500);

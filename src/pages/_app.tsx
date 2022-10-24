@@ -9,6 +9,7 @@ import '@style/globals.css';
 import Page from '@components/Page';
 
 import type { AppProps } from 'next/app';
+import AuthProvider from '@context/AuthProvider';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -23,9 +24,11 @@ const client = new ApolloClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
-      <Page>
-        <Component {...pageProps} />
-      </Page>
+      <AuthProvider>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
+      </AuthProvider>
     </ApolloProvider>
   );
 }

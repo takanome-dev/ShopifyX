@@ -1,23 +1,33 @@
-import Link from './common/Link';
 import { Menu, Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
 import { AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
 import { VscSignOut } from 'react-icons/vsc';
+import { gql, useMutation } from '@apollo/client';
 
-import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import { CURRENT_USER_QUERY, useCurrentUser } from 'src/hooks/useCurrentUser';
 
 import Button from './common/Button';
 import HeaderLink from './common/HeaderLink';
+import Link from './common/Link';
 
 interface HeaderProps {
   handleOpen: () => void;
 }
 
+const SIGN_OUT_MUTATION = gql`
+  mutation {
+    endSession
+  }
+`;
+
 export default function Header({ handleOpen }: HeaderProps) {
   const user = useCurrentUser();
   const router = useRouter();
+  const [signout] = useMutation(SIGN_OUT_MUTATION, {
+    refetchQueries: [{ query: CURRENT_USER_QUERY }],
+  });
 
   return (
     <header className="sticky top-0 z-10 bg-white shadow-md bg-opacity-80 backdrop-blur-md">
@@ -106,8 +116,8 @@ export default function Header({ handleOpen }: HeaderProps) {
                         title="Profile"
                         Icon={AiOutlineUser}
                         className={`${
-                          active ? 'bg-gray-100 text-gray-800' : 'text-gray-800'
-                        } flex w-full items-center rounded-md px-6 py-4 hover:no-underline`}
+                          active && 'bg-gray-100'
+                        } flex w-full items-center rounded-md px-6 py-4 hover:no-underline text-gray-700`}
                       />
                     )}
                   </Menu.Item>
@@ -118,8 +128,8 @@ export default function Header({ handleOpen }: HeaderProps) {
                         title="Favorites"
                         Icon={AiOutlineHeart}
                         className={`${
-                          active ? 'bg-gray-100 text-gray-800' : 'text-gray-800'
-                        } flex w-full items-center rounded-md px-6 py-4 hover:no-underline`}
+                          active && 'bg-gray-100'
+                        } flex w-full items-center rounded-md px-6 py-4 hover:no-underline text-gray-700`}
                       />
                     )}
                   </Menu.Item>
@@ -130,7 +140,10 @@ export default function Header({ handleOpen }: HeaderProps) {
                         className={`${
                           active && 'bg-gray-100'
                         } w-full rounded-md px-6 pl-8 py-4 text-2xl font-normal text-gray-700 hover:bg-gray-100`}
-                        onClick={() => console.log('clicked...')}
+                        onClick={() => {
+                          signout();
+                          router.replace('/login');
+                        }}
                         size="xs"
                         Icon={VscSignOut}
                         iconPosition="left"

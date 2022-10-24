@@ -13,7 +13,7 @@ interface LinkProps {
 const LinkComponent = forwardRef((props: LinkProps, ref) => {
   const { path, title, className, Icon, ...rest } = props;
 
-  const classes = `text-blue-500 text-2xl hover:underline ${className!}`;
+  const classes = `text-2xl hover:underline ${className!}`;
 
   return (
     <Link href={path}>

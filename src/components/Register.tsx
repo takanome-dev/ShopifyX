@@ -3,6 +3,7 @@ import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
+import { CURRENT_USER_QUERY } from 'src/hooks/useCurrentUser';
 import * as Yup from 'yup';
 
 import Button from './common/Button';
@@ -35,6 +36,7 @@ const CREATE_USER_MUTATION = gql`
     createUser(
       data: { username: $username, email: $email, password: $password }
     ) {
+      __typename
       id
       username
       email
@@ -44,13 +46,16 @@ const CREATE_USER_MUTATION = gql`
 
 const Register = () => {
   const router = useRouter();
-  const [createUser, { loading, error }] =
-    useMutation<CreateUserMutation>(CREATE_USER_MUTATION);
+  const [createUser, { loading, error }] = useMutation<CreateUserMutation>(
+    CREATE_USER_MUTATION,
+    {
+      refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    }
+  );
 
-  if (error) {
-    // TODO: add toast error message and handle input color
-    console.log({ Error: error?.message });
-  }
+  const errorMessage = error?.graphQLErrors[0].message
+    ? 'Sorry, this email address is already taken'
+    : undefined;
 
   const handleSubmit = async (values: typeof initialValues) => {
     await createUser({
@@ -60,7 +65,10 @@ const Register = () => {
         password: values.password,
       },
     });
-    return router.replace('/products');
+
+    if (!error) {
+      router.replace('/products');
+    }
   };
 
   return (
@@ -79,11 +87,11 @@ const Register = () => {
         >
           <Form className="">
             <Input name="username" label="Username" />
-            <Input name="email" label="Email" error={error?.message} />
+            <Input name="email" label="Email" error={errorMessage} />
             <Input name="password" label="Password" />
             <Button
               title="Sign up"
-              className="w-full mt-8 border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+              className="w-full mt-8 justify-center border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
               type="submit"
               size="lg"
               disabled={loading}
@@ -92,7 +100,11 @@ const Register = () => {
         </Formik>
         <p className="mt-10 text-2xl text-center">
           Already have an account?{' '}
-          <Link path="/login" title="Sign in instead" />
+          <Link
+            path="/login"
+            title="Sign in instead"
+            className="text-blue-500"
+          />
         </p>
         <div className="relative flex flex-col items-center mt-8">
           <p className="mb-4 bg-white px-4 text-2xl before:content-[''] before:w-full before:h-1 before:bg-gray-200 before:absolute before:left-0 before:top-3 before:-z-10">

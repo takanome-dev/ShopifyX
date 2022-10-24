@@ -4,6 +4,7 @@ import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
+import { CURRENT_USER_QUERY } from 'src/hooks/useCurrentUser';
 import * as Yup from 'yup';
 
 import Button from './common/Button';
@@ -37,7 +38,6 @@ const AUTH_USER_MUTATION = gql`
   mutation AUTH_USER_MUTATION($email: String!, $password: String!) {
     authenticateUserWithPassword(email: $email, password: $password) {
       ... on UserAuthenticationWithPasswordSuccess {
-        # sessionToken
         item {
           id
           username
@@ -55,24 +55,12 @@ const AUTH_USER_MUTATION = gql`
 
 const Login = () => {
   const router = useRouter();
-  const [signin, { loading, data }] =
-    useMutation<AuthMutationType>(AUTH_USER_MUTATION);
-
-  const handleSubmit = async (values: typeof initialValues) => {
-    const res = (await signin({
-      variables: {
-        email: values.email,
-        password: values.password,
-      },
-    })) as AuthMutationType;
-
-    // if (
-    //   res?.authenticateUserWithPassword?.__typename !==
-    //   'UserAuthenticationWithPasswordFailure'
-    // ) {
-    //   void router.replace('/products');
-    // }
-  };
+  const [signin, { loading, data }] = useMutation<AuthMutationType>(
+    AUTH_USER_MUTATION,
+    {
+      refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    }
+  );
 
   const error =
     // eslint-disable-next-line no-underscore-dangle
@@ -80,6 +68,21 @@ const Login = () => {
     'UserAuthenticationWithPasswordFailure'
       ? 'Invalid email or password'
       : undefined;
+
+  const handleSubmit = async (values: typeof initialValues) => {
+    await signin({
+      variables: {
+        email: values.email,
+        password: values.password,
+      },
+    });
+
+    setTimeout(() => {
+      if (!error) {
+        router.replace('/products');
+      }
+    }, 500);
+  };
 
   return (
     <div className="min-h-[550px] flex items-center justify-center">
@@ -99,11 +102,15 @@ const Login = () => {
             <Input name="email" label="Email" error={error} />
             <Input name="password" label="Password" />
             <div className="my-4 text-right">
-              <Link path="/reset-password" title="Forgot password?" />
+              <Link
+                path="/reset-password"
+                title="Forgot password?"
+                className="text-blue-500"
+              />
             </div>
             <Button
               title="Sign in"
-              className="w-full mt-8 border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+              className="w-full justify-center mt-8 border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
               type="submit"
               size="lg"
               disabled={loading}
@@ -111,7 +118,12 @@ const Login = () => {
           </Form>
         </Formik>
         <p className="mt-10 text-2xl text-center">
-          New here? <Link path="/register" title="Create an account" />
+          New here?{' '}
+          <Link
+            path="/register"
+            title="Create an account"
+            className="text-blue-500"
+          />
         </p>
         <div className="relative flex flex-col items-center mt-8">
           <p className="mb-4 bg-white px-4 text-2xl before:content-[''] before:w-full before:h-1 before:bg-gray-200 before:absolute before:left-0 before:top-3 before:-z-10">

@@ -49,3 +49,10 @@ export interface Image {
     };
   };
 }
+
+export interface User {
+  __typename?: string;
+  username: string;
+  email: string;
+  password: string;
+}

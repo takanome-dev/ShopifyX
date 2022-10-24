@@ -31,12 +31,10 @@ const ALL_PRODUCTS_QUERY = gql`
 `;
 
 export default function CardList() {
-  // TODO: type query response
   const { data, error, loading } = useQuery<ProductsQuery>(ALL_PRODUCTS_QUERY);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  console.log(data);
 
   return (
     <div className="grid grid-cols-[repeat(auto-fill,_minmax(30rem,_1fr))] gap-8">

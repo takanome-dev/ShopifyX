@@ -1,6 +1,7 @@
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { BiLoader } from 'react-icons/bi';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import * as Yup from 'yup';
 
@@ -64,16 +65,19 @@ const Register = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form className="">
+          <Form>
             <Input name="username" label="Username" />
             <Input name="email" label="Email" error={error} />
             <Input name="password" label="Password" />
             <Button
-              title="Sign up"
-              className="w-full mt-8 justify-center border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+              title={loading ? 'Signing up...' : 'Sign up'}
+              className="w-full mt-8 justify-center"
+              variant="primary"
               type="submit"
               size="lg"
               disabled={loading}
+              iconClasses="animate-spin"
+              Icon={loading ? BiLoader : undefined}
             />
           </Form>
         </Formik>

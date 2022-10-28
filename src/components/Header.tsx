@@ -1,10 +1,11 @@
+import { gql, useMutation } from '@apollo/client';
 import { Menu, Transition } from '@headlessui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
 import { AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
+import { FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
 import { VscSignOut } from 'react-icons/vsc';
-import { gql, useMutation } from '@apollo/client';
 
 import { CURRENT_USER_QUERY, useCurrentUser } from 'src/hooks/useCurrentUser';
 
@@ -59,8 +60,9 @@ export default function Header({ handleOpen }: HeaderProps) {
           {!user && (
             <Button
               title="Signin"
-              className="border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+              className="border-none"
               size="xs"
+              variant="primary"
               onClick={() => {
                 void router.push('/login');
               }}
@@ -71,10 +73,12 @@ export default function Header({ handleOpen }: HeaderProps) {
               <Menu.Button>
                 <div className="pl-4 border-l border-cyan2-300">
                   <div className="w-14 h-14 rounded-full overflow-hidden border border-cyan2-300">
-                    <img
+                    <Image
                       src="/assets/avatar.png"
                       alt="User avatar"
-                      className="w-full h-full"
+                      width="100%"
+                      height="100%"
+                      layout="responsive"
                     />
                   </div>
                 </div>
@@ -91,10 +95,12 @@ export default function Header({ handleOpen }: HeaderProps) {
                   <Menu.Item>
                     <div className="flex items-center px-6 py-4 mb-2 gap-x-3">
                       <div className="flex-col shrink-0 grow-0 w-14 h-14 overflow-hidden rounded-full border-cyan2-300 border">
-                        <img
+                        <Image
                           src="/assets/avatar.png"
                           alt="User avatar"
-                          className="w-full h-full"
+                          width="100%"
+                          height="100%"
+                          layout="responsive"
                         />
                       </div>
 
@@ -116,7 +122,7 @@ export default function Header({ handleOpen }: HeaderProps) {
                         title="Profile"
                         Icon={AiOutlineUser}
                         className={`${
-                          active && 'bg-gray-100'
+                          active ? 'bg-gray-100' : 'bg-white'
                         } flex w-full items-center rounded-md px-6 py-4 hover:no-underline text-gray-700`}
                       />
                     )}
@@ -128,7 +134,7 @@ export default function Header({ handleOpen }: HeaderProps) {
                         title="Favorites"
                         Icon={AiOutlineHeart}
                         className={`${
-                          active && 'bg-gray-100'
+                          active ? 'bg-gray-100' : 'bg-white'
                         } flex w-full items-center rounded-md px-6 py-4 hover:no-underline text-gray-700`}
                       />
                     )}
@@ -138,16 +144,16 @@ export default function Header({ handleOpen }: HeaderProps) {
                       <Button
                         title="Logout"
                         className={`${
-                          active && 'bg-gray-100'
-                        } w-full rounded-md px-6 pl-8 py-4 text-2xl font-normal text-gray-700 hover:bg-gray-100`}
+                          active ? 'bg-gray-100' : 'bg-white'
+                        } w-full rounded-md px-6 pl-8 py-4 font-normal text-gray-700 hover:bg-gray-100`}
                         onClick={() => {
-                          signout();
-                          router.replace('/login');
+                          signout().catch(console.error);
+                          router.replace('/login').catch(console.error);
                         }}
                         size="xs"
                         Icon={VscSignOut}
-                        iconPosition="left"
-                        color="text-red-500"
+                        iconPosition="start"
+                        iconClasses="text-red-500"
                       />
                     )}
                   </Menu.Item>

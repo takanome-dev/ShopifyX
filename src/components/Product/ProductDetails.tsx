@@ -68,9 +68,10 @@ const ProductDetails = () => {
           <p className="mb-8 text-2xl">{data?.product.description}</p>
           <Button
             title="Add to cart"
-            className="flex justify-center w-full text-center border-none shadow-md bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/30 hover:opacity-80"
+            className="flex justify-center w-full text-center"
+            variant="primary"
             Icon={FaShoppingBag}
-            iconPosition="left"
+            iconPosition="start"
             size="lg"
           />
         </div>

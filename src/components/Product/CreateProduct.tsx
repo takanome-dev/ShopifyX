@@ -47,10 +47,11 @@ export default function CreateProduct() {
           </fieldset>
           <Button
             title="Create product"
-            className="flex border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+            className="flex"
+            variant="primary"
             type="submit"
             Icon={FaPlusCircle}
-            iconPosition="left"
+            iconPosition="start"
             size="lg"
           />
         </Form>

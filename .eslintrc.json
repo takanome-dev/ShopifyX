@@ -39,6 +39,7 @@
     "arrow-spacing": ["warn", { "before": true, "after": true }],
     // "brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
     "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     "comma-spacing": "error",
     "comma-style": "error",
     "no-void": "off",

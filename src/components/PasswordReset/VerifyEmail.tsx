@@ -6,7 +6,7 @@ import Link from '@components/common/Link';
 
 import Button from '../common/Button';
 
-export default function VerifyEmail() {
+export default function VerifyEmail({ email }: { email: string }) {
   return (
     <div className="min-h-[500px] flex items-center justify-center">
       <div className="rounded-xl shadow-xl w-[500px] p-8">
@@ -17,15 +17,18 @@ export default function VerifyEmail() {
           </h2>
           <p className="text-2xl text-center">
             We sent a password reset link to{' '}
-            <span className="font-semibold">takanomedev221@gmail.com</span>
+            <span className="font-semibold">{email}</span>
           </p>
         </div>
-        <Button
+        {/* TODO: add button link component */}
+        <a href={`mailto:${email}`}>Open email app</a>
+        {/* <Button
           title="Open email app"
-          className="w-full mt-8 border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+          className="w-full mt-8 justify-center"
+          variant='primary'
           type="button"
           size="sm"
-        />
+        /> */}
         <p className="mt-10 text-2xl text-center">
           Didn&apos;t receive the email?{' '}
           <Link path="/login" title="Click to resend" />

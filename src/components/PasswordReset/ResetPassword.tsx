@@ -1,5 +1,8 @@
+import { gql, useMutation } from '@apollo/client';
 import { Formik, Form } from 'formik';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { BiLoader } from 'react-icons/bi';
 import { FaKey } from 'react-icons/fa';
 import { TbArrowBack } from 'react-icons/tb';
 import * as Yup from 'yup';
@@ -9,12 +12,54 @@ import LinkComponent from '@components/common/Link';
 import Button from '../common/Button';
 import Input from '../common/Input';
 
+import NewPassword from './NewPassword';
+import VerifyEmail from './VerifyEmail';
+
+interface ResetMutationType {
+  sendUserPasswordResetLink: boolean;
+}
+
+const initialValues = {
+  email: '',
+};
+
+export const REQUEST_RESET_MUTATION = gql`
+  mutation REQUEST_RESET_MUTATION($email: String!) {
+    sendUserPasswordResetLink(email: $email)
+  }
+`;
+
 export default function ResetPassword() {
+  const [userMail, setUserMail] = useState('');
+  const { token, email } = useRouter().query;
+
+  const [resetPassword, { data, loading }] = useMutation<ResetMutationType>(
+    REQUEST_RESET_MUTATION
+  );
+  console.log({ data, loading });
+
+  if (token && email) {
+    return <NewPassword email={email as string} token={token as string} />;
+  }
+
+  if (userMail && data?.sendUserPasswordResetLink) {
+    return <VerifyEmail email={userMail} />;
+  }
+
+  const handleSubmit = async (values: typeof initialValues) => {
+    setUserMail(values.email);
+    await resetPassword({
+      variables: {
+        email: values.email,
+      },
+    });
+  };
+
   return (
     <div className="min-h-[550px] flex items-center justify-center">
       <div className="rounded-xl shadow-xl w-[500px] p-8">
         <div className="mb-12">
-          <h2 className="flex items-center justify-center pb-4 text-4xl font-semibold text-center">
+          <h2 className="flex items-center justify-center pb-8 text-4xl font-semibold text-center">
             <span>Reset Password</span> <FaKey size={20} className="ml-4" />
           </h2>
           <p className="text-2xl text-center">
@@ -22,28 +67,30 @@ export default function ResetPassword() {
           </p>
         </div>
         <Formik
-          initialValues={{
-            email: '',
-          }}
+          initialValues={initialValues}
           validationSchema={Yup.object().shape({
             email: Yup.string().email().required(),
           })}
-          onSubmit={(values) => console.log({ values })}
+          onSubmit={handleSubmit}
         >
           <Form className="">
             <Input name="email" label="Email" />
             <Button
-              title="Reset Password"
-              className="w-full mt-8 border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+              title={loading ? 'Resetting the password...' : 'Reset Password'}
+              className="w-full mt-8 justify-center"
+              variant="primary"
               type="submit"
               size="lg"
+              disabled={loading}
+              iconClasses="animate-spin"
+              Icon={loading ? BiLoader : undefined}
             />
           </Form>
         </Formik>
         <LinkComponent
           path="/login"
           title="Back to log in"
-          className="flex items-center justify-center mt-8"
+          className="flex items-center justify-center mt-8 text-blue-500"
           Icon={TbArrowBack}
         />
       </div>

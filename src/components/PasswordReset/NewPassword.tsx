@@ -1,3 +1,4 @@
+import { gql, useMutation } from '@apollo/client';
 import { Formik, Form } from 'formik';
 import React from 'react';
 import { FaKey } from 'react-icons/fa';
@@ -21,13 +22,54 @@ const validationSchema = Yup.object().shape({
     'Password must match'
   ),
 });
+interface RedeemUserPassword {
+  code: 'FAILURE' | 'TOKEN_EXPIRED' | 'TOKEN_REDEEMED';
+  message: string;
+}
 
-export default function NewPassword() {
+interface Props {
+  email: string;
+  token: string;
+}
+
+const RESET_PASSWORD_MUTATION = gql`
+  mutation RESET_PASSWORD_MUTATION(
+    $email: String!
+    $token: String!
+    $password: String!
+  ) {
+    redeemUserPasswordResetToken(
+      email: $email
+      token: $token
+      password: $password
+    ) {
+      code
+      message
+    }
+  }
+`;
+
+export default function NewPassword({ email, token }: Props) {
+  const [reset, { data, loading, error }] =
+    useMutation<RedeemUserPassword | null>(RESET_PASSWORD_MUTATION);
+
+  console.log({ data, loading, error });
+
+  const handleSubmit = async (values: typeof initialValues) => {
+    await reset({
+      variables: {
+        password: values.password,
+        email,
+        token,
+      },
+    });
+  };
+
   return (
     <div className="min-h-[550px] flex items-center justify-center">
       <div className="rounded-xl shadow-xl w-[500px] p-8">
         <div className="mb-12">
-          <h2 className="flex items-center justify-center pb-4 text-4xl font-semibold text-center">
+          <h2 className="flex items-center justify-center pb-8 text-4xl font-semibold text-center">
             <span>Set New Password</span> <FaKey size={20} className="ml-4" />
           </h2>
           <p className="text-2xl text-center">
@@ -37,14 +79,15 @@ export default function NewPassword() {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values) => console.log({ values })}
+          onSubmit={handleSubmit}
         >
           <Form className="">
             <Input name="password" label="Password" />
             <Input name="confirmPassword" label="Confirm password" />
             <Button
               title="Reset Password"
-              className="w-full mt-8 border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+              className="w-full mt-8 justify-center"
+              variant="primary"
               type="submit"
               size="lg"
             />
@@ -53,7 +96,7 @@ export default function NewPassword() {
         <LinkComponent
           path="/login"
           title="Back to log in"
-          className="flex items-center justify-center mt-8"
+          className="flex items-center justify-center mt-8 text-blue-500"
           Icon={TbArrowBack}
         />
       </div>

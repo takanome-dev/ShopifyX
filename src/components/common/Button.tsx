@@ -44,7 +44,7 @@ const Button = forwardRef(
 
     const classes = `${className!} ${SIZES[size]} ${
       VARIANTS[variant]
-    } rounded-lg font-semibold cursor-pointer flex items-center  disabled:opacity-50 disabled:pointer-events-none`;
+    } rounded-lg font-semibold cursor-pointer flex items-center disabled:opacity-50 disabled:pointer-events-none`;
 
     return (
       // eslint-disable-next-line react/button-has-type

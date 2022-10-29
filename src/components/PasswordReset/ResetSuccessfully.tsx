@@ -1,10 +1,8 @@
 import React from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
-import { TbArrowBack } from 'react-icons/tb';
+import { TbArrowRight } from 'react-icons/tb';
 
-import Link from '@components/common/Link';
-
-import Button from '../common/Button';
+import ButtonLink from '@components/common/ButtonLink';
 
 export default function ResetSuccessfully() {
   return (
@@ -17,20 +15,14 @@ export default function ResetSuccessfully() {
           </h2>
           <p className="text-2xl text-center">
             Your password has been successfully reset. Please, use your new
-            password to logging in.
+            password to log in.
           </p>
         </div>
-        <Button
-          title="Continue"
-          className="w-full mt-8 border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
-          type="button"
-          size="sm"
-        />
-        <Link
+        <ButtonLink
           path="/login"
-          title="Back to log in"
-          className="flex items-center justify-center mt-8"
-          Icon={TbArrowBack}
+          title="Continue"
+          className="justify-center"
+          Icon={TbArrowRight}
         />
       </div>
     </div>

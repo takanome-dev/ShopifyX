@@ -1,14 +1,17 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { Formik, Form } from 'formik';
 import React from 'react';
+import { BiLoader } from 'react-icons/bi';
 import { FaKey } from 'react-icons/fa';
 import { TbArrowBack } from 'react-icons/tb';
 import * as Yup from 'yup';
 
-import LinkComponent from '@components/common/Link';
+import Link from '@components/common/Link';
 
 import Button from '../common/Button';
 import Input from '../common/Input';
+
+import ResetSuccessfully from './ResetSuccessfully';
 
 const initialValues = {
   password: '',
@@ -23,14 +26,33 @@ const validationSchema = Yup.object().shape({
   ),
 });
 interface RedeemUserPassword {
-  code: 'FAILURE' | 'TOKEN_EXPIRED' | 'TOKEN_REDEEMED';
-  message: string;
+  redeemUserPasswordResetToken: {
+    code: string;
+    message: string;
+  } | null;
+}
+
+interface ValidateUserToken {
+  validateUserPasswordResetToken: {
+    code: string;
+    message: string;
+  } | null;
 }
 
 interface Props {
   email: string;
   token: string;
 }
+
+const VALIDATE_TOKEN_QUERY = gql`
+  query VALIDATE_TOKEN_QUERY($email: String!, $token: String!) {
+    validateUserPasswordResetToken(email: $email, token: $token) {
+      code
+      message
+      __typename
+    }
+  }
+`;
 
 const RESET_PASSWORD_MUTATION = gql`
   mutation RESET_PASSWORD_MUTATION(
@@ -50,10 +72,43 @@ const RESET_PASSWORD_MUTATION = gql`
 `;
 
 export default function NewPassword({ email, token }: Props) {
-  const [reset, { data, loading, error }] =
-    useMutation<RedeemUserPassword | null>(RESET_PASSWORD_MUTATION);
+  const { data: dataValidation } = useQuery<ValidateUserToken>(
+    VALIDATE_TOKEN_QUERY,
+    {
+      variables: {
+        email,
+        token,
+      },
+    }
+  );
+  const [reset, { data, loading }] = useMutation<RedeemUserPassword | null>(
+    RESET_PASSWORD_MUTATION
+  );
 
-  console.log({ data, loading, error });
+  if (data?.redeemUserPasswordResetToken === null) return <ResetSuccessfully />;
+
+  if (
+    data?.redeemUserPasswordResetToken.code ||
+    dataValidation?.validateUserPasswordResetToken?.code
+  ) {
+    return (
+      <div className="min-h-[500px] flex items-center justify-center">
+        <div className="rounded-xl shadow-xl w-[500px] p-8 border-l-4 border-red-500">
+          <p className="text-2xl font-semibold text-center">
+            <span className="mr-2 text-red-500">Error:</span>
+            {data?.redeemUserPasswordResetToken.message ||
+              dataValidation?.validateUserPasswordResetToken?.message}
+          </p>
+          <Link
+            path="/reset-password"
+            title="Re-request password reset"
+            className="flex items-center justify-center mt-8 text-blue-500"
+            Icon={TbArrowBack}
+          />
+        </div>
+      </div>
+    );
+  }
 
   const handleSubmit = async (values: typeof initialValues) => {
     await reset({
@@ -85,15 +140,18 @@ export default function NewPassword({ email, token }: Props) {
             <Input name="password" label="Password" />
             <Input name="confirmPassword" label="Confirm password" />
             <Button
-              title="Reset Password"
+              title={loading ? 'resetting the password...' : 'Reset Password'}
               className="w-full mt-8 justify-center"
               variant="primary"
               type="submit"
               size="lg"
+              disabled={loading}
+              iconClasses="animate-spin"
+              Icon={loading ? BiLoader : undefined}
             />
           </Form>
         </Formik>
-        <LinkComponent
+        <Link
           path="/login"
           title="Back to log in"
           className="flex items-center justify-center mt-8 text-blue-500"

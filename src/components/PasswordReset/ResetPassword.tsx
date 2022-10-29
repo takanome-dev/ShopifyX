@@ -36,6 +36,8 @@ export default function ResetPassword() {
   const [resetPassword, { data, loading }] = useMutation<ResetMutationType>(
     REQUEST_RESET_MUTATION
   );
+
+  // TODO: validate input
   console.log({ data, loading });
 
   if (token && email) {

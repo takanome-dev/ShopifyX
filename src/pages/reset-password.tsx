@@ -1,12 +1,7 @@
 import React from 'react';
 
-import {
-  NewPassword,
-  ResetPassword,
-  ResetSuccessfully,
-  VerifyEmail,
-} from '@components/PasswordReset';
+import { ResetPassword } from '@components/PasswordReset';
 
-const ResetPasswordPage = () => <ResetSuccessfully />;
+const ResetPasswordPage = () => <ResetPassword />;
 
 export default ResetPasswordPage;

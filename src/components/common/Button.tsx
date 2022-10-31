@@ -24,7 +24,7 @@ const SIZES = {
 const VARIANTS = {
   primary:
     'border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20',
-  secondary: 'border hover:bg-gray-100 shadow-md shadow-gray-500',
+  secondary: 'border hover:bg-gray-100 shadow-md shadow-gray-200',
   inherit: '',
 };
 

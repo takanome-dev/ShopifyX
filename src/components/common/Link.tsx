@@ -14,7 +14,7 @@ const LinkComponent = forwardRef(
   (props: LinkProps, ref: React.LegacyRef<HTMLAnchorElement> | undefined) => {
     const { path, title, className, Icon, ...rest } = props;
 
-    const classes = `text-2xl hover:underline ${className!}`;
+    const classes = `hover:underline ${className!}`;
 
     return (
       <Link href={path}>

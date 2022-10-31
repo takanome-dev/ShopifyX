@@ -33,12 +33,11 @@ export default function ResetPassword() {
   const [userMail, setUserMail] = useState('');
   const { token, email } = useRouter().query;
 
-  const [resetPassword, { data, loading }] = useMutation<ResetMutationType>(
-    REQUEST_RESET_MUTATION
-  );
+  const [resetPassword, { data, loading, error }] =
+    useMutation<ResetMutationType>(REQUEST_RESET_MUTATION);
 
   // TODO: validate input
-  console.log({ data, loading });
+  console.log({ data, loading, error });
 
   if (token && email) {
     return <NewPassword email={email as string} token={token as string} />;

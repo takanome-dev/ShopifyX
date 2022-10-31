@@ -2,8 +2,9 @@ import { gql, useQuery } from '@apollo/client';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FaShoppingBag } from 'react-icons/fa';
+import { FaDollarSign, FaShoppingBag } from 'react-icons/fa';
 
+import FavIcon from '@components/common/FavIcon';
 import { Product } from '@components/types';
 import formatMoney from '@lib/formatMoney';
 
@@ -47,8 +48,8 @@ const ProductDetails = () => {
 
   return (
     <div className="py-20">
-      <div className="grid grid-cols-2 gap-x-12">
-        <div className="overflow-hidden border shadow-md rounded-2xl">
+      <div className="grid grid-cols-[0.5fr,1fr] gap-x-12">
+        <div className="relative overflow-hidden border shadow-md rounded-2xl">
           <Image
             src={data?.product.photo.image.publicUrlTransformed as string}
             alt={data?.product.name}
@@ -59,21 +60,35 @@ const ProductDetails = () => {
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+yHgAFWAJp08sG7wAAAABJRU5ErkJggg=="
           />
+          <FavIcon className="top-8 right-8" />
         </div>
         <div className="">
           <h1 className="mb-8 text-5xl font-bold">{data?.product.name}</h1>
           <p className="mb-8 text-3xl font-semibold">
             {formatMoney(data?.product.price)}
           </p>
-          <p className="mb-8 text-2xl">{data?.product.description}</p>
-          <Button
-            title="Add to cart"
-            className="flex justify-center w-full text-center"
-            variant="primary"
-            Icon={FaShoppingBag}
-            iconPosition="start"
-            size="lg"
-          />
+          <div className="">
+            <p className="text-2xl text-gray-400">Description:</p>
+            <p className="mt-4 text-2xl">{data?.product.description}</p>
+          </div>
+          <div className="mt-12 flex">
+            <Button
+              title="Buy now"
+              className="text-3xl"
+              variant="primary"
+              Icon={FaDollarSign}
+              iconPosition="start"
+              size="md"
+            />
+            <Button
+              title="Add to cart"
+              className="ml-8 text-3xl border-2"
+              variant="secondary"
+              Icon={FaShoppingBag}
+              iconPosition="start"
+              size="md"
+            />
+          </div>
         </div>
       </div>
       <div className="mt-12">

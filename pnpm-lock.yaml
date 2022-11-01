@@ -11,7 +11,6 @@ specifiers:
   '@commitlint/config-conventional': ^17.1.0
   '@headlessui/react': ^1.7.3
   '@tailwindcss/forms': ^0.5.3
-  '@types/lodash': ^4.14.186
   '@types/node': 18.7.11
   '@types/nprogress': ^0.2.0
   '@types/react': 18.0.20
@@ -35,7 +34,6 @@ specifiers:
   formik: ^2.2.9
   graphql: ^16.6.0
   husky: ^8.0.1
-  lodash: ^4.17.21
   next: 12.3.1
   nprogress: ^0.2.0
   postcss: ^8.4.16
@@ -54,7 +52,6 @@ dependencies:
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.1.8
   formik: 2.2.9_react@18.2.0
   graphql: 16.6.0
-  lodash: 4.17.21
   next: 12.3.1_qtpcxnaaarbm4ws7ughq6oxfve
   nprogress: 0.2.0
   react: 18.2.0
@@ -70,7 +67,6 @@ devDependencies:
   '@babel/preset-typescript': 7.18.6_@babel+core@7.19.6
   '@commitlint/cli': 17.1.2
   '@commitlint/config-conventional': 17.1.0
-  '@types/lodash': 4.14.186
   '@types/node': 18.7.11
   '@types/nprogress': 0.2.0
   '@types/react': 18.0.20
@@ -1908,6 +1904,7 @@ packages:
 
   /@types/lodash/4.14.186:
     resolution: {integrity: sha512-eHcVlLXP0c2FlMPm56ITode2AgLMSa6aJ05JTTbYbI+7EMkCEE5qk2E41d5g2lCVTqRe0GnnRFurmlCsDODrPw==}
+    dev: false
 
   /@types/minimist/1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}

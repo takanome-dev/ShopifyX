@@ -7,7 +7,8 @@ import { AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
 import { FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
 import { VscSignOut } from 'react-icons/vsc';
 
-import { CURRENT_USER_QUERY, useCurrentUser } from 'src/hooks/useCurrentUser';
+import { CURRENT_USER_QUERY } from '@context/auth';
+import { AuthContext } from '@context/AuthProvider';
 
 import Button from './common/Button';
 import HeaderLink from './common/HeaderLink';
@@ -24,7 +25,7 @@ const SIGN_OUT_MUTATION = gql`
 `;
 
 export default function Header({ handleOpen }: HeaderProps) {
-  const user = useCurrentUser();
+  const { user } = AuthContext();
   const router = useRouter();
   const [signout] = useMutation(SIGN_OUT_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],

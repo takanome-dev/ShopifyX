@@ -36,7 +36,6 @@ export default function AuthProvider({ children }: Props) {
   });
 
   const currentUserQuery = useQuery<UserQueryType>(CURRENT_USER_QUERY);
-  // console.log({ currentUser: currentUserQuery?.data?.authenticatedItem });
 
   const login = async (user: UserInfo) => {
     const [signin, { loading, data }] = signInMutation;

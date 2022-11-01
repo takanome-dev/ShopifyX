@@ -1,5 +1,7 @@
 import { ApolloError } from '@apollo/client';
 
+import { Product } from '@components/types';
+
 export interface InitialValues {
   user: User | null;
   login: (user: UserInfo) => Promise<LoginReturnType> | null;
@@ -21,6 +23,16 @@ export interface User {
   id?: string;
   username: string;
   email: string;
+  cart?: Cart[];
+}
+
+export interface UserQueryType {
+  authenticatedItem: User;
+}
+
+export interface Cart {
+  product: Product;
+  quantity: number;
 }
 
 export interface UserInfo {
@@ -47,12 +59,4 @@ export interface SignupMutationType {
   username: string;
   email: string;
   password: string;
-}
-
-export interface UserQueryType {
-  authenticatedItem: {
-    id: string;
-    username: string;
-    email: string;
-  };
 }

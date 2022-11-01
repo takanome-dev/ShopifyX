@@ -121,9 +121,10 @@ export default function Header({ handleOpen }: HeaderProps) {
                         path="/account"
                         title="Profile"
                         Icon={AiOutlineUser}
+                        iconPosition="start"
                         className={`${
                           active ? 'bg-gray-100' : 'bg-white'
-                        } flex w-full items-center rounded-md px-6 py-4 hover:no-underline text-gray-700`}
+                        } flex text-2xl w-full items-center rounded-md px-6 py-4 hover:no-underline text-gray-700`}
                       />
                     )}
                   </Menu.Item>
@@ -133,9 +134,10 @@ export default function Header({ handleOpen }: HeaderProps) {
                         path="/favorites"
                         title="Favorites"
                         Icon={AiOutlineHeart}
+                        iconPosition="start"
                         className={`${
                           active ? 'bg-gray-100' : 'bg-white'
-                        } flex w-full items-center rounded-md px-6 py-4 hover:no-underline text-gray-700`}
+                        } flex w-full text-2xl items-center rounded-md px-6 py-4 hover:no-underline text-gray-700`}
                       />
                     )}
                   </Menu.Item>

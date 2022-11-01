@@ -102,8 +102,9 @@ export default function NewPassword({ email, token }: Props) {
           <Link
             path="/reset-password"
             title="Re-request password reset"
-            className="flex items-center justify-center mt-8 text-blue-500"
+            className="flex items-center text-2xl justify-center mt-8 text-blue-500"
             Icon={TbArrowBack}
+            iconPosition="start"
           />
         </div>
       </div>
@@ -154,8 +155,9 @@ export default function NewPassword({ email, token }: Props) {
         <Link
           path="/login"
           title="Back to log in"
-          className="flex items-center justify-center mt-8 text-blue-500"
+          className="flex items-center text-2xl justify-center mt-8 text-blue-500"
           Icon={TbArrowBack}
+          iconPosition="start"
         />
       </div>
     </div>

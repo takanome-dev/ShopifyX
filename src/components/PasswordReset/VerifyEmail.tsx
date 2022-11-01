@@ -31,14 +31,15 @@ export default function VerifyEmail({ email }: { email: string }) {
           <Link
             path="/reset-password"
             title="Request a new one"
-            className="text-blue-500"
+            className="text-blue-500 text-2xl"
           />
         </p>
         <Link
           path="/login"
           title="Back to log in"
-          className="flex items-center justify-center mt-8 text-blue-500"
+          className="flex items-center justify-center mt-8 text-blue-500 text-2xl"
           Icon={TbArrowBack}
+          iconPosition="start"
         />
       </div>
     </div>

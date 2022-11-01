@@ -86,7 +86,8 @@ const Register = () => {
           <Link
             path="/login"
             title="Sign in instead"
-            className="text-blue-500"
+            className="text-blue-500 text-2xl"
+            iconPosition="start"
           />
         </p>
         <div className="relative flex flex-col items-center mt-8">

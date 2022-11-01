@@ -9,19 +9,26 @@ interface LinkProps extends React.HTMLProps<HTMLAnchorElement> {
   className?: string | undefined;
   Icon?: IconType;
   disabled?: boolean;
+  iconPosition?: 'start' | 'end';
 }
 
 const LinkComponent = forwardRef(
   (props: LinkProps, ref: React.LegacyRef<HTMLAnchorElement> | undefined) => {
-    const { path, title, className, disabled, Icon, ...rest } = props;
+    const { path, title, className, disabled, iconPosition, Icon, ...rest } =
+      props;
     const classes = `hover:underline ${className!}`;
     // TODO: disabled buttons
 
     return (
       <Link href={path}>
         <a ref={ref} className={classes} {...rest}>
-          {Icon && <Icon size={18} className="mr-4 text-gray-500" />}
+          {Icon && iconPosition === 'start' && (
+            <Icon size={18} className="mr-4 text-gray-500" />
+          )}
           <span>{title}</span>
+          {Icon && iconPosition === 'end' && (
+            <Icon size={18} className="mr-4 text-gray-500" />
+          )}
         </a>
       </Link>
     );

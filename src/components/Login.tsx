@@ -73,7 +73,8 @@ const Login = () => {
               <Link
                 path="/reset-password"
                 title="Forgot password?"
-                className="text-blue-500"
+                className="text-blue-500 text-2xl"
+                iconPosition="start"
               />
             </div>
             <Button
@@ -93,7 +94,8 @@ const Login = () => {
           <Link
             path="/register"
             title="Create an account"
-            className="text-blue-500"
+            className="text-blue-500 text-2xl"
+            iconPosition="start"
           />
         </p>
         <div className="relative flex flex-col items-center mt-8">

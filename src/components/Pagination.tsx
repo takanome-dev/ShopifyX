@@ -1,12 +1,12 @@
 import { gql, useQuery } from '@apollo/client';
 import React from 'react';
+import { VscArrowSmallLeft, VscArrowSmallRight } from 'react-icons/vsc';
 
 import Link from './common/Link';
 
 interface PaginationProps {
   page: number;
   pageSize: number;
-  // onPageCHange: (page: number) => void;
 }
 
 interface ProductsCountQuery {
@@ -20,29 +20,29 @@ const PRODUCTS_COUNT_QUERY = gql`
 `;
 
 export default function Pagination({ page, pageSize }: PaginationProps) {
-  const { data } = useQuery<ProductsCountQuery>(PRODUCTS_COUNT_QUERY);
-  const pages = Math.ceil(data!.productsCount / pageSize);
-  console.log({ pages, page });
-  // TODO: disable buttons
+  const { data, loading } = useQuery<ProductsCountQuery>(PRODUCTS_COUNT_QUERY);
+  const pages = Math.ceil((data?.productsCount as number) / pageSize);
+
+  // TODO: add loader
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="w-[300px] grid grid-cols-[repeat(5,_auto)] rounded-2xl my-12 mx-auto overflow-hidden border border-gray-300">
       <Link
         path={`/products?page=${page - 1}`}
-        className="p-4 text-2xl border-r border-r-gray-300"
-        title="⬅️ Prev"
-        disabled={page <= 1}
+        className={`flex items-center p-4 text-2xl border-r border-r-gray-300 ${
+          page <= 1 ? 'opacity-50 pointer-events-none' : ''
+        }`}
+        title="Prev"
+        Icon={VscArrowSmallLeft}
+        iconPosition="start"
       />
       <Link
-        path={`/products?page=${page + 1}`}
+        path={`/products?page=${page >= pages ? page - 1 : page + 1}`}
         className="p-4 text-2xl border-r border-r-gray-300"
-        title={`${page}`}
+        title={`${page >= pages ? page - 1 : page}`}
       />
-      <Link
-        path={`/products?page=${page + 1}`}
-        className="p-4 text-2xl border-r border-r-gray-300"
-        title="..."
-      />
+      <p className="p-4 text-2xl border-r border-r-gray-300">...</p>
       <Link
         path={`/products?page=${pages}`}
         className="p-4 text-2xl border-r border-r-gray-300"
@@ -50,9 +50,12 @@ export default function Pagination({ page, pageSize }: PaginationProps) {
       />
       <Link
         path={`/products?page=${page + 1}`}
-        className="p-4 text-2xl"
-        title="➡️ Next"
-        disabled={page >= pages}
+        className={`flex items-center p-4 text-2xl ${
+          page >= pages ? 'opacity-50 pointer-events-none' : ''
+        }`}
+        title="Next"
+        Icon={VscArrowSmallRight}
+        iconPosition="end"
       />
     </div>
   );

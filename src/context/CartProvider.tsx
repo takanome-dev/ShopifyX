@@ -1,11 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
 
+import { useAuthContext } from './AuthProvider';
 import { CartItem, CartInitialValues } from './types';
 
 interface Props {
@@ -16,7 +20,7 @@ const initialState: CartInitialValues = {
   cartItems: [],
   subTotal: 0,
   addToCart: () => null,
-  updateSubTotal: () => null,
+  onUpdateItem: () => null,
 };
 
 const CartContext = createContext(initialState);
@@ -24,6 +28,7 @@ const CartContext = createContext(initialState);
 export default function CartProvider({ children }: Props) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [subTotal, setSubTotal] = useState(0);
+  const { user } = useAuthContext();
 
   const calculateSubTotal = useCallback((items: CartItem[]) => {
     const totalPrices = items.reduce(
@@ -33,14 +38,23 @@ export default function CartProvider({ children }: Props) {
     setSubTotal(totalPrices);
   }, []);
 
-  const handleSubTotal = useCallback(
-    (quantity: number, productId: number) => {
-      const items = cartItems;
-      const product = items.find((item) => item.product.id === productId);
-      product!.quantity = quantity;
+  useEffect(() => {
+    if (user) {
+      // TODO: set cart items to local storage
+      setCartItems(user?.cart as CartItem[]);
+      calculateSubTotal(user?.cart as CartItem[]);
+    }
+  }, [user]);
 
-      calculateSubTotal(items);
-      setCartItems(items);
+  const handleUpdateItem = useCallback(
+    (quantity: number, productId: string) => {
+      // TODO: find a nice and more efficient way to do this!!!
+      const cartItem = cartItems.find((item) => item.product.id === productId);
+      const items = cartItems.filter((item) => item.product.id !== productId);
+      const newCartItems = [...items, { ...cartItem!, quantity }];
+
+      calculateSubTotal(newCartItems);
+      setCartItems(newCartItems);
     },
     [cartItems]
   );
@@ -60,9 +74,8 @@ export default function CartProvider({ children }: Props) {
       cartItems,
       subTotal,
       addToCart: handleAddToCart,
-      updateSubTotal: handleSubTotal,
+      onUpdateItem: handleUpdateItem,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [cartItems, subTotal]
   );
 

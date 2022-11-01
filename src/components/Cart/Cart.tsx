@@ -47,11 +47,15 @@ const Cart = ({ handleClose, cartOpen }: CartProps) => {
           </button>
         </div>
         <div>
-          {cartItems.length > 0 ? (
+          {cartItems?.length > 0 ? (
             <>
               <div className="cart-items-scrollbar max-h-[84%] pr-2 mt-4 overflow-y-auto">
                 {cartItems.map((item) => (
-                  <CartProduct key={item.product.id} product={item.product} />
+                  <CartProduct
+                    key={item.product.id}
+                    product={item.product}
+                    initialQuantity={item.quantity}
+                  />
                 ))}
               </div>
               <div className="absolute bottom-0 w-[92%] p-4 bg-white border-t border-gray-200">

@@ -13,7 +13,7 @@ export interface CartInitialValues {
   subTotal: number;
   // quantity: number;
   addToCart: (item: CartItem) => void | null;
-  updateSubTotal: (quantity: number, productId: number) => void | null;
+  onUpdateItem: (quantity: number, productId: string) => void | null;
 }
 
 export interface LoginReturnType {
@@ -39,6 +39,7 @@ export interface UserQueryType {
 }
 
 export interface CartItem {
+  __typename: string;
   product: Product;
   quantity: number;
 }

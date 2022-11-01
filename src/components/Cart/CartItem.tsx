@@ -10,17 +10,17 @@ import formatMoney from '@lib/formatMoney';
 
 interface CartItemProps {
   product: Product;
+  initialQuantity: number;
 }
 
-export default function CartItem({ product }: CartItemProps) {
-  // const [price, setPrice] = useState(product.price)
-  const { updateSubTotal } = useCartItems();
-  const [quantity, setQuantity] = useState(1);
+export default function CartItem({ product, initialQuantity }: CartItemProps) {
+  const { onUpdateItem } = useCartItems();
+  const [quantity, setQuantity] = useState(initialQuantity);
 
-  const handleSetQuantity = (value: number, productId: number) => {
+  const handleSetQuantity = (value: number, productId: string) => {
     setQuantity(value);
     // TODO: send productId to provider
-    updateSubTotal(value, productId);
+    onUpdateItem(value, productId);
   };
 
   return (

@@ -16,6 +16,7 @@ export const CURRENT_USER_QUERY = gql`
             stock
             price
             photo {
+              id
               altText
               image {
                 publicUrlTransformed

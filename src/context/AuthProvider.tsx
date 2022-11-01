@@ -7,7 +7,7 @@ import {
   CURRENT_USER_QUERY,
 } from './auth';
 import {
-  InitialValues,
+  AuthInitialValues,
   UserInfo,
   SignupMutationType,
   SigninMutationType,
@@ -18,7 +18,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const initialState: InitialValues = {
+const initialState: AuthInitialValues = {
   user: null,
   login: () => null,
   register: () => null,
@@ -84,4 +84,4 @@ export default function AuthProvider({ children }: Props) {
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
 
-export const AuthContext = () => useContext(UserContext);
+export const useAuthContext = () => useContext(UserContext);

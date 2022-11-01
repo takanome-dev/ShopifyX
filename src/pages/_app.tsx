@@ -7,9 +7,10 @@ import '@style/nprogress.css';
 import '@style/globals.css';
 
 import Page from '@components/Page';
+import AuthProvider from '@context/AuthProvider';
+import CartProvider from '@context/CartProvider';
 
 import type { AppProps } from 'next/app';
-import AuthProvider from '@context/AuthProvider';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -25,9 +26,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <AuthProvider>
-        <Page>
-          <Component {...pageProps} />
-        </Page>
+        <CartProvider>
+          <Page>
+            <Component {...pageProps} />
+          </Page>
+        </CartProvider>
       </AuthProvider>
     </ApolloProvider>
   );

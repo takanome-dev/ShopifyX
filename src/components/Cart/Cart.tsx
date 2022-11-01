@@ -3,8 +3,11 @@
 
 import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import { GiShoppingCart } from 'react-icons/gi';
 
-import { AuthContext } from '@context/AuthProvider';
+// import { useAuthContext } from '@context/AuthProvider';
+import { useCartItems } from '@context/CartProvider';
+import formatMoney from '@lib/formatMoney';
 
 import Button from '../common/Button';
 
@@ -17,7 +20,8 @@ interface CartProps {
 
 // TODO: drop pr-2 if cart items > 4
 const Cart = ({ handleClose, cartOpen }: CartProps) => {
-  const { user } = AuthContext();
+  // const { user } = useAuthContext();
+  const { cartItems, subTotal } = useCartItems();
 
   return (
     <>
@@ -43,10 +47,10 @@ const Cart = ({ handleClose, cartOpen }: CartProps) => {
           </button>
         </div>
         <div>
-          {user?.cart ? (
+          {cartItems.length > 0 ? (
             <>
               <div className="cart-items-scrollbar max-h-[84%] pr-2 mt-4 overflow-y-auto">
-                {user.cart.map((item) => (
+                {cartItems.map((item) => (
                   <CartProduct key={item.product.id} product={item.product} />
                 ))}
               </div>
@@ -54,7 +58,9 @@ const Cart = ({ handleClose, cartOpen }: CartProps) => {
                 <div className="flex items-center justify-between">
                   <p className="text-2xl">
                     SubTotal:{' '}
-                    <span className="text-2xl font-semibold">$20,000</span>
+                    <span className="text-2xl font-semibold">
+                      {formatMoney(subTotal)}
+                    </span>
                   </p>
                   <Button
                     title="Proceed to checkout"
@@ -65,8 +71,16 @@ const Cart = ({ handleClose, cartOpen }: CartProps) => {
               </div>
             </>
           ) : (
-            <div>
-              <p>Nothing there</p>
+            <div className="flex items-center justify-center flex-col h-[60vh]">
+              <GiShoppingCart size={150} />
+              <div className="mt-8 text-center">
+                <h3 className="text-3xl font-semibold mb-8">
+                  Your cart is Empty
+                </h3>
+                <p className="text-2xl">
+                  looks like you haven&apos;t added anything to your cart yet.
+                </p>
+              </div>
             </div>
           )}
         </div>

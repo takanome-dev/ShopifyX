@@ -5,7 +5,7 @@ import { BiLoader } from 'react-icons/bi';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import * as Yup from 'yup';
 
-import { AuthContext } from '@context/AuthProvider';
+import { useAuthContext } from '@context/AuthProvider';
 import { RegisterReturnType } from '@context/types';
 
 import Button from './common/Button';
@@ -29,7 +29,7 @@ const Register = () => {
   const [error, setError] = useState<string | undefined>();
 
   const router = useRouter();
-  const { register } = AuthContext();
+  const { register } = useAuthContext();
 
   const handleSubmit = async (values: typeof initialValues) => {
     const { loading: isLoading, error: isError } = (await register({

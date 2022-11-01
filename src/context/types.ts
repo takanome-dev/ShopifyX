@@ -2,10 +2,18 @@ import { ApolloError } from '@apollo/client';
 
 import { Product } from '@components/types';
 
-export interface InitialValues {
+export interface AuthInitialValues {
   user: User | null;
   login: (user: UserInfo) => Promise<LoginReturnType> | null;
   register: (user: UserInfo) => Promise<RegisterReturnType> | null;
+}
+
+export interface CartInitialValues {
+  cartItems: CartItem[];
+  subTotal: number;
+  // quantity: number;
+  addToCart: (item: CartItem) => void | null;
+  updateSubTotal: (quantity: number, productId: number) => void | null;
 }
 
 export interface LoginReturnType {
@@ -23,14 +31,14 @@ export interface User {
   id?: string;
   username: string;
   email: string;
-  cart?: Cart[];
+  cart?: CartItem[];
 }
 
 export interface UserQueryType {
   authenticatedItem: User;
 }
 
-export interface Cart {
+export interface CartItem {
   product: Product;
   quantity: number;
 }
@@ -60,3 +68,5 @@ export interface SignupMutationType {
   email: string;
   password: string;
 }
+
+// export

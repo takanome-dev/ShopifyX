@@ -6,6 +6,7 @@ import { FaDollarSign, FaShoppingBag } from 'react-icons/fa';
 
 import FavIcon from '@components/common/FavIcon';
 import { Product } from '@components/types';
+import { useCartItems } from '@context/CartProvider';
 import formatMoney from '@lib/formatMoney';
 
 import { CardList } from '../Card';
@@ -35,6 +36,7 @@ const SINGLE_PRODUCT_QUERY = gql`
 const ProductDetails = () => {
   const router = useRouter();
   const { id } = router.query;
+  const { addToCart } = useCartItems();
 
   const { data, loading, error } = useQuery<SingleProductQuery>(
     SINGLE_PRODUCT_QUERY,
@@ -87,14 +89,16 @@ const ProductDetails = () => {
               Icon={FaShoppingBag}
               iconPosition="start"
               size="md"
+              onClick={() => addToCart({ product: data!.product, quantity: 1 })}
             />
           </div>
         </div>
       </div>
-      <div className="mt-12">
+      {/* TODO: review similar products */}
+      {/* <div className="mt-12">
         <h2 className="mb-8 text-3xl font-semibold">Similar Products</h2>
         <CardList />
-      </div>
+      </div> */}
     </div>
   );
 };

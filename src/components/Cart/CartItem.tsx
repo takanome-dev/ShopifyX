@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { FaRegHeart } from 'react-icons/fa';
 
 import { Product } from '@components/types';
+import { useCartItems } from '@context/CartProvider';
 import formatMoney from '@lib/formatMoney';
 
 interface CartItemProps {
@@ -12,6 +13,16 @@ interface CartItemProps {
 }
 
 export default function CartItem({ product }: CartItemProps) {
+  // const [price, setPrice] = useState(product.price)
+  const { updateSubTotal } = useCartItems();
+  const [quantity, setQuantity] = useState(1);
+
+  const handleSetQuantity = (value: number, productId: number) => {
+    setQuantity(value);
+    // TODO: send productId to provider
+    updateSubTotal(value, productId);
+  };
+
   return (
     <div className="grid grid-cols-[100px_1fr] gap-x-8 border border-gray-100 shadow-xs p-4 rounded-xl mb-4">
       <div className="overflow-hidden border-2 rounded-xl">
@@ -33,20 +44,26 @@ export default function CartItem({ product }: CartItemProps) {
               {product.name}
             </a>
           </Link>
-          <p className="text-3xl font-semibold">{formatMoney(product.price)}</p>
+          <p className="text-3xl font-semibold">
+            {formatMoney(product.price * quantity)}
+          </p>
         </div>
         <div className="flex justify-between">
           <div className="flex items-center border-2 rounded-xl">
             <button
               type="button"
-              className="h-full px-6 py-2 text-2xl transition hover:bg-gray-100"
+              className="h-full px-6 py-2 text-2xl transition hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
+              onClick={() => handleSetQuantity(quantity - 1, product.id)}
+              disabled={quantity <= 1}
             >
               -
             </button>
-            <span className="px-6 py-2 text-2xl">1</span>
+            <span className="px-6 py-2 text-2xl">{quantity}</span>
             <button
               type="button"
-              className="h-full px-6 py-2 text-2xl transition hover:bg-gray-100"
+              className="h-full px-6 py-2 text-2xl transition hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
+              onClick={() => handleSetQuantity(quantity + 1, product.id)}
+              disabled={quantity >= product.stock}
             >
               +
             </button>

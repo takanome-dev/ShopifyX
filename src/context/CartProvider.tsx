@@ -9,6 +9,8 @@ import React, {
   useState,
 } from 'react';
 
+import useLocalStorage from 'src/hooks/useLocalStorage';
+
 import { useAuthContext } from './AuthProvider';
 import { CartItem, CartInitialValues } from './types';
 
@@ -29,6 +31,7 @@ export default function CartProvider({ children }: Props) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [subTotal, setSubTotal] = useState(0);
   const { user } = useAuthContext();
+  const { getItemsFromStorage, setItemsToStorage } = useLocalStorage();
 
   const calculateSubTotal = useCallback((items: CartItem[]) => {
     const totalPrices = items.reduce(
@@ -40,9 +43,17 @@ export default function CartProvider({ children }: Props) {
 
   useEffect(() => {
     if (user) {
-      // TODO: set cart items to local storage
-      setCartItems(user?.cart as CartItem[]);
-      calculateSubTotal(user?.cart as CartItem[]);
+      const items =
+        getItemsFromStorage().length > 0
+          ? getItemsFromStorage()
+          : (user?.cart as CartItem[]);
+      setItemsToStorage(items);
+      setCartItems(items);
+      calculateSubTotal(items);
+    } else {
+      const items = getItemsFromStorage();
+      setCartItems(items);
+      calculateSubTotal(items);
     }
   }, [user]);
 
@@ -55,6 +66,7 @@ export default function CartProvider({ children }: Props) {
 
       calculateSubTotal(newCartItems);
       setCartItems(newCartItems);
+      setItemsToStorage(newCartItems);
     },
     [cartItems]
   );
@@ -65,6 +77,7 @@ export default function CartProvider({ children }: Props) {
 
       calculateSubTotal(items);
       setCartItems(items);
+      setItemsToStorage(items);
     },
     [cartItems]
   );

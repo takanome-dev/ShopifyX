@@ -6,7 +6,7 @@ import { BiLoader } from 'react-icons/bi';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import * as Yup from 'yup';
 
-import { AuthContext } from '@context/AuthProvider';
+import { useAuthContext } from '@context/AuthProvider';
 import { LoginReturnType } from '@context/types';
 
 import Button from './common/Button';
@@ -28,7 +28,7 @@ const Login = () => {
   const [error, setError] = useState<string | undefined>();
 
   const router = useRouter();
-  const { login } = AuthContext();
+  const { login } = useAuthContext();
 
   const handleSubmit = async (values: typeof initialValues) => {
     const { loading: isLoading, data } = (await login({

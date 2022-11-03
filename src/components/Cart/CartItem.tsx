@@ -14,12 +14,11 @@ interface CartItemProps {
 }
 
 export default function CartItem({ product, initialQuantity }: CartItemProps) {
-  const { onUpdateItem } = useCartItems();
+  const { onUpdateItem, onDeleteItem } = useCartItems();
   const [quantity, setQuantity] = useState(initialQuantity);
 
   const handleSetQuantity = (value: number, productId: string) => {
     setQuantity(value);
-    // TODO: send productId to provider
     onUpdateItem(value, productId);
   };
 
@@ -79,6 +78,7 @@ export default function CartItem({ product, initialQuantity }: CartItemProps) {
             <button
               type="button"
               className="p-4 text-red-500 rounded-full hover:bg-gray-100"
+              onClick={() => onDeleteItem(product.id)}
             >
               <AiFillDelete size={20} />
             </button>

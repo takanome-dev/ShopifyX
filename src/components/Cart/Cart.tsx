@@ -5,13 +5,12 @@ import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { GiShoppingCart } from 'react-icons/gi';
 
-// import { useAuthContext } from '@context/AuthProvider';
 import { useCartItems } from '@context/CartProvider';
 import formatMoney from '@lib/formatMoney';
 
 import Button from '../common/Button';
 
-import CartProduct from './CartItem';
+import CartItem from './CartItem';
 
 interface CartProps {
   handleClose: () => void;
@@ -20,7 +19,6 @@ interface CartProps {
 
 // TODO: drop pr-2 if cart items > 4
 const Cart = ({ handleClose, cartOpen }: CartProps) => {
-  // const { user } = useAuthContext();
   const { cartItems, subTotal } = useCartItems();
 
   return (
@@ -46,48 +44,46 @@ const Cart = ({ handleClose, cartOpen }: CartProps) => {
             <AiOutlineClose size={20} />
           </button>
         </div>
-        <div>
-          {cartItems?.length > 0 ? (
-            <>
-              <div className="cart-items-scrollbar max-h-[84%] pr-2 mt-4 overflow-y-auto">
-                {cartItems.map((item) => (
-                  <CartProduct
-                    key={item.product.id}
-                    product={item.product}
-                    initialQuantity={item.quantity}
-                  />
-                ))}
-              </div>
-              <div className="absolute bottom-0 w-[92%] p-4 bg-white border-t border-gray-200">
-                <div className="flex items-center justify-between">
-                  <p className="text-2xl">
-                    SubTotal:{' '}
-                    <span className="text-2xl font-semibold">
-                      {formatMoney(subTotal)}
-                    </span>
-                  </p>
-                  <Button
-                    title="Proceed to checkout"
-                    className="border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
-                    size="sm"
-                  />
-                </div>
-              </div>
-            </>
-          ) : (
-            <div className="flex items-center justify-center flex-col h-[60vh]">
-              <GiShoppingCart size={150} />
-              <div className="mt-8 text-center">
-                <h3 className="text-3xl font-semibold mb-8">
-                  Your cart is Empty
-                </h3>
+        {cartItems?.length > 0 ? (
+          <>
+            <div className="cart-items-scrollbar max-h-[84%] pr-2 mt-4 overflow-auto">
+              {cartItems.map((item) => (
+                <CartItem
+                  key={item.product.id}
+                  product={item.product}
+                  initialQuantity={item.quantity}
+                />
+              ))}
+            </div>
+            <div className="absolute bottom-0 w-[92%] p-4 bg-white border-t border-gray-200">
+              <div className="flex items-center justify-between">
                 <p className="text-2xl">
-                  looks like you haven&apos;t added anything to your cart yet.
+                  SubTotal:{' '}
+                  <span className="text-2xl font-semibold">
+                    {formatMoney(subTotal)}
+                  </span>
                 </p>
+                <Button
+                  title="Proceed to checkout"
+                  className="border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+                  size="sm"
+                />
               </div>
             </div>
-          )}
-        </div>
+          </>
+        ) : (
+          <div className="flex items-center justify-center flex-col h-[60vh]">
+            <GiShoppingCart size={150} />
+            <div className="mt-8 text-center">
+              <h3 className="text-3xl font-semibold mb-8">
+                Your cart is Empty
+              </h3>
+              <p className="text-2xl">
+                looks like you haven&apos;t added anything to your cart yet.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

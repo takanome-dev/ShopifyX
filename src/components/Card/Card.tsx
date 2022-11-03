@@ -1,15 +1,19 @@
 import Image from 'next/image';
 // import Link from 'next/link';
 import React from 'react';
+import { BsCartPlusFill } from 'react-icons/bs';
 import { FaCartPlus, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 
 import FavIcon from '@components/common/FavIcon';
 import Link from '@components/common/Link';
+import { useCartItems } from '@context/CartProvider';
 import formatMoney from '@lib/formatMoney';
 
 import { Product } from '../types';
 
 export default function Card({ product }: { product: Product }) {
+  const { addToCart } = useCartItems();
+
   return (
     <div className="relative border border-gray-300 rounded-2xl p-4">
       <div className="relative">
@@ -49,9 +53,17 @@ export default function Card({ product }: { product: Product }) {
             {product.stock > 0 ? 'In stock' : 'Out of stock'}
           </p>
         </div>
-        <p className="mt-8 text-gray-500 text-2xl">
-          seller <Link path="/" title="@Takanome" className="text-blue-500" />
-        </p>
+        <div className="flex items-center justify-between mt-4">
+          <p className="text-gray-500 text-2xl">
+            seller <Link path="/" title="@Takanome" className="text-blue-500" />
+          </p>
+          <button type="button" className="p-4 hover:bg-gray-200 rounded-full">
+            <BsCartPlusFill
+              size={20}
+              onClick={() => addToCart({ product, quantity: 1 })}
+            />
+          </button>
+        </div>
       </div>
       {/* <div className="mt-4 grid grid-cols-[repeat(auto-fit,_minmax(50px,_1fr))] gap-px auto-rows-[50px] border-t border-t-gray-300">
         <div className="flex items-center justify-center cursor-pointer">

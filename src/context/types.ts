@@ -11,9 +11,9 @@ export interface AuthInitialValues {
 export interface CartInitialValues {
   cartItems: CartItem[];
   subTotal: number;
-  // quantity: number;
   addToCart: (item: CartItem) => void | null;
   onUpdateItem: (quantity: number, productId: string) => void | null;
+  onDeleteItem: (productId: string) => void | null;
 }
 
 export interface LoginReturnType {
@@ -39,7 +39,7 @@ export interface UserQueryType {
 }
 
 export interface CartItem {
-  __typename: string;
+  __typename?: string;
   product: Product;
   quantity: number;
 }

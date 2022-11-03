@@ -23,6 +23,7 @@ const initialState: CartInitialValues = {
   subTotal: 0,
   addToCart: () => null,
   onUpdateItem: () => null,
+  onDeleteItem: () => null,
 };
 
 const CartContext = createContext(initialState);
@@ -82,12 +83,22 @@ export default function CartProvider({ children }: Props) {
     [cartItems]
   );
 
+  const handleDeleteItem = (productId: string) => {
+    const newCartItems = cartItems.filter(
+      ({ product }) => product.id !== productId
+    );
+    setCartItems(newCartItems);
+    calculateSubTotal(newCartItems);
+    setItemsToStorage(newCartItems);
+  };
+
   const value = useMemo(
     () => ({
       cartItems,
       subTotal,
       addToCart: handleAddToCart,
       onUpdateItem: handleUpdateItem,
+      onDeleteItem: handleDeleteItem,
     }),
     [cartItems, subTotal]
   );

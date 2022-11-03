@@ -4,11 +4,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
-import { FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
+import { FaSearch, FaBars } from 'react-icons/fa';
+import { MdShoppingCart } from 'react-icons/md';
 import { VscSignOut } from 'react-icons/vsc';
 
 import { CURRENT_USER_QUERY } from '@context/auth';
 import { useAuthContext } from '@context/AuthProvider';
+import { useCartItems } from '@context/CartProvider';
 
 import Button from './common/Button';
 import HeaderLink from './common/HeaderLink';
@@ -26,6 +28,7 @@ const SIGN_OUT_MUTATION = gql`
 
 export default function Header({ handleOpen }: HeaderProps) {
   const { user } = useAuthContext();
+  const { cartItems } = useCartItems();
   const router = useRouter();
   const [signout] = useMutation(SIGN_OUT_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
@@ -48,11 +51,18 @@ export default function Header({ handleOpen }: HeaderProps) {
         <div className="flex justify-end items-center">
           <div className={user ? 'mr-8 flex' : 'mr-16 flex'}>
             <FaSearch size={20} className="text-gray-700 cursor-pointer" />
-            <FaShoppingCart
-              size={20}
-              className="ml-8 text-gray-700 cursor-pointer"
-              onClick={handleOpen}
-            />
+            <div className="relative">
+              <MdShoppingCart
+                size={20}
+                className="ml-8 text-gray-700 cursor-pointer"
+                onClick={handleOpen}
+              />
+              {cartItems.length > 0 && (
+                <p className="absolute -top-5 -right-5 bg-red-500 w-8 h-8 flex items-center justify-center text-white text-xl font-semibold rounded-full">
+                  {cartItems.length}
+                </p>
+              )}
+            </div>
             <FaBars
               size={20}
               className="block ml-8 text-gray-700 cursor-pointer md:hidden"

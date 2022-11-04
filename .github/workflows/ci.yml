@@ -28,10 +28,9 @@ jobs:
 
       - name: '📦 install dependencies'
         run: pnpm install
-        
+
       - name: '🔍 lint code'
-        run: npm lint
+        run: pnpm lint
 
       - name: '🔍 run tests'
         run: pnpm test
-      

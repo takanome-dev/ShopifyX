@@ -7,11 +7,11 @@ import { Product } from '@components/types';
 import { CardList } from '../Card';
 import Pagination from '../Pagination';
 
-interface ProductsQuery {
+export interface ProductsQuery {
   products: Product[];
 }
 
-const ALL_PRODUCTS_QUERY = gql`
+export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY($skip: Int!, $take: Int!) {
     products(skip: $skip, take: $take) {
       id

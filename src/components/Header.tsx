@@ -52,16 +52,23 @@ export default function Header({ handleOpen }: HeaderProps) {
             </nav>
           )}
           <div className="flex justify-end items-center">
-            <div className={user ? 'mr-8 flex' : 'mr-16 flex'}>
-              <FaSearch
-                size={20}
-                className="text-gray-700 cursor-pointer"
+            <div
+              className={
+                user ? 'mr-8 flex items-center' : 'mr-16 flex items-center'
+              }
+            >
+              <button
+                type="button"
+                className="border border-gray-200 pl-3 pr-10 py-3 flex items-center rounded-lg"
                 onClick={() => setOpenSearch(true)}
-              />
-              <div className="relative">
+              >
+                <FaSearch size={18} className="text-gray-500" />
+                <p className="ml-4 text-xl text-gray-500">Search...</p>
+              </button>
+              <div className="relative ml-12">
                 <MdShoppingCart
                   size={20}
-                  className="ml-8 text-gray-700 cursor-pointer"
+                  className="text-gray-700 cursor-pointer"
                   onClick={handleOpen}
                 />
                 {cartItems.length > 0 && (
@@ -122,12 +129,12 @@ export default function Header({ handleOpen }: HeaderProps) {
                           />
                         </div>
 
-                        <div className="flex-col shrink">
-                          <p className="text-gray-700 text-xl font-semibold">
+                        <div className="flex-col shrink w-52">
+                          <p className="text-gray-700 text-2xl font-semibold">
                             {user?.username}
                           </p>
 
-                          <p className="text-gray-500 text-sm font-normal">
+                          <p className="text-gray-500 truncate text-xl font-normal">
                             {user?.email}
                           </p>
                         </div>

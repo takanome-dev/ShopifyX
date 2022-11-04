@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -12,7 +11,6 @@ import { Product } from '../types';
 
 const CardOrderProduct = ({ product }: { product: Product }) => {
   const borderColor =
-    // eslint-disable-next-line no-nested-ternary
     product.orderStatus === 'delivered'
       ? 'border-l-green-400'
       : product.orderStatus === 'processing'
@@ -24,7 +22,7 @@ const CardOrderProduct = ({ product }: { product: Product }) => {
       <div className="grid grid-cols-[150px_1fr] gap-x-8 mb-8">
         <div className="overflow-hidden border-2 rounded-2xl">
           <Image
-            src={product.photo}
+            src={product.photo.image.publicUrlTransformed}
             alt={product.name}
             width="100%"
             height="100%"

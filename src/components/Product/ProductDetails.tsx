@@ -9,7 +9,7 @@ import { Product } from '@components/types';
 import { useCartItems } from '@context/CartProvider';
 import formatMoney from '@lib/formatMoney';
 
-import { CardList } from '../Card';
+// import { CardList } from '../Card';
 import Button from '../common/Button';
 
 interface SingleProductQuery {

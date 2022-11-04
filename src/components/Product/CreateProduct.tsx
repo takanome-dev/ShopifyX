@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Formik, Form } from 'formik';
 import React from 'react';
 import { FaPlusCircle } from 'react-icons/fa';

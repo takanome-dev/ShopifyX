@@ -27,7 +27,7 @@ jobs:
         run: npm i -g pnpm
 
       - name: '📦 install dependencies'
-        uses: pnpm install
+        run: pnpm install
 
       - name: '🔍 run tests'
         run: pnpm test
@@ -49,7 +49,7 @@ jobs:
         run: npm i -g pnpm
 
       - name: '📦 install dependencies'
-        uses: pnpm install
+        run: pnpm install
 
       - name: '🔍 lint code'
         run: npm lint

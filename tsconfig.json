@@ -31,6 +31,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "src"],
+  "include": ["next-env.d.ts", "src", "**/*.ts"],
   "exclude": ["node_modules", "**/*.js"]
 }

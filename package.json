@@ -9,7 +9,7 @@
     "format": "pnpm lint --fix",
     "start": "next start",
     "postinstall": "husky install",
-    "test": ""
+    "test": "npx playwright test"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
@@ -32,6 +32,7 @@
     "@babel/preset-typescript": "^7.18.6",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "@playwright/test": "^1.27.1",
     "@types/node": "18.11.9",
     "@types/nprogress": "^0.2.0",
     "@types/react": "18.0.24",

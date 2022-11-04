@@ -1,4 +1,4 @@
-name: Development
+name: CI
 
 on:
   pull_request:
@@ -10,8 +10,8 @@ on:
   workflow_call:
 
 jobs:
-  test:
-    name: Test application
+  ci:
+    name: Lint and Test application
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -28,28 +28,10 @@ jobs:
 
       - name: '📦 install dependencies'
         run: pnpm install
+        
+      - name: '🔍 lint code'
+        run: npm lint
 
       - name: '🔍 run tests'
         run: pnpm test
-
-  lint:
-    name: Code standards
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: '☁️ checkout repository'
-        uses: actions/checkout@v3
-
-      - name: '🔧 setup node'
-        uses: actions/setup-node@v3.5.1
-        with:
-          node-version: 16
-
-      - name: '🔧 install pnpm@latest'
-        run: npm i -g pnpm
-
-      - name: '📦 install dependencies'
-        run: pnpm install
-
-      - name: '🔍 lint code'
-        run: npm lint
+      

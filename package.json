@@ -5,8 +5,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "format": "npx eslint . --fix",
     "lint": "npx eslint . --report-unused-disable-directives",
+    "format": "pnpm lint --fix",
     "start": "next start",
     "postinstall": "husky install",
     "test": ""

@@ -1,6 +1,5 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 import { useField, useFormikContext } from 'formik';

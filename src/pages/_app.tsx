@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import Router from 'next/router';
 import NProgress from 'nprogress';

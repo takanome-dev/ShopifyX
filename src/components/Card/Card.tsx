@@ -1,8 +1,6 @@
 import Image from 'next/image';
-// import Link from 'next/link';
 import React from 'react';
 import { BsCartPlusFill } from 'react-icons/bs';
-import { FaCartPlus, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 
 import FavIcon from '@components/common/FavIcon';
 import Link from '@components/common/Link';
@@ -35,14 +33,6 @@ export default function Card({ product }: { product: Product }) {
           title={product.name}
           className="w-full mb-8 overflow-hidden text-4xl font-semibold text-ellipsis whitespace-nowrap"
         />
-        {/* <Link href={`/products/${product.id}`}>
-          <a className="w-full px-8 py-2 -mt-8 overflow-hidden text-5xl font-semibold text-center -skew-x-6 text-ellipsis whitespace-nowrap hover:underline bg-gradient-to-r from-cyan to-teal -rotate-2">
-            {product.name}
-          </a>
-        </Link> */}
-        {/* <p className="absolute px-4 py-2 text-3xl font-semibold -skew-x-6 bg-gradient-to-r from-cyan to-teal rotate-2 -top-1 -right-1">
-          {formatMoney(product.price)}
-        </p> */}
         <div className="flex items-center justify-between">
           <p className="text-3xl font-semibold">{formatMoney(product.price)}</p>
           <p
@@ -65,17 +55,6 @@ export default function Card({ product }: { product: Product }) {
           </button>
         </div>
       </div>
-      {/* <div className="mt-4 grid grid-cols-[repeat(auto-fit,_minmax(50px,_1fr))] gap-px auto-rows-[50px] border-t border-t-gray-300">
-        <div className="flex items-center justify-center cursor-pointer">
-          <FaPencilAlt size={20} className="text-gray-700 " />
-        </div>
-        <div className="flex items-center justify-center border-l cursor-pointer border-l-gray-300">
-          <FaCartPlus size={20} className="text-gray-700" />
-        </div>
-        <div className="flex items-center justify-center border-l cursor-pointer border-l-gray-300">
-          <FaTrashAlt size={20} className="text-red" />
-        </div>
-      </div> */}
     </div>
   );
 }

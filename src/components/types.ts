@@ -20,15 +20,15 @@ export interface InitialValues {
 }
 
 export interface Image {
-  id: string;
+  id?: string;
   image: {
-    id: string;
+    id?: string;
     publicUrlTransformed: string;
-    filename: string;
-    originalFilename: string;
-    mimetype: string;
-    encoding: string;
-    _meta: {
+    filename?: string;
+    originalFilename?: string;
+    mimetype?: string;
+    encoding?: string;
+    _meta?: {
       public_id: string;
       version: number;
       signature: string;

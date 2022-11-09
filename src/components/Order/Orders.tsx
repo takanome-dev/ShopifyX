@@ -5,34 +5,58 @@ import { Product } from '@components/types';
 import CardOrder from './CardOrder';
 
 const product1: Product = {
-  id: 1,
+  id: '1',
   name: 'Yeti Hondo',
   description: 'Great shoes!',
   status: 'AVAILABLE',
   price: 3423,
-  photo:
-    'https://res.cloudinary.com/wesbos/image/upload/v1576791335/sick-fits-keystone/5dfbed262849d7961377c2c0.jpg',
+  photo: {
+    image: {
+      publicUrlTransformed:
+        'https://res.cloudinary.com/wesbos/image/upload/v1576791335/sick-fits-keystone/5dfbed262849d7961377c2c0.jpg',
+    },
+  },
   orderStatus: 'delivered',
+  createdAt: '',
+  updatedAt: '',
+  createdById: '',
+  stock: 1,
 };
 const product2: Product = {
-  id: 1,
+  id: '1',
   name: 'Yeti Hondo',
   description: 'Great shoes!',
   status: 'AVAILABLE',
   price: 3423,
-  photo:
-    'https://res.cloudinary.com/wesbos/image/upload/v1576791335/sick-fits-keystone/5dfbed262849d7961377c2c0.jpg',
-  orderStatus: 'processing',
+  photo: {
+    image: {
+      publicUrlTransformed:
+        'https://res.cloudinary.com/wesbos/image/upload/v1576791335/sick-fits-keystone/5dfbed262849d7961377c2c0.jpg',
+    },
+  },
+  orderStatus: 'delivered',
+  createdAt: '',
+  updatedAt: '',
+  createdById: '',
+  stock: 1,
 };
 const product3: Product = {
-  id: 1,
+  id: '1',
   name: 'Yeti Hondo',
   description: 'Great shoes!',
   status: 'AVAILABLE',
   price: 3423,
-  photo:
-    'https://res.cloudinary.com/wesbos/image/upload/v1576791335/sick-fits-keystone/5dfbed262849d7961377c2c0.jpg',
-  orderStatus: 'failed',
+  orderStatus: 'delivered',
+  createdAt: '',
+  updatedAt: '',
+  createdById: '',
+  stock: 1,
+  photo: {
+    image: {
+      publicUrlTransformed:
+        'https://res.cloudinary.com/wesbos/image/upload/v1576791335/sick-fits-keystone/5dfbed262849d7961377c2c0.jpg',
+    },
+  },
 };
 
 export default function Orders() {

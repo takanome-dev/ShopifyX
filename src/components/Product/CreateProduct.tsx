@@ -1,3 +1,4 @@
+import { gql, useMutation } from '@apollo/client';
 import { Formik, Form } from 'formik';
 import React from 'react';
 import { FaPlusCircle } from 'react-icons/fa';
@@ -11,6 +12,7 @@ const initialValues = {
   name: '',
   price: '',
   description: '',
+  stock: '',
 };
 
 const validationSchema = Yup.object().shape({
@@ -18,15 +20,48 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().min(4).required(),
   price: Yup.number().integer().min(1).required(),
   description: Yup.string().min(10).required(),
+  stock: Yup.string().min(1).required(),
 });
 
+const CREATE_PRODUCT_MUTATION = gql`
+  mutation CREATE_PRODUCT_MUTATION(
+    $name: String!
+    $description: String!
+    $price: String!
+    $stock: Integer!
+  ) {
+    createProduct(
+      data: {
+        name: $name
+        description: $description
+        price: $price
+        stock: $stock
+      }
+    ) {
+      id
+    }
+  }
+`;
+
 export default function CreateProduct() {
+  const [createProduct, { error, loading, data }] = useMutation(
+    CREATE_PRODUCT_MUTATION
+  );
+
+  console.log({ error, loading, data });
+  const handleSubmit = (values: typeof initialValues) => {
+    console.log({ values });
+    createProduct({
+      variables: values,
+    }).catch((err) => console.error(err));
+  };
+
   return (
     <div className="min-h-[550px] flex items-center justify-center">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => console.log({ values })}
+        onSubmit={handleSubmit}
       >
         <Form className="w-full max-w-screen-md p-8 border border-gray-300 rounded-xl">
           <fieldset className="p-0 m-0 border-none disabled:opacity-50 disabled:pointer-events-none">
@@ -37,6 +72,12 @@ export default function CreateProduct() {
               type="number"
               label="Price"
               placeholder="10_000"
+            />
+            <Input
+              name="stock"
+              type="number"
+              label="Number In Stock"
+              placeholder="5"
             />
             <Input
               name="description"

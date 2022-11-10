@@ -29,6 +29,7 @@ const CREATE_PRODUCT_MUTATION = gql`
     $description: String!
     $price: String!
     $stock: Integer!
+    $photo: Upload!
   ) {
     createProduct(
       data: {
@@ -36,6 +37,7 @@ const CREATE_PRODUCT_MUTATION = gql`
         description: $description
         price: $price
         stock: $stock
+        photo: $photo
       }
     ) {
       id
@@ -52,7 +54,13 @@ export default function CreateProduct() {
   const handleSubmit = (values: typeof initialValues) => {
     console.log({ values });
     createProduct({
-      variables: values,
+      variables: {
+        name: values.name,
+        description: values.description,
+        price: values.price,
+        stock: values.stock,
+        photo: values.image,
+      },
     }).catch((err) => console.error(err));
   };
 

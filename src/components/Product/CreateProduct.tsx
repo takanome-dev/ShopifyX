@@ -1,11 +1,22 @@
 import { gql, useMutation } from '@apollo/client';
 import { Formik, Form } from 'formik';
+import { useRouter } from 'next/router';
 import React from 'react';
+import { BiLoader } from 'react-icons/bi';
 import { FaPlusCircle } from 'react-icons/fa';
 import * as Yup from 'yup';
 
+import ErrorMessage from '@components/common/ErrorMessage';
+
 import Button from '../common/Button';
 import Input from '../common/Input';
+
+interface CreateProductMutation {
+  createProduct: {
+    id: string;
+    __typename: string;
+  };
+}
 
 const initialValues = {
   image: '',
@@ -27,17 +38,17 @@ const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
     $name: String!
     $description: String!
-    $price: String!
-    $stock: Integer!
+    $price: Int!
+    $stock: Int!
     $photo: Upload!
   ) {
     createProduct(
       data: {
-        name: $name
+        # name: $name
         description: $description
         price: $price
         stock: $stock
-        photo: $photo
+        photo: { create: { image: $photo, altText: $name } }
       }
     ) {
       id
@@ -46,64 +57,70 @@ const CREATE_PRODUCT_MUTATION = gql`
 `;
 
 export default function CreateProduct() {
-  const [createProduct, { error, loading, data }] = useMutation(
-    CREATE_PRODUCT_MUTATION
-  );
+  const router = useRouter();
+  const [createProduct, { error, loading, data }] =
+    useMutation<CreateProductMutation>(CREATE_PRODUCT_MUTATION);
 
-  console.log({ error, loading, data });
-  const handleSubmit = (values: typeof initialValues) => {
-    console.log({ values });
-    createProduct({
+  console.log({ data });
+
+  const handleSubmit = async (values: typeof initialValues) => {
+    await createProduct({
       variables: {
-        name: values.name,
+        // name: values.name,
         description: values.description,
-        price: values.price,
-        stock: values.stock,
+        price: +values.price,
+        stock: +values.stock,
         photo: values.image,
       },
-    }).catch((err) => console.error(err));
+    });
+    router.push(`/products/${data!.createProduct.id}`).catch(console.error);
   };
 
   return (
-    <div className="min-h-[550px] flex items-center justify-center">
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form className="w-full max-w-screen-md p-8 border border-gray-300 rounded-xl">
-          <fieldset className="p-0 m-0 border-none disabled:opacity-50 disabled:pointer-events-none">
-            <Input type="file" name="image" />
-            <Input name="name" label="Name" placeholder="Car" />
-            <Input
-              name="price"
-              type="number"
-              label="Price"
-              placeholder="10_000"
+    <>
+      <ErrorMessage error={error} />
+      <div className="min-h-[550px] flex items-center justify-center">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form className="w-full max-w-screen-md p-8 border border-gray-300 rounded-xl">
+            <fieldset className="p-0 m-0 border-none disabled:opacity-50 disabled:pointer-events-none">
+              <Input type="file" name="image" />
+              <Input name="name" label="Name" placeholder="Car" />
+              <Input
+                name="price"
+                type="number"
+                label="Price"
+                placeholder="10_000"
+              />
+              <Input
+                name="stock"
+                type="number"
+                label="Number In Stock"
+                placeholder="5"
+              />
+              <Input
+                name="description"
+                label="Description"
+                placeholder="Nice car"
+              />
+            </fieldset>
+            <Button
+              title={loading ? 'creating product...' : 'Create product'}
+              className="flex"
+              variant="primary"
+              type="submit"
+              disabled={loading}
+              iconClasses={loading ? 'animate-spin' : ''}
+              Icon={loading ? BiLoader : FaPlusCircle}
+              iconPosition={loading ? 'end' : 'start'}
+              size="lg"
             />
-            <Input
-              name="stock"
-              type="number"
-              label="Number In Stock"
-              placeholder="5"
-            />
-            <Input
-              name="description"
-              label="Description"
-              placeholder="Nice car"
-            />
-          </fieldset>
-          <Button
-            title="Create product"
-            className="flex"
-            variant="primary"
-            type="submit"
-            Icon={FaPlusCircle}
-            iconPosition="start"
-            size="lg"
-          />
-        </Form>
-      </Formik>
-    </div>
+          </Form>
+        </Formik>
+      </div>
+    </>
   );
 }

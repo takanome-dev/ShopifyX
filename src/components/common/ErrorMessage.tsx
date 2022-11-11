@@ -1,14 +1,33 @@
 import React from 'react';
-import { MdErrorOutline } from 'react-icons/md';
 
-const ErrorMessage = ({ error }: { error: string | false | undefined }) => {
-  if (!error) return null;
+import { ServerError } from '@components/types';
+
+const ErrorComponent = ({ error }: { error: string }) => (
+  <div className="flex items-center justify-center">
+    <div className="rounded-xl shadow-xl w-[500px] p-8 border-l-4 border-red-500">
+      <p className="text-2xl font-semibold text-center">
+        <span className="mr-2 text-red-500">Error:</span>
+        {error}
+      </p>
+    </div>
+  </div>
+);
+
+const ErrorMessage = ({ error }: { error: ServerError }) => {
+  // console.log({ error });
+  if (!error || !error.message) return null;
+
+  if (error?.networkError?.result?.errors?.length) {
+    return error.networkError.result.errors.map((err) => (
+      <ErrorComponent
+        key={err.locations[0].column}
+        error={err.message.replace('GraphQL error: ', '')}
+      />
+    ));
+  }
 
   return (
-    <div className="flex items-center mt-2 text-2xl text-red-500">
-      <MdErrorOutline className="mr-4" size={20} />
-      <span>{error}</span>
-    </div>
+    <ErrorComponent error={error.message.replace('GraphQL error: ', '')} />
   );
 };
 

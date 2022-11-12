@@ -93,7 +93,7 @@ const ProductDetails = () => {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        path={`/products/update?${data!.product.id}`}
+                        path={`/products/update?id=${data!.product.id}`}
                         title="Edit"
                         Icon={FaPencilAlt}
                         iconPosition="start"

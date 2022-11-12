@@ -1,5 +1,6 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { Formik, Form } from 'formik';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { BiLoader } from 'react-icons/bi';
@@ -20,7 +21,7 @@ interface UpdateProductMutation {
 }
 
 const validationSchema = Yup.object().shape({
-  // image: Yup.mixed().required(),
+  image: Yup.mixed(),
   name: Yup.string().min(4).required(),
   price: Yup.number().integer().min(1).required(),
   description: Yup.string().min(10).required(),
@@ -33,7 +34,8 @@ const UPDATE_PRODUCT_MUTATION = gql`
     $name: String
     $description: String
     $price: Int
-    $stock: Int # $photo: Upload!
+    $stock: Int
+    $photo: Upload
   ) {
     updateProduct(
       where: { id: $id }
@@ -42,6 +44,7 @@ const UPDATE_PRODUCT_MUTATION = gql`
         description: $description
         price: $price
         stock: $stock
+        photo: { create: { image: $photo, altText: $name } }
       }
     ) {
       id
@@ -63,7 +66,7 @@ export default function UpdateProduct() {
   });
 
   const initialValues = {
-    // image: '',
+    image: data?.product.photo.image.publicUrlTransformed,
     name: data?.product.name,
     price: data?.product.price,
     description: data?.product.description,
@@ -85,7 +88,7 @@ export default function UpdateProduct() {
         description: values.description ?? '',
         price: +values.price!,
         stock: +values.stock!,
-        // photo: values.image,
+        photo: values.image ?? '',
       },
     });
 
@@ -107,7 +110,21 @@ export default function UpdateProduct() {
         >
           <Form className="w-full max-w-screen-md p-8 border border-gray-300 rounded-xl">
             <fieldset className="p-0 m-0 border-none disabled:opacity-50 disabled:pointer-events-none">
-              {/* <Input type="file" name="image" /> */}
+              <div className="flex items-center mb-8">
+                <div className="overflow-hidden border shadow-md rounded-2xl w-48 h-48 mr-12">
+                  <Image
+                    src={initialValues.image as string}
+                    alt={initialValues.name}
+                    width="100%"
+                    height="100%"
+                    className="object-cover"
+                    layout="responsive"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+yHgAFWAJp08sG7wAAAABJRU5ErkJggg=="
+                  />
+                </div>
+                <Input type="file" name="image" />
+              </div>
               <Input name="name" label="Name" placeholder="Car" />
               <Input
                 name="price"

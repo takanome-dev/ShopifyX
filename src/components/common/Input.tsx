@@ -6,7 +6,7 @@ import { useField, useFormikContext } from 'formik';
 import { NextPage } from 'next';
 import React from 'react';
 
-import ErrorMessage from './ErrorMessage';
+import InputError from './InputError';
 
 /**
  * For more information about the input transition
@@ -58,7 +58,7 @@ const Input: NextPage<InputProps> = ({ label, error, ...props }) => {
       >
         {label}
       </label>
-      <ErrorMessage error={errorMessage} />
+      <InputError error={errorMessage} />
     </div>
   );
 };

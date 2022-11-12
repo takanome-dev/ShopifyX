@@ -44,7 +44,7 @@ const CREATE_PRODUCT_MUTATION = gql`
   ) {
     createProduct(
       data: {
-        # name: $name
+        name: $name
         description: $description
         price: $price
         stock: $stock
@@ -58,27 +58,30 @@ const CREATE_PRODUCT_MUTATION = gql`
 
 export default function CreateProduct() {
   const router = useRouter();
-  const [createProduct, { error, loading, data }] =
+  const [createProduct, { error, loading }] =
     useMutation<CreateProductMutation>(CREATE_PRODUCT_MUTATION);
 
-  console.log({ data });
-
   const handleSubmit = async (values: typeof initialValues) => {
-    await createProduct({
+    const res = await createProduct({
       variables: {
-        // name: values.name,
+        name: values.name,
         description: values.description,
         price: +values.price,
         stock: +values.stock,
         photo: values.image,
       },
     });
-    router.push(`/products/${data!.createProduct.id}`).catch(console.error);
+
+    if (!error) {
+      router
+        .push(`/products/${res.data!.createProduct.id}`)
+        .catch(console.error);
+    }
   };
 
   return (
     <>
-      <ErrorMessage error={error} />
+      <ErrorMessage error={error!} />
       <div className="min-h-[550px] flex items-center justify-center">
         <Formik
           initialValues={initialValues}

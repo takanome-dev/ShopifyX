@@ -1,10 +1,20 @@
+/* eslint-disable import/exports-last */
 import { gql, useQuery } from '@apollo/client';
+import { Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FaDollarSign, FaShoppingBag } from 'react-icons/fa';
+import { AiFillDelete } from 'react-icons/ai';
+import { BsThreeDots } from 'react-icons/bs';
+import {
+  FaDollarSign,
+  FaPencilAlt,
+  FaRegHeart,
+  FaShoppingBag,
+} from 'react-icons/fa';
 
 import FavIcon from '@components/common/FavIcon';
+import Link from '@components/common/Link';
 import { Product } from '@components/types';
 import { useCartItems } from '@context/CartProvider';
 import formatMoney from '@lib/formatMoney';
@@ -12,11 +22,11 @@ import formatMoney from '@lib/formatMoney';
 // import { CardList } from '../Card';
 import Button from '../common/Button';
 
-interface SingleProductQuery {
+export interface SingleProductQuery {
   product: Product;
 }
 
-const SINGLE_PRODUCT_QUERY = gql`
+export const SINGLE_PRODUCT_QUERY = gql`
   query SINGLE_PRODUCT_QUERY($id: ID!) {
     product(where: { id: $id }) {
       id
@@ -64,8 +74,52 @@ const ProductDetails = () => {
           />
           <FavIcon className="top-8 right-8" />
         </div>
-        <div className="">
-          <h1 className="mb-8 text-5xl font-bold">{data?.product.name}</h1>
+        <div>
+          <div className="flex justify-between mb-8">
+            <h1 className="text-5xl font-bold">{data?.product.name}</h1>
+            <Menu as="div" className="flex relative">
+              <Menu.Button className="p-4 rounded-full hover:bg-gray-200">
+                <BsThreeDots size={20} />
+              </Menu.Button>
+              <Transition
+                enter="transition duration-100 ease-out"
+                enterFrom="transform scale-95 opacity-0"
+                enterTo="transform scale-100 opacity-100"
+                leave="transition duration-75 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
+              >
+                <Menu.Items className="z-40 absolute right-0 top-16 w-60 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        path={`/products/update?id=${data!.product.id}`}
+                        title="Edit"
+                        Icon={FaPencilAlt}
+                        iconPosition="start"
+                        className={`${
+                          active ? 'bg-gray-100' : 'bg-white'
+                        } flex text-2xl w-full items-center rounded-md px-6 py-4 hover:no-underline text-gray-700`}
+                      />
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        type="button"
+                        className={`${
+                          active ? 'bg-gray-100' : 'bg-white'
+                        } flex items-center text-2xl w-full rounded-md px-6 py-4 hover:no-underline text-gray-700`}
+                      >
+                        <AiFillDelete size={20} className="text-red-500 mr-4" />
+                        <span>Delete</span>
+                      </button>
+                    )}
+                  </Menu.Item>
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          </div>
           <p className="mb-8 text-3xl font-semibold">
             {formatMoney(data?.product.price)}
           </p>

@@ -68,7 +68,7 @@ const Register = () => {
           <Form>
             <Input name="username" label="Username" />
             <Input name="email" label="Email" error={error} />
-            <Input name="password" label="Password" />
+            <Input name="password" label="Password" isPassword />
             <Button
               title={loading ? 'Signing up...' : 'Sign up'}
               className="w-full mt-8 justify-center"

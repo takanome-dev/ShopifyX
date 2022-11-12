@@ -68,7 +68,7 @@ const Login = () => {
         >
           <Form className="">
             <Input name="email" label="Email" error={error} />
-            <Input name="password" label="Password" />
+            <Input name="password" label="Password" isPassword />
             <div className="my-4 text-right">
               <Link
                 path="/reset-password"

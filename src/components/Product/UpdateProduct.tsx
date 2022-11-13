@@ -16,7 +16,8 @@ import { SingleProductQuery, SINGLE_PRODUCT_QUERY } from './ProductDetails';
 
 interface UpdateProductMutation {
   updateProduct: {
-    id?: string;
+    __typename: string;
+    id: string;
   };
 }
 
@@ -34,8 +35,7 @@ const UPDATE_PRODUCT_MUTATION = gql`
     $name: String
     $description: String
     $price: Int
-    $stock: Int
-    $photo: Upload
+    $stock: Int # $photo: Upload
   ) {
     updateProduct(
       where: { id: $id }
@@ -44,9 +44,10 @@ const UPDATE_PRODUCT_MUTATION = gql`
         description: $description
         price: $price
         stock: $stock
-        photo: { create: { image: $photo, altText: $name } }
+        # photo: { create: { image: $photo, altText: $name } }
       }
     ) {
+      __typename
       id
     }
   }
@@ -73,35 +74,35 @@ export default function UpdateProduct() {
     stock: data?.product.stock,
   };
 
+  // TODO: refetch queries
   const [updateProduct, { error, loading }] =
     useMutation<UpdateProductMutation>(UPDATE_PRODUCT_MUTATION);
 
   // TODO: add loader
   if (loadingProduct) return <p>Loading...</p>;
-  if (errorProduct) return <ErrorMessage error={errorProduct} />;
 
   const handleSubmit = async (values: typeof initialValues) => {
     const res = await updateProduct({
       variables: {
-        id: router.query.id ?? '',
-        name: values.name ?? '',
-        description: values.description ?? '',
+        id: router.query.id,
+        name: values.name,
+        description: values.description,
         price: +values.price!,
         stock: +values.stock!,
-        photo: values.image ?? '',
+        // photo: values.image,
       },
     });
 
     if (!error) {
       router
-        .push(`/products/${res.data!.updateProduct.id!}`)
+        .push(`/products/${res.data!.updateProduct.id}`)
         .catch(console.error);
     }
   };
 
   return (
     <>
-      <ErrorMessage error={error!} />
+      <ErrorMessage error={errorProduct || error!} />
       <div className="min-h-[550px] flex items-center justify-center">
         <Formik
           initialValues={initialValues}
@@ -123,7 +124,7 @@ export default function UpdateProduct() {
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+yHgAFWAJp08sG7wAAAABJRU5ErkJggg=="
                   />
                 </div>
-                <Input type="file" name="image" />
+                {/* <Input type="file" name="image" /> */}
               </div>
               <Input name="name" label="Name" placeholder="Car" />
               <Input

@@ -1,7 +1,6 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/exports-last */
-import { gql, useMutation, useQuery } from '@apollo/client';
+
+import { gql, useQuery } from '@apollo/client';
 import { Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -19,15 +18,10 @@ import formatMoney from '@lib/formatMoney';
 
 import Button from '../common/Button';
 
+import DeleteProduct from './DeleteProduct';
+
 export interface SingleProductQuery {
   product: Product;
-}
-
-export interface DeleteProductMutation {
-  deleteProduct: {
-    __typename: string;
-    id: string;
-  };
 }
 
 export const SINGLE_PRODUCT_QUERY = gql`
@@ -47,56 +41,6 @@ export const SINGLE_PRODUCT_QUERY = gql`
   }
 `;
 
-const DELETE_PRODUCT_MUTATION = gql`
-  mutation DELETE_PRODUCT_MUTATION($id: ID!) {
-    deleteProduct(where: { id: $id }) {
-      __typename
-      id
-    }
-  }
-`;
-
-const DeleteModal = ({
-  isOpen,
-  loading,
-  handleClose,
-  handleDelete,
-}: {
-  isOpen: boolean;
-  loading: boolean;
-  handleClose: () => void;
-  handleDelete: () => Promise<void>;
-}) => {
-  if (!isOpen) return null;
-  return (
-    <>
-      <div
-        className="fixed inset-0 z-10 transition ease-in-out bg-gray-900 bg-opacity-40"
-        onClick={handleClose}
-      />
-      <div className="bg-white rounded-xl z-10 p-12 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <p className="text-2xl">Do you really want to delete this product?</p>
-        <div className="flex mt-8 justify-center">
-          <Button
-            title="Cancel"
-            size="sm"
-            className="border border-gray-400"
-            onClick={handleClose}
-          />
-          <Button
-            title="Delete"
-            size="sm"
-            className="text-red-500 border border-red-500 ml-8"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={handleDelete}
-            disabled={loading}
-          />
-        </div>
-      </div>
-    </>
-  );
-};
-
 const ProductDetails = () => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -110,37 +54,17 @@ const ProductDetails = () => {
     }
   );
 
-  const [deleteProduct, { loading: deleteLoading, error: deleteError }] =
-    useMutation<DeleteProductMutation>(DELETE_PRODUCT_MUTATION, {
-      update: (cache, payload) =>
-        // @ts-ignore
-        cache.evict(cache.identify(payload.data!.deleteProduct)),
-    });
-
   // TODO: add loader
   if (loading) return <p>Loading...</p>;
 
-  if (error || deleteError) <ErrorMessage error={error! || deleteError} />;
-
-  if (!id) router.replace('/404').catch(console.log);
-
-  const handleDelete = async () => {
-    await deleteProduct({
-      variables: {
-        id,
-      },
-    });
-
-    if (!deleteError) {
-      router.replace('/products').catch(console.log);
-    }
-  };
+  // if (!id) router.replace('/404').catch(console.log);
 
   return (
     <>
+      <ErrorMessage error={error!} />;
       <div className="py-20">
-        <div className="grid grid-cols-[0.5fr,1fr] gap-x-12">
-          <div className="relative overflow-hidden border shadow-md rounded-2xl">
+        <div className="grid grid-cols-1 gap-x-16 md:grid-cols-[0.75fr,1fr]">
+          <div className="relative overflow-hidden border shadow-md rounded-2xl mb-8 md:mb-0">
             <Image
               src={data?.product.photo.image.publicUrlTransformed as string}
               alt={data?.product.name}
@@ -239,11 +163,10 @@ const ProductDetails = () => {
         <CardList />
       </div> */}
       </div>
-      <DeleteModal
+      <DeleteProduct
+        id={id as string}
         isOpen={isModalOpen}
-        loading={deleteLoading}
         handleClose={() => setIsModalOpen(false)}
-        handleDelete={handleDelete}
       />
     </>
   );

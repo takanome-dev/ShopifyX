@@ -23,6 +23,13 @@ export interface SingleProductQuery {
   product: Product;
 }
 
+export interface DeleteProductMutation {
+  deleteProduct: {
+    __typename: string;
+    id: string;
+  };
+}
+
 export const SINGLE_PRODUCT_QUERY = gql`
   query SINGLE_PRODUCT_QUERY($id: ID!) {
     product(where: { id: $id }) {
@@ -43,6 +50,7 @@ export const SINGLE_PRODUCT_QUERY = gql`
 const DELETE_PRODUCT_MUTATION = gql`
   mutation DELETE_PRODUCT_MUTATION($id: ID!) {
     deleteProduct(where: { id: $id }) {
+      __typename
       id
     }
   }
@@ -103,7 +111,11 @@ const ProductDetails = () => {
   );
 
   const [deleteProduct, { loading: deleteLoading, error: deleteError }] =
-    useMutation(DELETE_PRODUCT_MUTATION);
+    useMutation<DeleteProductMutation>(DELETE_PRODUCT_MUTATION, {
+      update: (cache, payload) =>
+        // @ts-ignore
+        cache.evict(cache.identify(payload.data!.deleteProduct)),
+    });
 
   // TODO: add loader
   if (loading) return <p>Loading...</p>;

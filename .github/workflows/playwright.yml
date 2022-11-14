@@ -17,8 +17,11 @@ jobs:
         with:
           node-version: '14.x'
 
+      - name: '🔧 install pnpm@latest'
+        run: npm i -g pnpm
+
       - name: '📦 Install dependencies'
-        run: npm ci
+        run: pnpm install
 
       - name: '🔧 Install Playwright Browsers'
         run: npx playwright install-deps chromium

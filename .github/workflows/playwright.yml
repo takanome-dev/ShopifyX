@@ -27,7 +27,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: '🔍 Run Playwright tests'
-        run: npx playwright test
+        run: xvfb-run --auto-servernum -- pnpm test
 
       - uses: actions/upload-artifact@v2
         if: always()

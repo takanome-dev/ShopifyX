@@ -17,17 +17,14 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: '🔧 install pnpm@latest'
-        run: npm i -g pnpm
-
       - name: '📦 Install dependencies'
-        run: pnpm install
+        run: npm ci
 
       - name: '🔧 Install Playwright Browsers'
-        run: npx playwright install --with-deps
+        run: npx playwright install-deps chromium
 
       - name: '🔍 Run Playwright tests'
-        run: pnpm test
+        run: npx playwright test
 
       - uses: actions/upload-artifact@v2
         if: always()

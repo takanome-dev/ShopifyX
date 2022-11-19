@@ -31,20 +31,30 @@ export default function Card({ product }: { product: Product }) {
         <Link
           path={`/products/${product.id}`}
           title={product.name}
-          className="w-full mb-8 overflow-hidden text-4xl font-semibold text-ellipsis whitespace-nowrap"
+          className="card-title w-full mb-8 overflow-hidden text-4xl font-semibold text-ellipsis whitespace-nowrap"
+          data-testid={`title-${product.id}`}
         />
         <div className="flex items-center justify-between">
-          <p className="text-3xl font-semibold">{formatMoney(product.price)}</p>
           <p
-            className={`text-2xl ${
+            className="card-price text-3xl font-semibold"
+            data-testid={`price-${product.id}`}
+          >
+            {formatMoney(product.price)}
+          </p>
+          <p
+            className={`card-stock text-2xl ${
               product.stock > 0 ? 'text-green-500' : 'text-red-500'
             }`}
+            data-testid={`stock-${product.id}`}
           >
             {product.stock > 0 ? 'In stock' : 'Out of stock'}
           </p>
         </div>
         <div className="flex items-center justify-between mt-4">
-          <p className="text-gray-500 text-2xl">
+          <p
+            className="card-seller text-gray-500 text-2xl"
+            data-testid={`seller-${product.id}`}
+          >
             seller <Link path="/" title="@Takanome" className="text-blue-500" />
           </p>
           <button type="button" className="p-4 hover:bg-gray-200 rounded-full">

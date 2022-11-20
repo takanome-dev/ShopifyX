@@ -44,12 +44,14 @@ const Login = () => {
         : undefined;
     setError(errorMessage);
 
-    setTimeout(() => {
-      if (!errorMessage) {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        router.replace('/products');
-      }
-    }, 500);
+    console.log({ errorMessage, data });
+
+    // setTimeout(() => {
+    //   if (!errorMessage) {
+    //     // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    //     router.replace('/products');
+    //   }
+    // }, 500);
   };
 
   return (

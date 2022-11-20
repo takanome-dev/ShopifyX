@@ -23,14 +23,14 @@ export default function CartItem({ product, initialQuantity }: CartItemProps) {
   };
 
   return (
-    <div className="grid grid-cols-[100px_1fr] gap-x-8 border border-gray-100 shadow-xs p-4 rounded-xl mb-4">
+    <div className="cart-item grid grid-cols-[100px_1fr] gap-x-8 border border-gray-100 shadow-xs p-4 rounded-xl mb-4">
       <div className="overflow-hidden border-2 rounded-xl">
         <Image
           src={product.photo.image.publicUrlTransformed}
           alt={product.name}
           width="100%"
           height="100%"
-          className="object-cover"
+          className="cart-item-img object-cover"
           layout="responsive"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+yHgAFWAJp08sG7wAAAABJRU5ErkJggg=="
@@ -39,11 +39,11 @@ export default function CartItem({ product, initialQuantity }: CartItemProps) {
       <div className="flex flex-col justify-between">
         <div className="flex items-center justify-between">
           <Link href={`products/${product.id}`}>
-            <a className="text-3xl font-semibold hover:underline">
+            <a className="cart-item-name text-3xl font-semibold hover:underline">
               {product.name}
             </a>
           </Link>
-          <p className="text-3xl font-semibold">
+          <p className="cart-item-price text-3xl font-semibold">
             {formatMoney(product.price * quantity)}
           </p>
         </div>

@@ -65,14 +65,14 @@ export default function Header({ handleOpen }: HeaderProps) {
                 <FaSearch size={18} className="text-gray-500" />
                 <p className="ml-4 text-xl text-gray-500">Search...</p>
               </button>
-              <div className="relative ml-12">
+              <div className="cart-icon relative ml-12">
                 <MdShoppingCart
                   size={20}
                   className="text-gray-700 cursor-pointer"
                   onClick={handleOpen}
                 />
                 {cartItems.length > 0 && (
-                  <p className="absolute -top-5 -right-5 bg-red-500 w-8 h-8 flex items-center justify-center text-white text-xl font-semibold rounded-full">
+                  <p className="total-cart-items absolute -top-5 -right-5 bg-red-500 w-8 h-8 flex items-center justify-center text-white text-xl font-semibold rounded-full">
                     {cartItems.length}
                   </p>
                 )}

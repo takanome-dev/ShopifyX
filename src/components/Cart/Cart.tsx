@@ -30,15 +30,15 @@ const Cart = ({ handleClose, cartOpen }: CartProps) => {
         onClick={handleClose}
       />
       <div
-        className={`fixed top-0 right-0 z-10 w-1/3 h-full p-8 overflow-hidden transition duration-300 ease-in-out bg-white shadow-2xl ${
-          cartOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`cart fixed top-0 right-0 z-10 w-1/3 h-full p-8 overflow-hidden transition duration-300 ease-in-out bg-white shadow-2xl ${
+          cartOpen ? 'translate-x-0 block' : 'translate-x-full hidden'
         }`}
       >
         <div className="flex items-center justify-between">
-          <h2 className="text-4xl font-semibold">My Cart</h2>
+          <h2 className="cart-title text-4xl font-semibold">My Cart</h2>
           <button
             type="button"
-            className="p-4 rounded-full hover:bg-gray-100"
+            className="cart-btn-close p-4 rounded-full hover:bg-gray-100"
             onClick={handleClose}
           >
             <AiOutlineClose size={20} />

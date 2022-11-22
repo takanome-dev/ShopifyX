@@ -24,7 +24,7 @@ const Cart = ({ handleClose, cartOpen }: CartProps) => {
   return (
     <>
       <div
-        className={`inset-0 z-10 transition ease-in-out bg-gray-900 ${
+        className={`cart-overlay inset-0 z-10 transition ease-in-out bg-gray-900 ${
           cartOpen ? 'fixed bg-opacity-40' : 'bg-opacity-0 hidden'
         }`}
         onClick={handleClose}

@@ -49,11 +49,12 @@ export default function Card({ product }: { product: Product }) {
           <p className="card-seller text-gray-500 text-2xl">
             seller <Link path="/" title="@Takanome" className="text-blue-500" />
           </p>
-          <button type="button" className="p-4 hover:bg-gray-200 rounded-full">
-            <BsCartPlusFill
-              size={20}
-              onClick={() => addToCart({ product, quantity: 1 })}
-            />
+          <button
+            type="button"
+            className="card-add-btn p-4 hover:bg-gray-200 rounded-full"
+            onClick={() => addToCart({ product, quantity: 1 })}
+          >
+            <BsCartPlusFill size={20} />
           </button>
         </div>
       </div>

@@ -27,10 +27,10 @@ export default function Pagination({ page, pageSize }: PaginationProps) {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="w-[300px] grid grid-cols-[repeat(5,_auto)] rounded-2xl my-12 mx-auto overflow-hidden border border-gray-300">
+    <div className="pagination w-[300px] grid grid-cols-[repeat(5,_auto)] rounded-2xl my-12 mx-auto overflow-hidden border border-gray-300">
       <Link
         path={`/products?page=${page - 1}`}
-        className={`flex items-center p-4 text-2xl border-r border-r-gray-300 ${
+        className={`pagination-arrow-left flex items-center p-4 text-2xl border-r border-r-gray-300 ${
           page <= 1 ? 'opacity-50 pointer-events-none' : ''
         }`}
         title="Prev"
@@ -45,12 +45,12 @@ export default function Pagination({ page, pageSize }: PaginationProps) {
       <p className="p-4 text-2xl border-r border-r-gray-300">...</p>
       <Link
         path={`/products?page=${pages}`}
-        className="p-4 text-2xl border-r border-r-gray-300"
+        className="pagination-last-page p-4 text-2xl border-r border-r-gray-300"
         title={`${pages}`}
       />
       <Link
         path={`/products?page=${page + 1}`}
-        className={`flex items-center p-4 text-2xl ${
+        className={`pagination-arrow-right flex items-center p-4 text-2xl ${
           page >= pages ? 'opacity-50 pointer-events-none' : ''
         }`}
         title="Next"

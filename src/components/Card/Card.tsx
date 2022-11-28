@@ -2,14 +2,17 @@ import Image from 'next/image';
 import React from 'react';
 import { BsCartPlusFill } from 'react-icons/bs';
 
-import FavIcon from '@components/common/FavIcon';
-import Link from '@components/common/Link';
+import FavIcon from '@common/FavIcon';
+import Link from '@common/Link';
 import { useCartItems } from '@context/CartProvider';
+import { Product } from '@interfaces/product';
 import formatMoney from '@lib/formatMoney';
 
-import { Product } from '../types';
+interface Props {
+  product: Product;
+}
 
-export default function Card({ product }: { product: Product }) {
+export default function Card({ product }: Props) {
   const { addToCart } = useCartItems();
 
   return (

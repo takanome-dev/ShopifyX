@@ -6,12 +6,10 @@ import { BiLoader } from 'react-icons/bi';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import * as Yup from 'yup';
 
-import { useAuthContext } from '@context/AuthProvider';
-import { LoginReturnType } from '@context/types';
-
-import Button from './common/Button';
-import Input from './common/Input';
-import Link from './common/Link';
+import Button from '@common/Button';
+import Input from '@common/Input';
+import Link from '@common/Link';
+import useAuth from '@hooks/useAuth';
 
 const initialValues = {
   email: '',
@@ -24,22 +22,25 @@ const validationSchema = Yup.object().shape({
 });
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
 
   const router = useRouter();
-  const { login } = useAuthContext();
+  const { login, loginLoading: loading } = useAuth();
 
   const handleSubmit = async (values: typeof initialValues) => {
-    const { loading: isLoading, data } = (await login({
-      email: values.email,
-      password: values.password,
-    })) as LoginReturnType;
+    const { data, errors } = await login({
+      variables: {
+        email: values.email,
+        password: values.password,
+      },
+    });
 
-    setLoading(isLoading);
+    // setLoading(loginLoading);
     const errorMessage =
+      errors ||
       data?.authenticateUserWithPassword?.__typename ===
-      'UserAuthenticationWithPasswordFailure'
+        'UserAuthenticationWithPasswordFailure'
         ? 'Invalid email or password'
         : undefined;
     setError(errorMessage);

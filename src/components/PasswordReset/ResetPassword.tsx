@@ -7,10 +7,9 @@ import { FaKey } from 'react-icons/fa';
 import { TbArrowBack } from 'react-icons/tb';
 import * as Yup from 'yup';
 
-import LinkComponent from '@components/common/Link';
-
-import Button from '../common/Button';
-import Input from '../common/Input';
+import Button from '@common/Button';
+import Input from '@common/Input';
+import LinkComponent from '@common/Link';
 
 import NewPassword from './NewPassword';
 import VerifyEmail from './VerifyEmail';

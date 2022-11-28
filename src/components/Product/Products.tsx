@@ -2,14 +2,10 @@ import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { Product } from '@components/types';
+import { Product, ProductsQuery } from '@interfaces/product';
 
 import { CardList } from '../Card';
 import Pagination from '../Pagination';
-
-export interface ProductsQuery {
-  products: Product[];
-}
 
 export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY($skip: Int!, $take: Int!) {

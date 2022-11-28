@@ -6,11 +6,14 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
+      "@common/*": ["src/components/common/*"],
       "@styles/*": ["src/components/styles/*"],
       "@style/*": ["src/styles/*"],
       "@assets": ["public/assets"],
       "@lib/*": ["src/lib/*"],
-      "@context/*": ["src/context/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@context/*": ["src/context/*"],
+      "@interfaces/*": ["src/interfaces/*"]
     },
     "skipLibCheck": true,
     "strict": true,

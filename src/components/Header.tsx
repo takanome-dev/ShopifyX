@@ -8,13 +8,12 @@ import { FaSearch, FaBars } from 'react-icons/fa';
 import { MdShoppingCart } from 'react-icons/md';
 import { VscSignOut } from 'react-icons/vsc';
 
-import { CURRENT_USER_QUERY } from '@context/auth';
-import { useAuthContext } from '@context/AuthProvider';
+import Button from '@common/Button';
+import HeaderLink from '@common/HeaderLink';
+import Link from '@common/Link';
 import { useCartItems } from '@context/CartProvider';
+import useCurrentUser, { CURRENT_USER_QUERY } from '@hooks/useCurrentUser';
 
-import Button from './common/Button';
-import HeaderLink from './common/HeaderLink';
-import Link from './common/Link';
 import Search from './Search';
 
 interface HeaderProps {
@@ -29,7 +28,7 @@ const SIGN_OUT_MUTATION = gql`
 
 export default function Header({ handleOpen }: HeaderProps) {
   const [openSearch, setOpenSearch] = useState(false);
-  const { user } = useAuthContext();
+  const { user } = useCurrentUser();
   const { cartItems } = useCartItems();
   const router = useRouter();
   const [signout] = useMutation(SIGN_OUT_MUTATION, {

@@ -9,20 +9,16 @@ import { AiFillDelete } from 'react-icons/ai';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaDollarSign, FaPencilAlt, FaShoppingBag } from 'react-icons/fa';
 
+import Link from '@common/Link';
 import ErrorMessage from '@components/common/ErrorMessage';
 import FavIcon from '@components/common/FavIcon';
-import Link from '@components/common/Link';
-import { Product } from '@components/types';
 import { useCartItems } from '@context/CartProvider';
+import { SingleProductQuery } from '@interfaces/product';
 import formatMoney from '@lib/formatMoney';
 
 import Button from '../common/Button';
 
 import DeleteProduct from './DeleteProduct';
-
-export interface SingleProductQuery {
-  product: Product;
-}
 
 export const SINGLE_PRODUCT_QUERY = gql`
   query SINGLE_PRODUCT_QUERY($id: ID!) {

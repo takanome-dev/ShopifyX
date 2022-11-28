@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { FaRegHeart } from 'react-icons/fa';
 
-import { Product } from '@components/types';
 import { useCartItems } from '@context/CartProvider';
+import { Product } from '@interfaces/product';
 import formatMoney from '@lib/formatMoney';
 
 interface CartItemProps {

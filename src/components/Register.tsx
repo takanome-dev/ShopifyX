@@ -5,12 +5,10 @@ import { BiLoader } from 'react-icons/bi';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import * as Yup from 'yup';
 
-import { useAuthContext } from '@context/AuthProvider';
-import { RegisterReturnType } from '@context/types';
-
-import Button from './common/Button';
-import Input from './common/Input';
-import Link from './common/Link';
+import Button from '@common/Button';
+import Input from '@common/Input';
+import Link from '@common/Link';
+import useAuth from '@hooks/useAuth';
 
 const initialValues = {
   username: '',
@@ -25,30 +23,33 @@ const validationSchema = Yup.object().shape({
 });
 
 const Register = () => {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
 
   const router = useRouter();
-  const { register } = useAuthContext();
+  const { register, registerLoading: loading } = useAuth();
 
   const handleSubmit = async (values: typeof initialValues) => {
-    const { loading: isLoading, error: isError } = (await register({
-      username: values.username,
-      email: values.email,
-      password: values.password,
-    })) as RegisterReturnType;
+    const { data, errors } = await register({
+      variables: {
+        username: values.username,
+        email: values.email,
+        password: values.password,
+      },
+    });
 
-    setLoading(isLoading);
-    const errorMessage = isError?.graphQLErrors[0].message
+    const errorMessage = errors?.[0].message
       ? 'Sorry, this email address is already taken'
       : undefined;
 
     setError(errorMessage);
 
-    if (!errorMessage) {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      router.replace('/products');
-    }
+    console.log({ data, errors });
+
+    // if (!errorMessage) {
+    //   // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    //   router.replace('/products');
+    // }
   };
 
   return (

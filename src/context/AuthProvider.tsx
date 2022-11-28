@@ -39,6 +39,7 @@ export default function AuthProvider({ children }: Props) {
 
   const login = async (user: UserInfo) => {
     const [signin, { loading, data }] = signInMutation;
+
     await signin({
       variables: {
         email: user.email,

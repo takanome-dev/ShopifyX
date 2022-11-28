@@ -55,9 +55,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[550px] flex items-center justify-center">
+    <div className="login-page min-h-[550px] flex items-center justify-center">
       <div className="rounded-xl shadow-xl w-[500px] p-8">
-        <div className="mb-12">
+        <div className="login-header mb-12">
           <h2 className="pb-4 text-4xl font-semibold text-center">Sign In</h2>
           <p className="text-xl text-center">
             Please sign-in to your account and start shopping 🛒
@@ -68,7 +68,7 @@ const Login = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form className="">
+          <Form className="login-form">
             <Input name="email" label="Email" error={error} />
             <Input name="password" label="Password" isPassword />
             <div className="my-4 text-right">

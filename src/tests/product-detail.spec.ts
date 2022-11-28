@@ -4,9 +4,7 @@ const productDetailSelector = (name: string) =>
   `main >> css=.product-detail >> css=.grid >> css=.product-${name}`;
 
 test.describe('Test Product Detail Page', () => {
-  test('product "Yeti" is displayed in the product details page', async ({
-    page,
-  }) => {
+  test('products are displayed in the products page', async ({ page }) => {
     await page.goto('http://localhost:3001');
     const titleLink = page.getByRole('link', { name: /yeti hondo/i });
     await titleLink.click();

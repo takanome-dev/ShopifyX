@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -22,7 +21,6 @@ const validationSchema = Yup.object().shape({
 });
 
 const Login = () => {
-  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
 
   const router = useRouter();
@@ -36,13 +34,9 @@ const Login = () => {
       },
     });
 
-    console.log('=============================================');
-    console.log({ data, errors });
-    console.log('=============================================');
-
-    // setLoading(loginLoading);
     const errorMessage =
       errors ||
+      // eslint-disable-next-line no-underscore-dangle
       data?.authenticateUserWithPassword?.__typename ===
         'UserAuthenticationWithPasswordFailure'
         ? 'Invalid email or password'
@@ -97,7 +91,7 @@ const Login = () => {
           <Link
             path="/register"
             title="Create an account"
-            className="text-blue-500 text-2xl"
+            className="register-link text-blue-500 text-2xl"
             iconPosition="start"
           />
         </p>

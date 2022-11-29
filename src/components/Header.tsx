@@ -84,16 +84,16 @@ export default function Header({ handleOpen }: HeaderProps) {
             {!user && (
               <Button
                 title="Signin"
-                className="border-none"
+                className="signin-btn border-none"
                 size="xs"
                 variant="primary"
                 onClick={() => {
-                  void router.push('/login');
+                  router.push('/login').catch(console.error);
                 }}
               />
             )}
             {user && (
-              <Menu as="div" className="flex relative">
+              <Menu as="div" className="avatar-container flex relative">
                 <Menu.Button>
                   <div className="pl-4 border-l border-cyan2-300">
                     <div className="w-14 h-14 rounded-full overflow-hidden border border-cyan2-300">

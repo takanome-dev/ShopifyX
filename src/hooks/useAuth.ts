@@ -50,7 +50,7 @@ export default function useAuth() {
     }
   );
 
-  const [register, { loading: registerLoading }] =
+  const [register, { loading: registerLoading, error: registerError }] =
     useMutation<RegisterMutation>(CREATE_USER_MUTATION, {
       refetchQueries: [{ query: CURRENT_USER_QUERY }],
     });
@@ -66,7 +66,7 @@ export default function useAuth() {
     registerLoading,
     // loginError,
     // loginData,
-    // registerError,
+    registerError,
     // registerData,
   };
 

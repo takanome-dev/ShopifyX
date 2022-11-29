@@ -44,13 +44,17 @@ const uploadLink = createUploadLink({
   uri: process.env.NEXT_PUBLIC_API_URI as string,
   // pass the headers along from this request. This enables SSR with logged in state
   // Headers: ,
-  // credentials: 'include',
+  fetchOptions: {
+    credentials: 'include',
+  },
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
 });
 
 const client = new ApolloClient({
   link: from([errorLink, uploadLink]),
   cache: new InMemoryCache(),
-  credentials: 'include',
 });
 
 function MyApp({ Component, pageProps }: AppProps) {

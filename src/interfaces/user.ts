@@ -20,10 +20,9 @@ export interface UserQuery {
 //   data: LoginMutation | null | undefined;
 // }
 
-// export interface IRegisterReturn {
-//   loading: boolean;
-//   error: ApolloError | undefined;
-// }
+export interface IRegisterReturn {
+  createUser: RegisterMutation;
+}
 
 export interface LoginMutation {
   authenticateUserWithPassword: {

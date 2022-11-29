@@ -7,6 +7,13 @@ test.describe('Login Flow', () => {
   test('should login with valid credentials or get errors', async ({
     page,
   }) => {
+    await page.goto('http://localhost:3001');
+    await expect(page).toHaveTitle(/clicktobuy | products/i);
+
+    const signinButton = page.locator('header >> nav >> css=.signin-btn');
+    await expect(signinButton).toBeVisible();
+    await signinButton.click();
+
     await page.goto('http://localhost:3001/login');
     await expect(page).toHaveTitle(/clicktobuy | login/i);
 
@@ -19,8 +26,6 @@ test.describe('Login Flow', () => {
     const passwordInput = form.locator('input[name="password"]');
     const submitButton = form.locator('button[type="submit"]');
     const error = form.locator('css=.input-error >> span >> nth=0');
-    // const emailError = form.locator('css=.input-error >> span >> nth=0');
-    // const passwordError = form.locator('css=.input-error >> span >> nth=1');
 
     await emailInput.focus();
     await passwordInput.focus();
@@ -38,7 +43,17 @@ test.describe('Login Flow', () => {
     await submitButton.click();
 
     await expect(error).toHaveText('Invalid email or password');
-    // await expect(page).toHaveURL('http://localhost:3001/');
-    // await expect(page).toHaveTitle(/clicktobuy | products/i);
+    await emailInput.fill('takanomedev221@gmail.com');
+    await passwordInput.fill('admin@takanome_dev');
+    await submitButton.click();
+
+    await expect(error).not.toBeVisible();
+    await expect(page).toHaveURL('http://localhost:3001/products');
+    await expect(page).toHaveTitle(/clicktobuy | products/i);
+    const avatarContainer = page.locator(
+      'header >> nav >> css=.avatar-container'
+    );
+    await expect(avatarContainer).toBeVisible();
+    await expect(signinButton).not.toBeVisible();
   });
 });

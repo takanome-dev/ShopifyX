@@ -27,35 +27,43 @@ const Register = () => {
   const [error, setError] = useState<string | undefined>();
 
   const router = useRouter();
-  const { register, registerLoading: loading } = useAuth();
+  const { register, login, registerLoading: loading } = useAuth();
 
   const handleSubmit = async (values: typeof initialValues) => {
-    const { data, errors } = await register({
-      variables: {
-        username: values.username,
-        email: values.email,
-        password: values.password,
-      },
-    });
+    await Promise.all([
+      await register({
+        variables: {
+          username: values.username,
+          email: values.email,
+          password: values.password,
+        },
+      }),
+      await login({
+        variables: {
+          email: values.email,
+          password: values.password,
+        },
+      }),
+    ]);
 
-    const errorMessage = errors?.[0].message
-      ? 'Sorry, this email address is already taken'
-      : undefined;
+    // TODO: Handle errors
 
-    setError(errorMessage);
+    // const errorMessage =
+    //   registerError || response[0].data.message
+    //     ? 'Sorry, this email is already taken'
+    //     : undefined;
 
-    console.log({ data, errors });
+    // setError(errorMessage);
 
     // if (!errorMessage) {
-    //   // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    //   router.replace('/products');
+    router.replace('/products').catch(console.log);
     // }
   };
 
   return (
-    <div className="min-h-[550px] flex items-center justify-center">
+    <div className="register-page min-h-[550px] flex items-center justify-center">
       <div className="rounded-xl shadow-xl w-[500px] p-8">
-        <div className="mb-12">
+        <div className="register-header mb-12">
           <h2 className="pb-4 text-4xl font-semibold text-center">Register</h2>
           <p className="text-xl text-center">
             Create an account and start shopping 🛒
@@ -66,7 +74,7 @@ const Register = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form>
+          <Form className="register-form">
             <Input name="username" label="Username" />
             <Input name="email" label="Email" error={error} />
             <Input name="password" label="Password" isPassword />

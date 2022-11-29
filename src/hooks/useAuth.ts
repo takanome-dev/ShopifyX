@@ -25,6 +25,8 @@ export const AUTH_USER_MUTATION = gql`
   mutation AUTH_USER_MUTATION($email: String!, $password: String!) {
     authenticateUserWithPassword(email: $email, password: $password) {
       ... on UserAuthenticationWithPasswordSuccess {
+        sessionToken
+        __typename
         item {
           id
           username

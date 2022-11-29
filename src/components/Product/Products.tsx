@@ -28,7 +28,7 @@ export const ALL_PRODUCTS_QUERY = gql`
 
 export default function Products() {
   const router = useRouter();
-  const PAGE_SIZE = 3;
+  const PAGE_SIZE = 6;
   const currentPage = router.query.page ?? 1;
 
   const { data, error, loading } = useQuery<ProductsQuery>(ALL_PRODUCTS_QUERY, {

@@ -36,6 +36,10 @@ const Login = () => {
       },
     });
 
+    console.log('=============================================');
+    console.log({ data, errors });
+    console.log('=============================================');
+
     // setLoading(loginLoading);
     const errorMessage =
       errors ||
@@ -43,16 +47,12 @@ const Login = () => {
         'UserAuthenticationWithPasswordFailure'
         ? 'Invalid email or password'
         : undefined;
+
     setError(errorMessage);
 
-    console.log({ errorMessage, data });
-
-    // setTimeout(() => {
-    //   if (!errorMessage) {
-    //     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    //     router.replace('/products');
-    //   }
-    // }, 500);
+    if (!errorMessage) {
+      router.replace('/products').catch(console.error);
+    }
   };
 
   return (

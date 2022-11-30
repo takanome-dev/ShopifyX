@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Product } from '@components/types';
+import { Product } from '@interfaces/product';
 
 import CardOrder from './CardOrder';
 

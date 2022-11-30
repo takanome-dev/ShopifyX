@@ -1,11 +1,15 @@
 import React from 'react';
 
-import { Product } from '@components/types';
+import { Product } from '@interfaces/product';
 
 import CardOrderHeader from './CardOrderHeader';
 import CardOrderProduct from './CardOrderProduct';
 
-const CardOrder = ({ product }: { product: Product }) => (
+interface Props {
+  product: Product;
+}
+
+const CardOrder = ({ product }: Props) => (
   <div className="mt-12 border divide-y rounded-xl">
     <CardOrderHeader />
     <CardOrderProduct product={product} />

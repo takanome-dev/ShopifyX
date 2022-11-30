@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { CartItem } from '@context/types';
+import { CartItem } from '@interfaces/cart';
 
 export default function useLocalStorage() {
   const getItemsFromStorage = useCallback(() => {

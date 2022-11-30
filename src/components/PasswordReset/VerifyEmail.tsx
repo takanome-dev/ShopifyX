@@ -3,8 +3,8 @@ import { BsEnvelopeOpen } from 'react-icons/bs';
 import { IoIosSend } from 'react-icons/io';
 import { TbArrowBack } from 'react-icons/tb';
 
-import ButtonLink from '@components/common/ButtonLink';
-import Link from '@components/common/Link';
+import ButtonLink from '@common/ButtonLink';
+import Link from '@common/Link';
 
 export default function VerifyEmail({ email }: { email: string }) {
   return (

@@ -62,9 +62,9 @@ const DeleteProduct = (props: Props) => {
         className="fixed inset-0 z-10 transition ease-in-out bg-gray-900 bg-opacity-40"
         onClick={handleClose}
       />
-      <div className="bg-white rounded-xl z-10 p-12 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="delete-modal bg-white rounded-xl z-10 p-12 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <p className="text-2xl">Do you really want to delete this product?</p>
-        <div className="flex mt-8 justify-center">
+        <div className="delete-modal-buttons flex mt-8 justify-center">
           <Button
             title="Cancel"
             size="sm"

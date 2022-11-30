@@ -52,7 +52,7 @@ const Button = forwardRef(
         {Icon && iconPosition === 'start' && (
           <Icon size={18} className={`mr-4 ${iconClasses!}`} />
         )}
-        <span>{title}</span>
+        <span className="btn-title">{title}</span>
         {Icon && iconPosition === 'end' && (
           <Icon size={18} className={`ml-4 ${iconClasses!}`} />
         )}

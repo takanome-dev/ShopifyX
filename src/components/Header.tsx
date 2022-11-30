@@ -8,13 +8,12 @@ import { FaSearch, FaBars } from 'react-icons/fa';
 import { MdShoppingCart } from 'react-icons/md';
 import { VscSignOut } from 'react-icons/vsc';
 
-import { CURRENT_USER_QUERY } from '@context/auth';
-import { useAuthContext } from '@context/AuthProvider';
+import Button from '@common/Button';
+import HeaderLink from '@common/HeaderLink';
+import Link from '@common/Link';
 import { useCartItems } from '@context/CartProvider';
+import useCurrentUser, { CURRENT_USER_QUERY } from '@hooks/useCurrentUser';
 
-import Button from './common/Button';
-import HeaderLink from './common/HeaderLink';
-import Link from './common/Link';
 import Search from './Search';
 
 interface HeaderProps {
@@ -29,7 +28,7 @@ const SIGN_OUT_MUTATION = gql`
 
 export default function Header({ handleOpen }: HeaderProps) {
   const [openSearch, setOpenSearch] = useState(false);
-  const { user } = useAuthContext();
+  const { user } = useCurrentUser();
   const { cartItems } = useCartItems();
   const router = useRouter();
   const [signout] = useMutation(SIGN_OUT_MUTATION, {
@@ -65,14 +64,14 @@ export default function Header({ handleOpen }: HeaderProps) {
                 <FaSearch size={18} className="text-gray-500" />
                 <p className="ml-4 text-xl text-gray-500">Search...</p>
               </button>
-              <div className="relative ml-12">
+              <div className="cart-icon relative ml-12">
                 <MdShoppingCart
                   size={20}
                   className="text-gray-700 cursor-pointer"
                   onClick={handleOpen}
                 />
                 {cartItems.length > 0 && (
-                  <p className="absolute -top-5 -right-5 bg-red-500 w-8 h-8 flex items-center justify-center text-white text-xl font-semibold rounded-full">
+                  <p className="total-cart-items absolute -top-5 -right-5 bg-red-500 w-8 h-8 flex items-center justify-center text-white text-xl font-semibold rounded-full">
                     {cartItems.length}
                   </p>
                 )}
@@ -85,16 +84,16 @@ export default function Header({ handleOpen }: HeaderProps) {
             {!user && (
               <Button
                 title="Signin"
-                className="border-none"
+                className="signin-btn border-none"
                 size="xs"
                 variant="primary"
                 onClick={() => {
-                  void router.push('/login');
+                  router.push('/login').catch(console.error);
                 }}
               />
             )}
             {user && (
-              <Menu as="div" className="flex relative">
+              <Menu as="div" className="avatar-container flex relative">
                 <Menu.Button>
                   <div className="pl-4 border-l border-cyan2-300">
                     <div className="w-14 h-14 rounded-full overflow-hidden border border-cyan2-300">

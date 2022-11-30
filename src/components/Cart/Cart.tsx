@@ -5,10 +5,9 @@ import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { GiShoppingCart } from 'react-icons/gi';
 
+import Button from '@common/Button';
 import { useCartItems } from '@context/CartProvider';
 import formatMoney from '@lib/formatMoney';
-
-import Button from '../common/Button';
 
 import CartItem from './CartItem';
 
@@ -24,21 +23,21 @@ const Cart = ({ handleClose, cartOpen }: CartProps) => {
   return (
     <>
       <div
-        className={`inset-0 z-10 transition ease-in-out bg-gray-900 ${
+        className={`cart-overlay inset-0 z-10 transition ease-in-out bg-gray-900 ${
           cartOpen ? 'fixed bg-opacity-40' : 'bg-opacity-0 hidden'
         }`}
         onClick={handleClose}
       />
       <div
-        className={`fixed top-0 right-0 z-10 w-1/3 h-full p-8 overflow-hidden transition duration-300 ease-in-out bg-white shadow-2xl ${
-          cartOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`cart fixed top-0 right-0 z-10 w-1/3 h-full p-8 overflow-hidden transition duration-300 ease-in-out bg-white shadow-2xl ${
+          cartOpen ? 'translate-x-0 block' : 'translate-x-full hidden'
         }`}
       >
         <div className="flex items-center justify-between">
-          <h2 className="text-4xl font-semibold">My Cart</h2>
+          <h2 className="cart-title text-4xl font-semibold">My Cart</h2>
           <button
             type="button"
-            className="p-4 rounded-full hover:bg-gray-100"
+            className="cart-btn-close p-4 rounded-full hover:bg-gray-100"
             onClick={handleClose}
           >
             <AiOutlineClose size={20} />

@@ -6,10 +6,9 @@ import { FaKey } from 'react-icons/fa';
 import { TbArrowBack } from 'react-icons/tb';
 import * as Yup from 'yup';
 
-import Link from '@components/common/Link';
-
-import Button from '../common/Button';
-import Input from '../common/Input';
+import Button from '@common/Button';
+import Input from '@common/Input';
+import Link from '@common/Link';
 
 import ResetSuccessfully from './ResetSuccessfully';
 

@@ -5,12 +5,10 @@ import { BiLoader } from 'react-icons/bi';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import * as Yup from 'yup';
 
-import { useAuthContext } from '@context/AuthProvider';
-import { RegisterReturnType } from '@context/types';
-
-import Button from './common/Button';
-import Input from './common/Input';
-import Link from './common/Link';
+import Button from '@common/Button';
+import Input from '@common/Input';
+import Link from '@common/Link';
+import useAuth from '@hooks/useAuth';
 
 const initialValues = {
   username: '',
@@ -25,36 +23,47 @@ const validationSchema = Yup.object().shape({
 });
 
 const Register = () => {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
 
   const router = useRouter();
-  const { register } = useAuthContext();
+  const { register, login, registerLoading: loading } = useAuth();
 
   const handleSubmit = async (values: typeof initialValues) => {
-    const { loading: isLoading, error: isError } = (await register({
-      username: values.username,
-      email: values.email,
-      password: values.password,
-    })) as RegisterReturnType;
+    await Promise.all([
+      await register({
+        variables: {
+          username: values.username,
+          email: values.email,
+          password: values.password,
+        },
+      }),
+      await login({
+        variables: {
+          email: values.email,
+          password: values.password,
+        },
+      }),
+    ]);
 
-    setLoading(isLoading);
-    const errorMessage = isError?.graphQLErrors[0].message
-      ? 'Sorry, this email address is already taken'
-      : undefined;
+    // TODO: Handle errors
 
-    setError(errorMessage);
+    // const errorMessage =
+    //   registerError || response[0].data.message
+    //     ? 'Sorry, this email is already taken'
+    //     : undefined;
 
-    if (!errorMessage) {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      router.replace('/products');
-    }
+    // setError(errorMessage);
+
+    // if (!errorMessage) {
+    router.replace('/products').catch(console.log);
+    // }
   };
 
   return (
-    <div className="min-h-[550px] flex items-center justify-center">
+    <div className="register-page min-h-[550px] flex items-center justify-center">
       <div className="rounded-xl shadow-xl w-[500px] p-8">
-        <div className="mb-12">
+        <div className="register-header mb-12">
           <h2 className="pb-4 text-4xl font-semibold text-center">Register</h2>
           <p className="text-xl text-center">
             Create an account and start shopping 🛒
@@ -65,7 +74,7 @@ const Register = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form>
+          <Form className="register-form">
             <Input name="username" label="Username" />
             <Input name="email" label="Email" error={error} />
             <Input name="password" label="Password" isPassword />

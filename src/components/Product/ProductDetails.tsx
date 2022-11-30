@@ -9,20 +9,16 @@ import { AiFillDelete } from 'react-icons/ai';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaDollarSign, FaPencilAlt, FaShoppingBag } from 'react-icons/fa';
 
+import Link from '@common/Link';
 import ErrorMessage from '@components/common/ErrorMessage';
 import FavIcon from '@components/common/FavIcon';
-import Link from '@components/common/Link';
-import { Product } from '@components/types';
 import { useCartItems } from '@context/CartProvider';
+import { SingleProductQuery } from '@interfaces/product';
 import formatMoney from '@lib/formatMoney';
 
 import Button from '../common/Button';
 
 import DeleteProduct from './DeleteProduct';
-
-export interface SingleProductQuery {
-  product: Product;
-}
 
 export const SINGLE_PRODUCT_QUERY = gql`
   query SINGLE_PRODUCT_QUERY($id: ID!) {
@@ -56,13 +52,14 @@ const ProductDetails = () => {
 
   // TODO: add loader
   if (loading) return <p>Loading...</p>;
+  // console.log({ data });
 
   // if (!id) router.replace('/404').catch(console.log);
 
   return (
     <>
       <ErrorMessage error={error!} />;
-      <div className="py-20">
+      <div className="product-detail py-20">
         <div className="grid grid-cols-1 gap-x-16 md:grid-cols-[0.75fr,1fr]">
           <div className="relative overflow-hidden border shadow-md rounded-2xl mb-8 md:mb-0">
             <Image
@@ -70,7 +67,7 @@ const ProductDetails = () => {
               alt={data?.product.name}
               width={400}
               height={350}
-              className="object-cover"
+              className="product-image object-cover"
               layout="responsive"
               placeholder="blur"
               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+yHgAFWAJp08sG7wAAAABJRU5ErkJggg=="
@@ -79,8 +76,10 @@ const ProductDetails = () => {
           </div>
           <div>
             <div className="flex justify-between mb-8">
-              <h1 className="text-5xl font-bold">{data?.product.name}</h1>
-              <Menu as="div" className="flex relative">
+              <h1 className="product-title text-5xl font-bold">
+                {data?.product.name}
+              </h1>
+              <Menu as="div" className="product-options flex relative">
                 <Menu.Button className="p-4 rounded-full hover:bg-gray-200">
                   <BsThreeDots size={20} />
                 </Menu.Button>
@@ -92,7 +91,7 @@ const ProductDetails = () => {
                   leaveFrom="transform scale-100 opacity-100"
                   leaveTo="transform scale-95 opacity-0"
                 >
-                  <Menu.Items className="z-40 absolute right-0 top-16 w-60 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Items className="product-dropdown z-40 absolute right-0 top-16 w-60 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <Menu.Item>
                       {({ active }) => (
                         <Link
@@ -102,7 +101,7 @@ const ProductDetails = () => {
                           iconPosition="start"
                           className={`${
                             active ? 'bg-gray-100' : 'bg-white'
-                          } flex text-2xl w-full items-center rounded-md px-6 py-4 hover:no-underline text-gray-700`}
+                          } flex text-2xl w-full items-center rounded-md px-6 py-4 hover:no-underline text-gray-700 edit-product`}
                         />
                       )}
                     </Menu.Item>
@@ -112,7 +111,7 @@ const ProductDetails = () => {
                           type="button"
                           className={`${
                             active ? 'bg-gray-100' : 'bg-white'
-                          } flex items-center text-2xl w-full rounded-md px-6 py-4 hover:no-underline text-gray-700`}
+                          } flex items-center text-2xl w-full rounded-md px-6 py-4 hover:no-underline text-gray-700 delete-product`}
                           onClick={() => setIsModalOpen(true)}
                         >
                           <AiFillDelete
@@ -127,14 +126,23 @@ const ProductDetails = () => {
                 </Transition>
               </Menu>
             </div>
-            <p className="mb-8 text-3xl font-semibold">
+            <p className="product-price mb-8 text-3xl font-semibold">
               {formatMoney(data?.product.price)}
             </p>
+            {data?.product.stock ? (
+              <p className="product-stock mb-8 text-2xl font-medium">
+                Stock: {data?.product.stock}
+              </p>
+            ) : null}
             <div className="">
-              <p className="text-2xl text-gray-400">Description:</p>
-              <p className="mt-4 text-2xl">{data?.product.description}</p>
+              <p className="product-desc-title text-2xl text-gray-400">
+                Description:
+              </p>
+              <p className="product-desc mt-4 text-2xl">
+                {data?.product.description}
+              </p>
             </div>
-            <div className="mt-12 flex">
+            <div className="product-buttons mt-12 flex">
               <Button
                 title="Buy now"
                 className="text-3xl"

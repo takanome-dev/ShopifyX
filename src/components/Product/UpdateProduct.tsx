@@ -7,12 +7,12 @@ import { BiLoader } from 'react-icons/bi';
 import { FaPencilAlt } from 'react-icons/fa';
 import * as Yup from 'yup';
 
-import ErrorMessage from '@components/common/ErrorMessage';
+import Button from '@common/Button';
+import ErrorMessage from '@common/ErrorMessage';
+import Input from '@common/Input';
+import { SingleProductQuery } from '@interfaces/product';
 
-import Button from '../common/Button';
-import Input from '../common/Input';
-
-import { SingleProductQuery, SINGLE_PRODUCT_QUERY } from './ProductDetails';
+import { SINGLE_PRODUCT_QUERY } from './ProductDetails';
 
 interface UpdateProductMutation {
   updateProduct: {

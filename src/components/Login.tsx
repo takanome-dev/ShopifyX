@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -6,12 +5,10 @@ import { BiLoader } from 'react-icons/bi';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import * as Yup from 'yup';
 
-import { useAuthContext } from '@context/AuthProvider';
-import { LoginReturnType } from '@context/types';
-
-import Button from './common/Button';
-import Input from './common/Input';
-import Link from './common/Link';
+import Button from '@common/Button';
+import Input from '@common/Input';
+import Link from '@common/Link';
+import useAuth from '@hooks/useAuth';
 
 const initialValues = {
   email: '',
@@ -24,38 +21,38 @@ const validationSchema = Yup.object().shape({
 });
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
 
   const router = useRouter();
-  const { login } = useAuthContext();
+  const { login, loginLoading: loading } = useAuth();
 
   const handleSubmit = async (values: typeof initialValues) => {
-    const { loading: isLoading, data } = (await login({
-      email: values.email,
-      password: values.password,
-    })) as LoginReturnType;
+    const { data, errors } = await login({
+      variables: {
+        email: values.email,
+        password: values.password,
+      },
+    });
 
-    setLoading(isLoading);
     const errorMessage =
+      errors ||
+      // eslint-disable-next-line no-underscore-dangle
       data?.authenticateUserWithPassword?.__typename ===
-      'UserAuthenticationWithPasswordFailure'
+        'UserAuthenticationWithPasswordFailure'
         ? 'Invalid email or password'
         : undefined;
+
     setError(errorMessage);
 
-    setTimeout(() => {
-      if (!errorMessage) {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        router.replace('/products');
-      }
-    }, 500);
+    if (!errorMessage) {
+      router.replace('/products').catch(console.error);
+    }
   };
 
   return (
-    <div className="min-h-[550px] flex items-center justify-center">
+    <div className="login-page min-h-[550px] flex items-center justify-center">
       <div className="rounded-xl shadow-xl w-[500px] p-8">
-        <div className="mb-12">
+        <div className="login-header mb-12">
           <h2 className="pb-4 text-4xl font-semibold text-center">Sign In</h2>
           <p className="text-xl text-center">
             Please sign-in to your account and start shopping 🛒
@@ -66,7 +63,7 @@ const Login = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form className="">
+          <Form className="login-form">
             <Input name="email" label="Email" error={error} />
             <Input name="password" label="Password" isPassword />
             <div className="my-4 text-right">
@@ -94,7 +91,7 @@ const Login = () => {
           <Link
             path="/register"
             title="Create an account"
-            className="text-blue-500 text-2xl"
+            className="register-link text-blue-500 text-2xl"
             iconPosition="start"
           />
         </p>

@@ -5,11 +5,14 @@ import { BsPatchCheckFill } from 'react-icons/bs';
 import { FiLoader } from 'react-icons/fi';
 import { MdCancel } from 'react-icons/md';
 
+import { Product } from '@interfaces/product';
 import formatMoney from '@lib/formatMoney';
 
-import { Product } from '../types';
+interface Props {
+  product: Product;
+}
 
-const CardOrderProduct = ({ product }: { product: Product }) => {
+const CardOrderProduct = ({ product }: Props) => {
   const borderColor =
     product.orderStatus === 'delivered'
       ? 'border-l-green-400'

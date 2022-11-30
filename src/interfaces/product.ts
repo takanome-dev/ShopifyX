@@ -1,3 +1,18 @@
+export interface InitialValues {
+  image: string;
+  name: string;
+  price: number;
+  description: string;
+}
+
+export interface ProductsQuery {
+  products: Product[];
+}
+
+export interface SingleProductQuery {
+  product: Product;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -10,13 +25,6 @@ export interface Product {
   updatedAt: string;
   createdAt: string;
   orderStatus?: 'processing' | 'delivered' | 'failed';
-}
-
-export interface InitialValues {
-  image: string;
-  name: string;
-  price: number;
-  description: string;
 }
 
 export interface Image {
@@ -48,36 +56,4 @@ export interface Image {
       original_filename: string;
     };
   };
-}
-
-export interface User {
-  __typename?: string;
-  username: string;
-  email: string;
-  password: string;
-}
-
-export interface ServerError {
-  graphQLErrors: [];
-  clientErrors: [];
-  networkError: {
-    name: string;
-    response: unknown;
-    statusCode: number;
-    result: {
-      errors: [
-        {
-          message: string;
-          locations: { line: number; column: number }[];
-          extensions: {
-            code: string;
-            exception: {
-              stacktrace: [];
-            };
-          };
-        }
-      ];
-    };
-  };
-  message: string;
 }

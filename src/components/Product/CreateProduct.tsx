@@ -6,10 +6,9 @@ import { BiLoader } from 'react-icons/bi';
 import { FaPlusCircle } from 'react-icons/fa';
 import * as Yup from 'yup';
 
-import ErrorMessage from '@components/common/ErrorMessage';
-
-import Button from '../common/Button';
-import Input from '../common/Input';
+import Button from '@common/Button';
+import ErrorMessage from '@common/ErrorMessage';
+import Input from '@common/Input';
 
 interface CreateProductMutation {
   createProduct: {

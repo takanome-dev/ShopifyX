@@ -9,10 +9,9 @@ import React, {
   useState,
 } from 'react';
 
+import useCurrentUser from '@hooks/useCurrentUser';
+import { CartInitialValues, CartItem } from '@interfaces/cart';
 import useLocalStorage from 'src/hooks/useLocalStorage';
-
-import { useAuthContext } from './AuthProvider';
-import { CartItem, CartInitialValues } from './types';
 
 interface Props {
   children: React.ReactNode;
@@ -31,7 +30,7 @@ const CartContext = createContext(initialState);
 export default function CartProvider({ children }: Props) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [subTotal, setSubTotal] = useState(0);
-  const { user } = useAuthContext();
+  const { user } = useCurrentUser();
   const { getItemsFromStorage, setItemsToStorage } = useLocalStorage();
 
   const calculateSubTotal = useCallback((items: CartItem[]) => {

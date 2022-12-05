@@ -1,21 +1,15 @@
 FROM node:18.12.1-alpine3.16
 
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /app
 
-WORKDIR /home/node/app
+# ENV PATH=$PATH:/home/node/.npm-global/bin
 
-USER node
+COPY package.json .npmrc ./
 
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-
-ENV PATH=$PATH:/home/node/.npm-global/bin
-
-COPY package.json ./
-
-RUN npm ci
+RUN yarn install
 
 COPY . .
 
 EXPOSE 3000
 
-CMD [ "npm", "start" ]
+CMD [ "yarn", "run", "dev" ]

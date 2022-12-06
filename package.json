@@ -1,7 +1,21 @@
 {
   "name": "ShopifyX",
-  "version": "0.1.0",
+  "description": "The One-Stop Shop for All Your E-Commerce Needs 🛒",
+  "version": "1.0.0",
+  "author": "TAKANOME-DEV <takanomedev221@gmail.com>",
   "private": true,
+  "homepage": "https://github.com/TAKANOME-DEV/ShopifyX#readme",
+  "bugs": {
+    "url": "https://github.com/TAKANOME-DEV/ShopifyX/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/TAKANOME-DEV/ShopifyX.git"
+  },
+  "engines": {
+    "node": ">= 16.7.0",
+    "npm": ">= 8.0.0"
+  },
   "scripts": {
     "build": "next build",
     "dev": "next dev",

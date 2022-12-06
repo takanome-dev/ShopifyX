@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-
 import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { GiShoppingCart } from 'react-icons/gi';
@@ -19,6 +16,8 @@ interface CartProps {
 // TODO: drop pr-2 if cart items > 4
 const Cart = ({ handleClose, cartOpen }: CartProps) => {
   const { cartItems, subTotal } = useCartItems();
+
+  // TODO: update product quantity when it's already in the cart
 
   return (
     <>
@@ -47,11 +46,7 @@ const Cart = ({ handleClose, cartOpen }: CartProps) => {
           <>
             <div className="cart-items-scrollbar max-h-[84%] pr-2 mt-4 overflow-auto">
               {cartItems.map((item) => (
-                <CartItem
-                  key={item.product.id}
-                  product={item.product}
-                  initialQuantity={item.quantity}
-                />
+                <CartItem key={item.product.id} item={item} />
               ))}
             </div>
             <div className="absolute bottom-0 w-[92%] p-4 bg-white border-t border-gray-200">

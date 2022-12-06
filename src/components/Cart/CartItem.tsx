@@ -9,13 +9,16 @@ import { Product } from '@interfaces/product';
 import formatMoney from '@lib/formatMoney';
 
 interface CartItemProps {
-  product: Product;
-  initialQuantity: number;
+  item: {
+    product: Product;
+    quantity: number;
+  };
 }
 
-export default function CartItem({ product, initialQuantity }: CartItemProps) {
+export default function CartItem({ item }: CartItemProps) {
+  const { product } = item;
   const { onUpdateItem, onDeleteItem } = useCartItems();
-  const [quantity, setQuantity] = useState(initialQuantity);
+  const [quantity, setQuantity] = useState(item.quantity);
 
   const handleSetQuantity = (value: number, productId: string) => {
     setQuantity(value);

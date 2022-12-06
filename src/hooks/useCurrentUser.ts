@@ -34,7 +34,5 @@ export const CURRENT_USER_QUERY = gql`
 export default function useCurrentUser() {
   const { data, error, loading } = useQuery<UserQuery>(CURRENT_USER_QUERY);
 
-  console.log({ data, error, loading });
-
   return { user: data?.authenticatedItem, error, loading };
 }

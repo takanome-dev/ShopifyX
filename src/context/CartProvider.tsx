@@ -73,13 +73,28 @@ export default function CartProvider({ children }: Props) {
 
   const handleAddToCart = useCallback(
     (item: CartItem) => {
-      const items = [...cartItems, item];
+      const foundItem = cartItems.find(
+        ({ product }) => product.id === item.product.id
+      );
 
-      calculateSubTotal(items);
-      setCartItems(items);
-      setItemsToStorage(items);
+      let newCartItems: CartItem[] = [];
+
+      if (!foundItem) {
+        newCartItems = [...cartItems, item];
+      } else {
+        newCartItems = cartItems.map((cartItem) => {
+          if (cartItem.product.id === foundItem.product.id) {
+            return { ...cartItem, quantity: cartItem.quantity + 1 };
+          }
+          return cartItem;
+        });
+      }
+
+      calculateSubTotal(newCartItems);
+      setCartItems(newCartItems);
+      setItemsToStorage(newCartItems);
     },
-    [cartItems]
+    [cartItems, subTotal]
   );
 
   const handleDeleteItem = (productId: string) => {

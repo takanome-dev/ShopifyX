@@ -13,7 +13,7 @@ specifiers:
   '@playwright/test': ^1.27.1
   '@tailwindcss/forms': ^0.5.3
   '@types/apollo-upload-client': ^17.0.2
-  '@types/node': 18.11.9
+  '@types/node': 18.11.11
   '@types/nprogress': ^0.2.0
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
@@ -73,7 +73,7 @@ devDependencies:
   '@commitlint/config-conventional': 17.2.0
   '@playwright/test': 1.27.1
   '@types/apollo-upload-client': 17.0.2_biqbaboplfbrettd7655fr4n2y
-  '@types/node': 18.11.9
+  '@types/node': 18.11.11
   '@types/nprogress': 0.2.0
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
@@ -1495,7 +1495,7 @@ packages:
       cosmiconfig-typescript-loader: 4.2.0_gbbg4brkmakf6m5nuj7scelzny
       lodash: 4.17.21
       resolve-from: 5.0.0
-      ts-node: 10.9.1_yodorn5kzjgomblrsstrk2spaa
+      ts-node: 10.9.1_5wyqbr5ddly62zcv3ehcsfny4y
       typescript: 4.8.4
     transitivePeerDependencies:
       - '@swc/core'
@@ -1855,7 +1855,7 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@types/node': 18.11.9
+      '@types/node': 18.11.11
       playwright-core: 1.27.1
     dev: true
 
@@ -1927,8 +1927,8 @@ packages:
     resolution: {integrity: sha512-qelS/Ra6sacc4loe/3MSjXNL1dNQ/GjxNHVzuChwMfmk7HuycRLVQN2qNY3XahK+fZc5E2szqQSKUyAF0E+2bg==}
     dev: true
 
-  /@types/node/18.11.9:
-    resolution: {integrity: sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==}
+  /@types/node/18.11.11:
+    resolution: {integrity: sha512-KJ021B1nlQUBLopzZmPBVuGU9un7WJd/W4ya7Ih02B4Uwky5Nja0yGYav2EfYIk0RR2Q9oVhf60S2XR1BCWJ2g==}
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -2555,7 +2555,7 @@ packages:
     dependencies:
       '@types/node': 14.18.33
       cosmiconfig: 7.0.1
-      ts-node: 10.9.1_yodorn5kzjgomblrsstrk2spaa
+      ts-node: 10.9.1_5wyqbr5ddly62zcv3ehcsfny4y
       typescript: 4.8.4
     dev: true
 
@@ -4448,7 +4448,7 @@ packages:
     dependencies:
       lilconfig: 2.0.6
       postcss: 8.4.18
-      ts-node: 10.9.1_cbe7ovvae6zqfnmtgctpgpys54
+      ts-node: 10.9.1_5wyqbr5ddly62zcv3ehcsfny4y
       yaml: 1.10.2
 
   /postcss-nested/6.0.0_postcss@8.4.18:
@@ -5088,7 +5088,7 @@ packages:
     dependencies:
       tslib: 2.4.1
 
-  /ts-node/10.9.1_cbe7ovvae6zqfnmtgctpgpys54:
+  /ts-node/10.9.1_5wyqbr5ddly62zcv3ehcsfny4y:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -5107,7 +5107,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.9
+      '@types/node': 18.11.11
       acorn: 8.8.1
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -5117,37 +5117,6 @@ packages:
       typescript: 4.8.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
-
-  /ts-node/10.9.1_yodorn5kzjgomblrsstrk2spaa:
-    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': '>=1.2.50'
-      '@swc/wasm': '>=1.2.50'
-      '@types/node': '*'
-      typescript: '>=2.7'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      '@swc/wasm':
-        optional: true
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.9
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.3
-      '@types/node': 14.18.33
-      acorn: 8.8.1
-      acorn-walk: 8.2.0
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 4.8.4
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    dev: true
 
   /tsconfig-paths/3.14.1:
     resolution: {integrity: sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==}

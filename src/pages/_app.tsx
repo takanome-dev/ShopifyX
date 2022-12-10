@@ -41,7 +41,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 // this uses apollo-link-http under the hood, so all the options here come from that package
 const uploadLink = createUploadLink({
-  uri: process.env.NEXT_PUBLIC_API_URI as string,
+  uri: process.env.API_URI as string,
   // pass the headers along from this request. This enables SSR with logged in state
   // Headers: ,
   fetchOptions: {

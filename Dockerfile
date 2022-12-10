@@ -1,12 +1,14 @@
 FROM node:18.12.1-alpine3.16
 
-WORKDIR /app
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
-RUN addgroup app && adduser -S -G app app
+WORKDIR /home/node/app
 
-USER app
+USER node
 
-# ENV PATH=$PATH:/home/node/.npm-global/bin
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+
+ENV PATH=$PATH:/home/node/.npm-global/bin
 
 COPY package.json .npmrc ./
 
@@ -16,4 +18,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD [ "yarn", "run", "dev" ]
+CMD [ "yarn", "dev" ]

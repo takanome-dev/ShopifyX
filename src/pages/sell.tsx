@@ -1,7 +1,6 @@
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { BiLoader } from 'react-icons/bi';
 import { FaPlusCircle } from 'react-icons/fa';
 import * as Yup from 'yup';
@@ -9,6 +8,7 @@ import * as Yup from 'yup';
 import Button from '@/components/common/Button';
 import ErrorMessage from '@/components/common/ErrorMessage';
 import Input from '@/components/common/Input';
+import { CREATE_PRODUCT_MUTATION } from '@/gql/product';
 
 interface CreateProductMutation {
   createProduct: {
@@ -32,28 +32,6 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().min(10).required(),
   stock: Yup.string().min(1).required(),
 });
-
-const CREATE_PRODUCT_MUTATION = gql`
-  mutation CREATE_PRODUCT_MUTATION(
-    $name: String!
-    $description: String!
-    $price: Int!
-    $stock: Int!
-    $photo: Upload!
-  ) {
-    createProduct(
-      data: {
-        name: $name
-        description: $description
-        price: $price
-        stock: $stock
-        photo: { create: { image: $photo, altText: $name } }
-      }
-    ) {
-      id
-    }
-  }
-`;
 
 export default function SellPage() {
   const router = useRouter();

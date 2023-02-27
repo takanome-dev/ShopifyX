@@ -1,14 +1,12 @@
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { Formik, Form } from 'formik';
-import React from 'react';
-import { BiLoader } from 'react-icons/bi';
-import { FaKey } from 'react-icons/fa';
-import { TbArrowBack } from 'react-icons/tb';
+import { CornerDownLeft, Key, Loader } from 'lucide-react';
+import Link from 'next/link';
 import * as Yup from 'yup';
 
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import Link from '@/components/common/Link';
+import { RESET_PASSWORD_MUTATION, VALIDATE_TOKEN_QUERY } from '@/gql/user';
 
 import ResetSuccessfully from './reset-success';
 
@@ -43,33 +41,6 @@ interface Props {
   token: string;
 }
 
-const VALIDATE_TOKEN_QUERY = gql`
-  query VALIDATE_TOKEN_QUERY($email: String!, $token: String!) {
-    validateUserPasswordResetToken(email: $email, token: $token) {
-      code
-      message
-      __typename
-    }
-  }
-`;
-
-const RESET_PASSWORD_MUTATION = gql`
-  mutation RESET_PASSWORD_MUTATION(
-    $email: String!
-    $token: String!
-    $password: String!
-  ) {
-    redeemUserPasswordResetToken(
-      email: $email
-      token: $token
-      password: $password
-    ) {
-      code
-      message
-    }
-  }
-`;
-
 export default function NewPassword({ email, token }: Props) {
   const { data: dataValidation } = useQuery<ValidateUserToken>(
     VALIDATE_TOKEN_QUERY,
@@ -99,12 +70,12 @@ export default function NewPassword({ email, token }: Props) {
               dataValidation?.validateUserPasswordResetToken?.message}
           </p>
           <Link
-            path="/reset-password"
-            title="Re-request password reset"
+            href="/reset-password"
             className="flex items-center text-2xl justify-center mt-8 text-blue-500"
-            Icon={TbArrowBack}
-            iconPosition="start"
-          />
+          >
+            <CornerDownLeft />
+            Re-request password reset
+          </Link>
         </div>
       </div>
     );
@@ -125,7 +96,7 @@ export default function NewPassword({ email, token }: Props) {
       <div className="rounded-xl shadow-xl w-[500px] p-8">
         <div className="mb-12">
           <h2 className="flex items-center justify-center pb-8 text-4xl font-semibold text-center">
-            <span>Set New Password</span> <FaKey size={20} className="ml-4" />
+            <span>Set New Password</span> <Key size={20} className="ml-4" />
           </h2>
           <p className="text-2xl text-center">
             Your new password must be different to previous used password
@@ -147,17 +118,17 @@ export default function NewPassword({ email, token }: Props) {
               size="lg"
               disabled={loading}
               iconClasses="animate-spin"
-              Icon={loading ? BiLoader : undefined}
+              Icon={loading ? Loader : undefined}
             />
           </Form>
         </Formik>
         <Link
-          path="/login"
-          title="Back to log in"
+          href="/login"
           className="flex items-center text-2xl justify-center mt-8 text-blue-500"
-          Icon={TbArrowBack}
-          iconPosition="start"
-        />
+        >
+          <CornerDownLeft />
+          Back to log in
+        </Link>
       </div>
     </div>
   );

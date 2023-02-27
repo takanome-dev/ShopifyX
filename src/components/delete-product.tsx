@@ -2,10 +2,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import Button from '@/components/common/Button';
 import ErrorMessage from '@/components/common/ErrorMessage';
+import { DELETE_PRODUCT_MUTATION } from '@/gql/product';
 
 interface DeleteProductMutation {
   deleteProduct: {
@@ -19,15 +19,6 @@ interface Props {
   isOpen: boolean;
   handleClose: () => void;
 }
-
-const DELETE_PRODUCT_MUTATION = gql`
-  mutation DELETE_PRODUCT_MUTATION($id: ID!) {
-    deleteProduct(where: { id: $id }) {
-      __typename
-      id
-    }
-  }
-`;
 
 const DeleteProduct = (props: Props) => {
   const { id, isOpen, handleClose } = props;

@@ -1,13 +1,13 @@
 import { Formik, Form } from 'formik';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BiLoader } from 'react-icons/bi';
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import * as Yup from 'yup';
 
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import Link from '@/components/common/Link';
 import useAuth from '@/hooks/useAuth';
 
 const initialValues = {
@@ -66,12 +66,9 @@ export default function LoginPage() {
             <Input name="email" label="Email" error={error} />
             <Input name="password" label="Password" isPassword />
             <div className="my-4 text-right">
-              <Link
-                path="/reset-password"
-                title="Forgot password?"
-                className="text-blue-500 text-2xl"
-                iconPosition="start"
-              />
+              <Link href="/reset-password" className="text-blue-500 text-2xl">
+                Forgot password?
+              </Link>
             </div>
             <Button
               title={loading ? 'Signing in...' : 'Sign in'}
@@ -88,11 +85,11 @@ export default function LoginPage() {
         <p className="mt-10 text-2xl text-center">
           New here?{' '}
           <Link
-            path="/register"
-            title="Create an account"
+            href="/register"
             className="register-link text-blue-500 text-2xl"
-            iconPosition="start"
-          />
+          >
+            Create an account
+          </Link>
         </p>
         <div className="relative flex flex-col items-center mt-8">
           <p className="mb-4 bg-white px-4 text-2xl before:content-[''] before:w-full before:h-1 before:bg-gray-200 before:absolute before:left-0 before:top-3 before:-z-10">

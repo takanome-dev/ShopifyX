@@ -1,46 +1,11 @@
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
+import {
+  AUTH_USER_MUTATION,
+  CREATE_USER_MUTATION,
+  CURRENT_USER_QUERY,
+} from '@/gql/user';
 import { LoginMutation, RegisterMutation } from '@/interfaces/user';
-
-import { CURRENT_USER_QUERY } from './useCurrentUser';
-
-export const CREATE_USER_MUTATION = gql`
-  mutation CREATE_USER_MUTATION(
-    $username: String!
-    $email: String!
-    $password: String!
-  ) {
-    createUser(
-      data: { username: $username, email: $email, password: $password }
-    ) {
-      __typename
-      id
-      username
-      email
-    }
-  }
-`;
-
-export const AUTH_USER_MUTATION = gql`
-  mutation AUTH_USER_MUTATION($email: String!, $password: String!) {
-    authenticateUserWithPassword(email: $email, password: $password) {
-      ... on UserAuthenticationWithPasswordSuccess {
-        sessionToken
-        __typename
-        item {
-          id
-          username
-          email
-        }
-      }
-
-      ... on UserAuthenticationWithPasswordFailure {
-        __typename
-        message
-      }
-    }
-  }
-`;
 
 export default function useAuth() {
   const [login, { loading: loginLoading }] = useMutation<LoginMutation>(

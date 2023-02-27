@@ -1,6 +1,7 @@
 import { gql, useMutation } from '@apollo/client';
 import { Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
@@ -9,10 +10,9 @@ import { MdShoppingCart } from 'react-icons/md';
 import { VscSignOut } from 'react-icons/vsc';
 
 import Button from '@/components/common/Button';
-import HeaderLink from '@/components/common/HeaderLink';
-import Link from '@/components/common/Link';
 import { useCartItems } from '@/context/CartProvider';
-import useCurrentUser, { CURRENT_USER_QUERY } from '@/hooks/useCurrentUser';
+import { CURRENT_USER_QUERY, SIGN_OUT_MUTATION } from '@/gql/user';
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 import Search from './search';
 import UserAvatar from './user-avatar';
@@ -20,12 +20,6 @@ import UserAvatar from './user-avatar';
 interface HeaderProps {
   handleOpen: () => void;
 }
-
-const SIGN_OUT_MUTATION = gql`
-  mutation {
-    endSession
-  }
-`;
 
 export default function Header({ handleOpen }: HeaderProps) {
   const [openSearch, setOpenSearch] = useState(false);
@@ -40,15 +34,32 @@ export default function Header({ handleOpen }: HeaderProps) {
     <>
       <header className="sticky top-0 z-10 bg-white shadow-md bg-opacity-80 backdrop-blur-md">
         <nav className="grid grid-cols-[auto_1fr_auto] items-center max-w-screen-xl mx-auto px-10 xl:px-0">
-          <h1 className="p-4 text-5xl text-gray-900 uppercase bg-gradient-to-r from-cyan to-teal">
-            <Link path="/" title="Logo" />
-          </h1>
+          <Link href="/" className="flex gap-4 border border-red-500">
+            <Image src="/logo.svg" alt="ShopifyX logo" width={40} height={40} />
+            <span className="text-4xl font-bold self-end text-slate-600">
+              ShopifyX
+            </span>
+          </Link>
           {user && (
             <nav className="justify-center hidden md:flex">
-              <HeaderLink name="Products" path="products" />
-              <HeaderLink name="Sell" path="sell" />
-              <HeaderLink name="Order" path="orders" />
-              <HeaderLink name="Account" path="account" />
+              <Link
+                href="/products"
+                className="m-8 text-3xl relative font-semibold text-gray-700 uppercase before:content-[''] before:h-1.5 before:w-0 before:bg-gradient-to-r before:from-cyan before:to-teal before:absolute before:left-0 before:mt-9 before:transition-all before:duration-[300ms] hover:before:w-full"
+              >
+                Products
+              </Link>
+              <Link
+                href="/sell"
+                className="m-8 text-3xl relative font-semibold text-gray-700 uppercase before:content-[''] before:h-1.5 before:w-0 before:bg-gradient-to-r before:from-cyan before:to-teal before:absolute before:left-0 before:mt-9 before:transition-all before:duration-[300ms] hover:before:w-full"
+              >
+                Sell
+              </Link>
+              <Link
+                href="/orders"
+                className="m-8 text-3xl relative font-semibold text-gray-700 uppercase before:content-[''] before:h-1.5 before:w-0 before:bg-gradient-to-r before:from-cyan before:to-teal before:absolute before:left-0 before:mt-9 before:transition-all before:duration-[300ms] hover:before:w-full"
+              >
+                Orders
+              </Link>
             </nav>
           )}
           <div className="flex justify-end items-center">

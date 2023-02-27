@@ -1,37 +1,25 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Menu, Transition } from '@headlessui/react';
+import {
+  Edit3,
+  ShoppingBag,
+  DollarSign,
+  Trash2,
+  MoreHorizontal,
+} from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { AiFillDelete } from 'react-icons/ai';
-import { BsThreeDots } from 'react-icons/bs';
-import { FaDollarSign, FaPencilAlt, FaShoppingBag } from 'react-icons/fa';
+import { useState } from 'react';
 
 import Button from '@/components/common/Button';
 import ErrorMessage from '@/components/common/ErrorMessage';
 import FavIcon from '@/components/common/FavIcon';
-import Link from '@/components/common/Link';
 import DeleteProduct from '@/components/delete-product';
 import { useCartItems } from '@/context/CartProvider';
+import { SINGLE_PRODUCT_QUERY } from '@/gql/product';
 import { SingleProductQuery } from '@/interfaces/product';
 import formatMoney from '@/utils/formatMoney';
-
-export const SINGLE_PRODUCT_QUERY = gql`
-  query SINGLE_PRODUCT_QUERY($id: ID!) {
-    product(where: { id: $id }) {
-      id
-      name
-      description
-      price
-      photo {
-        id
-        image {
-          publicUrlTransformed
-        }
-      }
-    }
-  }
-`;
 
 export default function SingleProductPage() {
   const router = useRouter();
@@ -60,11 +48,10 @@ export default function SingleProductPage() {
           <div className="relative overflow-hidden border shadow-md rounded-2xl mb-8 md:mb-0">
             <Image
               src={data?.product.photo.image.publicUrlTransformed as string}
-              alt={data?.product.name}
+              alt={data?.product.name as string}
               width={400}
               height={350}
               className="product-image object-cover"
-              layout="responsive"
               placeholder="blur"
               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+yHgAFWAJp08sG7wAAAABJRU5ErkJggg=="
             />
@@ -77,7 +64,7 @@ export default function SingleProductPage() {
               </h1>
               <Menu as="div" className="product-options flex relative">
                 <Menu.Button className="p-4 rounded-full hover:bg-gray-200">
-                  <BsThreeDots size={20} />
+                  <MoreHorizontal size={20} />
                 </Menu.Button>
                 <Transition
                   enter="transition duration-100 ease-out"
@@ -91,14 +78,14 @@ export default function SingleProductPage() {
                     <Menu.Item>
                       {({ active }) => (
                         <Link
-                          path={`/products/update?id=${data!.product.id}`}
-                          title="Edit"
-                          Icon={FaPencilAlt}
-                          iconPosition="start"
+                          href={`/products/update?id=${data!.product.id}`}
                           className={`${
                             active ? 'bg-gray-100' : 'bg-white'
                           } flex text-2xl w-full items-center rounded-md px-6 py-4 hover:no-underline text-gray-700 edit-product`}
-                        />
+                        >
+                          <Edit3 />
+                          Edit
+                        </Link>
                       )}
                     </Menu.Item>
                     <Menu.Item>
@@ -110,10 +97,7 @@ export default function SingleProductPage() {
                           } flex items-center text-2xl w-full rounded-md px-6 py-4 hover:no-underline text-gray-700 delete-product`}
                           onClick={() => setIsModalOpen(true)}
                         >
-                          <AiFillDelete
-                            size={20}
-                            className="text-red-500 mr-4"
-                          />
+                          <Trash2 size={20} className="text-red-500 mr-4" />
                           <span>Delete</span>
                         </button>
                       )}
@@ -143,7 +127,7 @@ export default function SingleProductPage() {
                 title="Buy now"
                 className="text-3xl"
                 variant="primary"
-                Icon={FaDollarSign}
+                Icon={DollarSign}
                 iconPosition="start"
                 size="md"
               />
@@ -151,7 +135,7 @@ export default function SingleProductPage() {
                 title="Add to cart"
                 className="ml-8 text-3xl border-2"
                 variant="secondary"
-                Icon={FaShoppingBag}
+                Icon={ShoppingBag}
                 iconPosition="start"
                 size="md"
                 onClick={() =>

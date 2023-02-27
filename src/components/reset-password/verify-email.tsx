@@ -1,10 +1,5 @@
-import React from 'react';
-import { BsEnvelopeOpen } from 'react-icons/bs';
-import { IoIosSend } from 'react-icons/io';
-import { TbArrowBack } from 'react-icons/tb';
-
-import ButtonLink from '@/components/common/ButtonLink';
-import Link from '@/components/common/Link';
+import { CornerDownLeft, Send, MailOpen } from 'lucide-react';
+import Link from 'next/link';
 
 export default function VerifyEmail({ email }: { email: string }) {
   return (
@@ -12,35 +7,30 @@ export default function VerifyEmail({ email }: { email: string }) {
       <div className="rounded-xl shadow-xl w-[500px] p-8">
         <div className="mb-12">
           <h2 className="flex items-center justify-center pb-8 text-4xl font-semibold text-center">
-            <span>Check your email</span>{' '}
-            <IoIosSend size={20} className="ml-4" />
+            <span>Check your email</span> <Send size={20} className="ml-4" />
           </h2>
           <p className="text-2xl text-center">
             We sent a password reset link to{' '}
             <span className="font-semibold">{email}</span>
           </p>
         </div>
-        <ButtonLink
-          path={`mailto:${email}`}
-          title="Open Emails"
-          Icon={BsEnvelopeOpen}
-          className="justify-center"
-        />
+        <Link href={`mailto:${email}`} className="justify-center">
+          <MailOpen />
+          Open Emails
+        </Link>
         <p className="mt-10 text-2xl text-center">
           Didn&apos;t receive the email?{' '}
-          <Link
-            path="/reset-password"
-            title="Request a new one"
-            className="text-blue-500 text-2xl"
-          />
+          <Link href="/reset-password" className="text-blue-500 text-2xl">
+            Request a new one
+          </Link>
         </p>
         <Link
-          path="/login"
-          title="Back to log in"
+          href="/login"
           className="flex items-center justify-center mt-8 text-blue-500 text-2xl"
-          Icon={TbArrowBack}
-          iconPosition="start"
-        />
+        >
+          <CornerDownLeft />
+          Back to log in
+        </Link>
       </div>
     </div>
   );

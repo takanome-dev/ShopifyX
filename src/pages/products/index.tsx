@@ -1,31 +1,15 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import Card from '@/components/card';
 import Pagination from '@/components/pagination';
+import { ALL_PRODUCTS_QUERY } from '@/gql/product';
 import { ProductsQuery } from '@/interfaces/product';
+import { WithPageLayout } from '@/interfaces/with-page-layout';
+import MainLayout from '@/layouts/main-layout';
 
-export const ALL_PRODUCTS_QUERY = gql`
-  query ALL_PRODUCTS_QUERY($skip: Int!, $take: Int!) {
-    products(skip: $skip, take: $take) {
-      id
-      name
-      description
-      price
-      stock
-      status
-      photo {
-        id
-        image {
-          publicUrlTransformed
-        }
-      }
-    }
-  }
-`;
-
-export default function ProductPage() {
+const ProductPage: WithPageLayout = () => {
   const router = useRouter();
   const PAGE_SIZE = 6;
   const currentPage = router.query.page ?? 1;
@@ -55,4 +39,7 @@ export default function ProductPage() {
       </div>
     </>
   );
-}
+};
+
+ProductPage.PageLayout = MainLayout;
+export default ProductPage;

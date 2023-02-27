@@ -1,17 +1,16 @@
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { Formik, Form } from 'formik';
+import { CornerDownLeft, Key, Loader } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { BiLoader } from 'react-icons/bi';
-import { FaKey } from 'react-icons/fa';
-import { TbArrowBack } from 'react-icons/tb';
+import { useState } from 'react';
 import * as Yup from 'yup';
 
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import LinkComponent from '@/components/common/Link';
 import NewPassword from '@/components/reset-password/new-password';
 import VerifyEmail from '@/components/reset-password/verify-email';
+import { REQUEST_RESET_MUTATION } from '@/gql/user';
 
 interface ResetMutationType {
   sendUserPasswordResetLink: boolean;
@@ -20,12 +19,6 @@ interface ResetMutationType {
 const initialValues = {
   email: '',
 };
-
-export const REQUEST_RESET_MUTATION = gql`
-  mutation REQUEST_RESET_MUTATION($email: String!) {
-    sendUserPasswordResetLink(email: $email)
-  }
-`;
 
 const ResetPasswordPage = () => {
   const [userMail, setUserMail] = useState('');
@@ -59,7 +52,7 @@ const ResetPasswordPage = () => {
       <div className="rounded-xl shadow-xl w-[500px] p-8">
         <div className="mb-12">
           <h2 className="flex items-center justify-center pb-8 text-4xl font-semibold text-center">
-            <span>Reset Password</span> <FaKey size={20} className="ml-4" />
+            <span>Reset Password</span> <Key size={20} className="ml-4" />
           </h2>
           <p className="text-2xl text-center">
             Please enter your email address below to reset your password
@@ -82,17 +75,17 @@ const ResetPasswordPage = () => {
               size="lg"
               disabled={loading}
               iconClasses="animate-spin"
-              Icon={loading ? BiLoader : undefined}
+              Icon={loading ? Loader : undefined}
             />
           </Form>
         </Formik>
-        <LinkComponent
-          path="/login"
-          title="Back to log in"
+        <Link
+          href="/login"
           className="flex items-center text-2xl justify-center mt-8 text-blue-500"
-          Icon={TbArrowBack}
-          iconPosition="start"
-        />
+        >
+          <CornerDownLeft />
+          Back to log in
+        </Link>
       </div>
     </div>
   );

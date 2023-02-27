@@ -1,8 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
-import React from 'react';
-import { VscArrowSmallLeft, VscArrowSmallRight } from 'react-icons/vsc';
-
-import Link from './common/Link';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 interface PaginationProps {
   page: number;
@@ -29,34 +27,34 @@ export default function Pagination({ page, pageSize }: PaginationProps) {
   return (
     <div className="pagination w-[300px] grid grid-cols-[repeat(5,_auto)] rounded-2xl my-12 mx-auto overflow-hidden border border-gray-300">
       <Link
-        path={`/products?page=${page - 1}`}
+        href={`/products?page=${page - 1}`}
         className={`pagination-arrow-left flex items-center p-4 text-2xl border-r border-r-gray-300 ${
           page <= 1 ? 'opacity-50 pointer-events-none' : ''
         }`}
-        title="Prev"
-        Icon={VscArrowSmallLeft}
-        iconPosition="start"
-      />
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Prev
+      </Link>
       <Link
-        path={`/products?page=${page >= pages ? page - 1 : page + 1}`}
+        href={`/products?page=${page >= pages ? page - 1 : page + 1}`}
         className="p-4 text-2xl border-r border-r-gray-300"
-        title={`${page >= pages ? page - 1 : page}`}
-      />
+      >{`${page >= pages ? page - 1 : page}`}</Link>
       <p className="p-4 text-2xl border-r border-r-gray-300">...</p>
       <Link
-        path={`/products?page=${pages}`}
+        href={`/products?page=${pages}`}
         className="pagination-last-page p-4 text-2xl border-r border-r-gray-300"
-        title={`${pages}`}
-      />
+      >
+        {pages}
+      </Link>
       <Link
-        path={`/products?page=${page + 1}`}
+        href={`/products?page=${page + 1}`}
         className={`pagination-arrow-right flex items-center p-4 text-2xl ${
           page >= pages ? 'opacity-50 pointer-events-none' : ''
         }`}
-        title="Next"
-        Icon={VscArrowSmallRight}
-        iconPosition="end"
-      />
+      >
+        Next
+        <ArrowRight className="h-4 w-4" />
+      </Link>
     </div>
   );
 }

@@ -1,9 +1,8 @@
 import Image from 'next/image';
-import React from 'react';
+import Link from 'next/link';
 import { BsCartPlusFill } from 'react-icons/bs';
 
 import FavIcon from '@/components/common/FavIcon';
-import Link from '@/components/common/Link';
 import { useCartItems } from '@/context/CartProvider';
 import { Product } from '@/interfaces/product';
 import formatMoney from '@/utils/formatMoney';
@@ -32,10 +31,12 @@ export default function Card({ product }: Props) {
       </div>
       <div className="flex flex-col px-4 mt-8 mb-4">
         <Link
-          path={`/products/${product.id}`}
-          title={product.name}
+          href={`/products/${product.id}`}
           className="card-title w-full mb-8 overflow-hidden text-4xl font-semibold text-ellipsis whitespace-nowrap"
-        />
+        >
+          {' '}
+          {product.name}
+        </Link>
         <div className="flex items-center justify-between">
           <p className="card-price text-3xl font-semibold">
             {formatMoney(product.price)}
@@ -50,7 +51,10 @@ export default function Card({ product }: Props) {
         </div>
         <div className="flex items-center justify-between mt-4">
           <p className="card-seller text-gray-500 text-2xl">
-            seller <Link path="/" title="@Takanome" className="text-blue-500" />
+            seller{' '}
+            <Link href="/" className="text-blue-500">
+              @Takanome
+            </Link>
           </p>
           <button
             type="button"

@@ -1,5 +1,6 @@
 import { Formik, Form } from 'formik';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { BiLoader } from 'react-icons/bi';
@@ -8,7 +9,6 @@ import * as Yup from 'yup';
 
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import Link from '@/components/common/Link';
 import useAuth from '@/hooks/useAuth';
 
 const initialValues = {
@@ -97,12 +97,9 @@ const RegisterPage = () => {
           </Formik>
           <p className="mt-10 text-2xl text-center">
             Already have an account?{' '}
-            <Link
-              path="/login"
-              title="Sign in instead"
-              className="text-blue-500 text-2xl"
-              iconPosition="start"
-            />
+            <Link href="/login" className="text-blue-500 text-2xl">
+              Sign in instead
+            </Link>
           </p>
           <div className="relative flex flex-col items-center mt-8">
             <p className="mb-4 bg-white px-4 text-2xl before:content-[''] before:w-full before:h-1 before:bg-gray-200 before:absolute before:left-0 before:top-3 before:-z-10">

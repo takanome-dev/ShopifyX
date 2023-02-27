@@ -1,4 +1,4 @@
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { Formik, Form } from 'formik';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -9,9 +9,8 @@ import * as Yup from 'yup';
 import Button from '@/components/common/Button';
 import ErrorMessage from '@/components/common/ErrorMessage';
 import Input from '@/components/common/Input';
+import { SINGLE_PRODUCT_QUERY, UPDATE_PRODUCT_MUTATION } from '@/gql/product';
 import { SingleProductQuery } from '@/interfaces/product';
-
-import { SINGLE_PRODUCT_QUERY } from './[id]';
 
 interface UpdateProductMutation {
   updateProduct: {
@@ -27,30 +26,6 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().min(10).required(),
   stock: Yup.string().min(1).required(),
 });
-
-const UPDATE_PRODUCT_MUTATION = gql`
-  mutation UPDATE_PRODUCT_MUTATION(
-    $id: ID!
-    $name: String
-    $description: String
-    $price: Int
-    $stock: Int # $photo: Upload
-  ) {
-    updateProduct(
-      where: { id: $id }
-      data: {
-        name: $name
-        description: $description
-        price: $price
-        stock: $stock
-        # photo: { create: { image: $photo, altText: $name } }
-      }
-    ) {
-      __typename
-      id
-    }
-  }
-`;
 
 const UpdateProductPage = () => {
   const router = useRouter();
@@ -114,11 +89,10 @@ const UpdateProductPage = () => {
                 <div className="overflow-hidden border shadow-md rounded-2xl w-48 h-48 mr-12">
                   <Image
                     src={initialValues.image as string}
-                    alt={initialValues.name}
-                    width="100%"
-                    height="100%"
+                    alt={initialValues.name as string}
+                    width={100}
+                    height={100}
                     className="object-cover"
-                    layout="responsive"
                     placeholder="blur"
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+yHgAFWAJp08sG7wAAAABJRU5ErkJggg=="
                   />

@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
 import { Combobox, Transition } from '@headlessui/react';
+import { Search as SearchIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { Fragment, useEffect, useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
+import { Fragment, useEffect, useState } from 'react';
 
-import Link from '@/components/common/Link';
+import { ALL_PRODUCTS_QUERY } from '@/gql/product';
 import { Product, ProductsQuery } from '@/interfaces/product';
-import { ALL_PRODUCTS_QUERY } from '@/pages/products';
 
 interface Props {
   isSearchOpen: boolean;
@@ -56,7 +56,7 @@ export default function Search({ isSearchOpen, onSearchClose }: Props) {
         <Combobox value={selected} onChange={setSelected}>
           <div className="relative p-8">
             <div className="relative flex items-center w-full cursor-default rounded-md bg-white text-left border">
-              <FaSearch size={17} className="ml-4 text-gray-500" />
+              <SearchIcon size={17} className="ml-4 text-gray-500" />
               <Combobox.Input
                 autoFocus
                 className="w-full outline-none p-4 text-2xl leading-6 text-gray-700 focus-visible:ring-0 rounded-lg"
@@ -92,12 +92,13 @@ export default function Search({ isSearchOpen, onSearchClose }: Props) {
                     >
                       {({ active }) => (
                         <Link
-                          path={`/products/${product.id}`}
-                          title={product.name}
+                          href={`/products/${product.id}`}
                           className={`block truncate text-2xl ${
                             active ? 'font-semibold' : 'font-medium'
                           }`}
-                        />
+                        >
+                          {product.name}
+                        </Link>
                       )}
                     </Combobox.Option>
                   ))

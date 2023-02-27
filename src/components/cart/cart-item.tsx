@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { FaRegHeart } from 'react-icons/fa';
 
@@ -31,8 +31,8 @@ export default function CartItem({ item }: CartItemProps) {
         <Image
           src={product.photo.image.publicUrlTransformed}
           alt={product.name}
-          width="100%"
-          height="100%"
+          width={100}
+          height={100}
           className="cart-item-img object-cover"
           layout="responsive"
           placeholder="blur"
@@ -41,10 +41,11 @@ export default function CartItem({ item }: CartItemProps) {
       </div>
       <div className="flex flex-col justify-between">
         <div className="flex items-center justify-between">
-          <Link href={`products/${product.id}`}>
-            <a className="cart-item-name text-3xl font-semibold hover:underline">
-              {product.name}
-            </a>
+          <Link
+            href={`products/${product.id}`}
+            className="cart-item-name text-3xl font-semibold hover:underline"
+          >
+            {product.name}
           </Link>
           <p className="cart-item-price text-3xl font-semibold">
             {formatMoney(product.price * quantity)}

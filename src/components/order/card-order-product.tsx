@@ -26,8 +26,8 @@ const CardOrderProduct = ({ product }: Props) => {
           <Image
             src={product.photo.image.publicUrlTransformed}
             alt={product.name}
-            width="100%"
-            height="100%"
+            width={100}
+            height={100}
             className="object-cover"
             layout="responsive"
             placeholder="blur"
@@ -63,10 +63,11 @@ const CardOrderProduct = ({ product }: Props) => {
             </>
           )}
         </p>
-        <Link href="#">
-          <a className="text-2xl font-semibold text-blue-500 underline">
-            View product
-          </a>
+        <Link
+          href="#"
+          className="text-2xl font-semibold text-blue-500 underline"
+        >
+          View product
         </Link>
       </div>
     </div>

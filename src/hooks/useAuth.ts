@@ -1,6 +1,6 @@
 import { useMutation, gql } from '@apollo/client';
 
-import { LoginMutation, RegisterMutation } from '@interfaces/user';
+import { LoginMutation, RegisterMutation } from '@/interfaces/user';
 
 import { CURRENT_USER_QUERY } from './useCurrentUser';
 

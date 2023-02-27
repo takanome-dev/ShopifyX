@@ -2,7 +2,6 @@ import React from 'react';
 import { FaRegHeart } from 'react-icons/fa';
 
 interface FavIconProps extends React.HTMLProps<HTMLButtonElement> {
-  // eslint-disable-next-line react/require-default-props
   color?: string;
 }
 

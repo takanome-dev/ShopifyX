@@ -1,14 +1,14 @@
 import { NextPage } from 'next';
 import React, { ReactNode, useState } from 'react';
 
-import { Cart } from './Cart';
-import Header from './Header';
+import Cart from '@/components/cart/cart';
+import Header from '@/components/header';
 
 type Props = {
   children: ReactNode;
 };
 
-const Page: NextPage<Props> = ({ children }) => {
+const MainLayout: NextPage<Props> = ({ children }) => {
   const [cartOpen, setCartOpen] = useState(false);
 
   const handleClose = () => setCartOpen(!cartOpen);
@@ -24,4 +24,4 @@ const Page: NextPage<Props> = ({ children }) => {
   );
 };
 
-export default Page;
+export default MainLayout;

@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import Link from 'next/link';
 import React, { forwardRef } from 'react';
 import { IconType } from 'react-icons/lib';

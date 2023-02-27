@@ -9,9 +9,9 @@ import React, {
   useState,
 } from 'react';
 
-import useCurrentUser from '@hooks/useCurrentUser';
-import { CartInitialValues, CartItem } from '@interfaces/cart';
-import useLocalStorage from 'src/hooks/useLocalStorage';
+import useCurrentUser from '@/hooks/useCurrentUser';
+import useLocalStorage from '@/hooks/useLocalStorage';
+import { CartInitialValues, CartItem } from '@/interfaces/cart';
 
 interface Props {
   children: React.ReactNode;

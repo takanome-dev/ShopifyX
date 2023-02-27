@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 
-import { UserQuery } from '@interfaces/user';
+import { UserQuery } from '@/interfaces/user';
 
 export const CURRENT_USER_QUERY = gql`
   query CURRENT_USER_QUERY {

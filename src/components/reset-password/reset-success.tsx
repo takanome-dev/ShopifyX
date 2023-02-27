@@ -1,8 +1,7 @@
-import React from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
 import { TbArrowRight } from 'react-icons/tb';
 
-import ButtonLink from '@common/ButtonLink';
+import ButtonLink from '@/components/common/ButtonLink';
 
 export default function ResetSuccessfully() {
   return (

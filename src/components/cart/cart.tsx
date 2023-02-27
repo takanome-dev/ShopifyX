@@ -1,12 +1,14 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { GiShoppingCart } from 'react-icons/gi';
 
-import Button from '@common/Button';
-import { useCartItems } from '@context/CartProvider';
-import formatMoney from '@lib/formatMoney';
+import Button from '@/components/common/Button';
+import { useCartItems } from '@/context/CartProvider';
+import formatMoney from '@/utils/formatMoney';
 
-import CartItem from './CartItem';
+import CartItem from './cart-item';
 
 interface CartProps {
   handleClose: () => void;

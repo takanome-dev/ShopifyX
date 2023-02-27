@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import React, { forwardRef } from 'react';
 import { IconType } from 'react-icons/lib';
 
@@ -47,7 +46,6 @@ const Button = forwardRef(
     } rounded-lg font-semibold cursor-pointer flex items-center disabled:opacity-50 disabled:pointer-events-none`;
 
     return (
-      // eslint-disable-next-line react/button-has-type
       <button className={classes} ref={ref} {...rest}>
         {Icon && iconPosition === 'start' && (
           <Icon size={18} className={`mr-4 ${iconClasses!}`} />

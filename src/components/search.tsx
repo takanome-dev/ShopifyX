@@ -4,10 +4,9 @@ import { useRouter } from 'next/router';
 import React, { Fragment, useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
-import Link from '@common/Link';
-import { Product, ProductsQuery } from '@interfaces/product';
-
-import { ALL_PRODUCTS_QUERY } from './Product/Products';
+import Link from '@/components/common/Link';
+import { Product, ProductsQuery } from '@/interfaces/product';
+import { ALL_PRODUCTS_QUERY } from '@/pages/products';
 
 interface Props {
   isSearchOpen: boolean;

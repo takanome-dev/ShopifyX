@@ -2,7 +2,7 @@ import { ApolloError } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
-import { ServerError } from '@interfaces/graphql';
+import { ServerError } from '@/interfaces/graphql';
 
 const ErrorComponent = ({
   error,

@@ -19,8 +19,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev -p 8080",
-    "lint": "npx eslint . --report-unused-disable-directives",
-    "format": "pnpm lint --fix",
+    "lint": "npx eslint . --fix --report-unused-disable-directives",
     "start": "next start",
     "postinstall": "husky install",
     "test": "npx playwright test"
@@ -28,15 +27,22 @@
   "dependencies": {
     "@apollo/client": "^3.6.9",
     "@headlessui/react": "^1.7.3",
-    "@tailwindcss/forms": "^0.5.3",
+    "@radix-ui/react-avatar": "^1.0.1",
+    "@radix-ui/react-dialog": "^1.0.2",
+    "@radix-ui/react-dropdown-menu": "^2.0.3",
     "apollo-upload-client": "^17.0.0",
+    "class-variance-authority": "^0.4.0",
+    "clsx": "^1.2.1",
+    "cmdk": "^0.1.22",
     "formik": "^2.2.9",
     "graphql": "^16.6.0",
+    "lucide-react": "^0.115.0",
     "next": "12.3.2",
     "nprogress": "^0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
+    "tailwind-merge": "^1.10.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
@@ -48,6 +54,7 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@playwright/test": "^1.27.1",
+    "@tailwindcss/forms": "^0.5.3",
     "@types/apollo-upload-client": "^17.0.2",
     "@types/node": "18.11.9",
     "@types/nprogress": "^0.2.0",

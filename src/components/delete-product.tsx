@@ -4,8 +4,8 @@ import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import Button from '@components/common/Button';
-import ErrorMessage from '@components/common/ErrorMessage';
+import Button from '@/components/common/Button';
+import ErrorMessage from '@/components/common/ErrorMessage';
 
 interface DeleteProductMutation {
   deleteProduct: {

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Product } from '@interfaces/product';
+import { Product } from '@/interfaces/product';
 
-import CardOrderHeader from './CardOrderHeader';
-import CardOrderProduct from './CardOrderProduct';
+import CardOrderHeader from './card-order-header';
+import CardOrderProduct from './card-order-product';
 
 interface Props {
   product: Product;

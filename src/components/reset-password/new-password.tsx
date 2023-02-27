@@ -6,11 +6,11 @@ import { FaKey } from 'react-icons/fa';
 import { TbArrowBack } from 'react-icons/tb';
 import * as Yup from 'yup';
 
-import Button from '@common/Button';
-import Input from '@common/Input';
-import Link from '@common/Link';
+import Button from '@/components/common/Button';
+import Input from '@/components/common/Input';
+import Link from '@/components/common/Link';
 
-import ResetSuccessfully from './ResetSuccessfully';
+import ResetSuccessfully from './reset-success';
 
 const initialValues = {
   password: '',

@@ -10,7 +10,8 @@ import formatMoney from '@/utils/formatMoney';
 
 interface CartItemProps {
   item: {
-    product: Product;
+    product: any;
+    // product: Product;
     quantity: number;
   };
 }
@@ -29,7 +30,8 @@ export default function CartItem({ item }: CartItemProps) {
     <div className="cart-item grid grid-cols-[100px_1fr] gap-x-8 border border-gray-100 shadow-xs p-4 rounded-xl mb-4">
       <div className="overflow-hidden border-2 rounded-xl">
         <Image
-          src={product.photo.image.publicUrlTransformed}
+          src={product.photo}
+          // src={product.photo.image.publicUrlTransformed}
           alt={product.name}
           width={100}
           height={100}

@@ -5,6 +5,7 @@ import {
   from,
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
+import { Inter as FontSans } from '@next/font/google';
 import { createUploadLink } from 'apollo-upload-client';
 import Router from 'next/router';
 import NProgress from 'nprogress';
@@ -59,17 +60,24 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const fontSans = FontSans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
+
 function MyApp({ Component, pageProps }: ComponentWithPageLayout) {
   return (
     <ApolloProvider client={client}>
       <CartProvider>
-        {Component.PageLayout ? (
-          <Component.PageLayout>
+        <div className={fontSans.variable}>
+          {Component.PageLayout ? (
+            <Component.PageLayout>
+              <Component {...pageProps} />
+            </Component.PageLayout>
+          ) : (
             <Component {...pageProps} />
-          </Component.PageLayout>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          )}
+        </div>
       </CartProvider>
     </ApolloProvider>
   );

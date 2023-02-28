@@ -14,8 +14,8 @@ import { useState } from 'react';
 
 import Button from '@/components/common/Button';
 import ErrorMessage from '@/components/common/ErrorMessage';
-import FavIcon from '@/components/common/FavIcon';
 import DeleteProduct from '@/components/delete-product';
+import Favorite from '@/components/favorite';
 import { useCartItems } from '@/context/CartProvider';
 import { SINGLE_PRODUCT_QUERY } from '@/gql/product';
 import { SingleProductQuery } from '@/interfaces/product';
@@ -55,7 +55,7 @@ export default function SingleProductPage() {
               placeholder="blur"
               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+yHgAFWAJp08sG7wAAAABJRU5ErkJggg=="
             />
-            <FavIcon className="top-8 right-8" />
+            <Favorite className="top-8 right-8" />
           </div>
           <div>
             <div className="flex justify-between mb-8">

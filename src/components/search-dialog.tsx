@@ -13,7 +13,7 @@ interface Props {
   onSearchClose: () => void;
 }
 
-export default function Search({ isSearchOpen, onSearchClose }: Props) {
+export default function SearchDialog({ isSearchOpen, onSearchClose }: Props) {
   const router = useRouter();
   const [selected, setSelected] = useState<Product | null>(null);
   const [query, setQuery] = useState('');

@@ -6,7 +6,7 @@ export default class MyDocument extends Document {
     return (
       <Html className="scroll-smooth">
         <Head />
-        <body>
+        <body className="font-sans antialiased text-slate-800">
           <Main />
           <NextScript />
         </body>

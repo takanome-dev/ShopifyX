@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 import Card from '@/components/card';
 import Pagination from '@/components/pagination';
+import products from '@/components/products.json';
 import { ALL_PRODUCTS_QUERY } from '@/gql/product';
 import { ProductsQuery } from '@/interfaces/product';
 import { WithPageLayout } from '@/interfaces/with-page-layout';
@@ -14,16 +15,16 @@ const ProductPage: WithPageLayout = () => {
   const PAGE_SIZE = 6;
   const currentPage = router.query.page ?? 1;
 
-  const { data, error, loading } = useQuery<ProductsQuery>(ALL_PRODUCTS_QUERY, {
-    variables: {
-      skip: +currentPage * PAGE_SIZE - PAGE_SIZE,
-      take: PAGE_SIZE,
-    },
-  });
+  // const { data, error, loading } = useQuery<ProductsQuery>(ALL_PRODUCTS_QUERY, {
+  //   variables: {
+  //     skip: +currentPage * PAGE_SIZE - PAGE_SIZE,
+  //     take: PAGE_SIZE,
+  //   },
+  // });
 
-  // TODO: add loader
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  // // TODO: add loader
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error: {error.message}</p>;
   return (
     <>
       <Head>
@@ -31,7 +32,7 @@ const ProductPage: WithPageLayout = () => {
       </Head>
       <div className="pb-8">
         <div className="card-container grid grid-cols-[repeat(auto-fill,_minmax(30rem,_1fr))] gap-8">
-          {data?.products.map((product) => (
+          {products.map((product) => (
             <Card key={product.id} product={product} />
           ))}
         </div>

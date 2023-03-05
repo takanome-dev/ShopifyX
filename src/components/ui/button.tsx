@@ -4,14 +4,15 @@ import * as React from 'react';
 import { cn } from '@/utils/merge-classnames';
 
 const buttonVariants = cva(
-  'active:scale-95 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none data-[state=open]:bg-slate-100',
+  'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none data-[state=open]:bg-slate-100',
   {
     variants: {
       variant: {
         default: 'bg-slate-50 text-slate-800 hover:bg-slate-100',
         destructive: 'bg-red-500 text-white hover:bg-red-600',
         outline: 'bg-transparent border border-slate-200 hover:bg-slate-100',
-        primary: 'bg-gradient-to-r from-primary to-secondary text-white',
+        primary:
+          'bg-gradient-to-r from-primary to-secondary text-white focus:ring-cyan-200',
         subtle: 'bg-slate-100 text-slate-900 hover:bg-slate-200',
         ghost:
           'bg-transparent hover:bg-slate-100 data-[state=open]:bg-transparent',

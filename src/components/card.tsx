@@ -23,7 +23,7 @@ export default function Card({ product }: Props) {
         <Image
           src={product.photo}
           alt={product.name}
-          className="card-image w-full object-cover rounded-lg"
+          className="card-image w-full h-full object-cover rounded-lg"
           fill
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+yHgAFWAJp08sG7wAAAABJRU5ErkJggg=="

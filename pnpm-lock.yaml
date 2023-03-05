@@ -10,6 +10,7 @@ specifiers:
   '@radix-ui/react-avatar': ^1.0.1
   '@radix-ui/react-dialog': ^1.0.2
   '@radix-ui/react-dropdown-menu': ^2.0.3
+  '@radix-ui/react-label': ^2.0.0
   '@tailwindcss/forms': ^0.5.3
   '@types/apollo-upload-client': ^17.0.2
   '@types/node': 18.11.9
@@ -60,6 +61,7 @@ dependencies:
   '@radix-ui/react-avatar': 1.0.1_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-dialog': 1.0.2_ib3m5ricvtkl2cll7qpr2f6lvq
   '@radix-ui/react-dropdown-menu': 2.0.3_ib3m5ricvtkl2cll7qpr2f6lvq
+  '@radix-ui/react-label': 2.0.0_biqbaboplfbrettd7655fr4n2y
   apollo-upload-client: 17.0.0_vyimhitoszmgfhxzjgw5jdtad4
   class-variance-authority: 0.4.0_typescript@4.8.4
   clsx: 1.2.1
@@ -844,6 +846,18 @@ packages:
       '@babel/runtime': 7.20.1
       '@radix-ui/react-use-layout-effect': 1.0.0_react@18.2.0
       react: 18.2.0
+    dev: false
+
+  /@radix-ui/react-label/2.0.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-7qCcZ3j2VQspWjy+gKR4W+V/z0XueQjeiZnlPOtsyiP9HaS8bfSU7ECoI3bvvdYntQj7NElW7OAYsYRW4MQvCg==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.20.1
+      '@radix-ui/react-primitive': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@radix-ui/react-menu/2.0.3_ib3m5ricvtkl2cll7qpr2f6lvq:

@@ -31,7 +31,7 @@ const ProductPage: WithPageLayout = () => {
         <title>ClickToBuy | Products</title>
       </Head>
       <div className="pb-8">
-        <div className="card-container grid grid-cols-[repeat(auto-fill,_minmax(30rem,_1fr))] gap-8">
+        <div className="card-container grid grid-cols-[repeat(auto-fit,_minmax(25rem,_1fr))] gap-8">
           {products.map((product) => (
             <Card key={product.id} product={product} />
           ))}

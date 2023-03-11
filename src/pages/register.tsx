@@ -4,12 +4,19 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { BiLoader } from 'react-icons/bi';
-import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
+import { SiDiscord } from 'react-icons/si';
 import * as Yup from 'yup';
 
-import Button from '@/components/common/Button';
-import Input from '@/components/common/Input';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import useAuth from '@/hooks/useAuth';
+import { WithPageLayout } from '@/interfaces/with-page-layout';
+import BlankLayout from '@/layouts/blank-layout';
+// import Button from '@/components/common/Button';
+// import Input from '@/components/common/Input';
 
 const initialValues = {
   username: '',
@@ -23,7 +30,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().min(8).required(),
 });
 
-const RegisterPage = () => {
+const RegisterPage: WithPageLayout = () => {
   const [error, setError] = useState<string | undefined>();
 
   const router = useRouter();
@@ -64,13 +71,13 @@ const RegisterPage = () => {
       <Head>
         <title>ClickToBuy | Register</title>
       </Head>
-      <div className="register-page min-h-[550px] flex items-center justify-center">
-        <div className="rounded-xl shadow-xl w-[500px] p-8">
-          <div className="register-header mb-12">
-            <h2 className="pb-4 text-4xl font-semibold text-center">
+      <div className="register-page flex items-center justify-center">
+        <div className="rounded-lg shadow-xl max-w-2xl p-8">
+          <div className="register-header mb-10">
+            <h2 className="pb-2 text-3xl font-semibold text-center">
               Register
             </h2>
-            <p className="text-xl text-center">
+            <p className="text-center">
               Create an account and start shopping 🛒
             </p>
           </div>
@@ -80,10 +87,35 @@ const RegisterPage = () => {
             onSubmit={handleSubmit}
           >
             <Form className="register-form">
-              <Input name="username" label="Username" />
-              <Input name="email" label="Email" error={error} />
-              <Input name="password" label="Password" isPassword />
+              <div className="flex flex-col gap-2 mt-4">
+                <Label htmlFor="username">Email</Label>
+                <Input name="username" id="username" placeholder="hello" />
+              </div>
+              <div className="flex flex-col gap-2 mt-4">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  name="email"
+                  id="email"
+                  type="email"
+                  placeholder="hell@example.com"
+                />
+              </div>
+              <div className="flex flex-col gap-2 mt-4">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  name="password"
+                  id="password"
+                  type="password"
+                  placeholder="supersecret"
+                />
+              </div>
               <Button
+                className="mt-4 w-full font-bold text-lg shadow-md shadow-cyan-100"
+                variant="primary"
+              >
+                Sign up
+              </Button>
+              {/* <Button
                 title={loading ? 'Signing up...' : 'Sign up'}
                 className="w-full mt-8 justify-center"
                 variant="primary"
@@ -92,32 +124,33 @@ const RegisterPage = () => {
                 disabled={loading}
                 iconClasses="animate-spin"
                 Icon={loading ? BiLoader : undefined}
-              />
+              /> */}
             </Form>
           </Formik>
-          <p className="mt-10 text-2xl text-center">
+          <p className="mt-8">
             Already have an account?{' '}
-            <Link href="/login" className="text-blue-500 text-2xl">
+            <Link href="/login" className="text-blue-500">
               Sign in instead
             </Link>
           </p>
-          <div className="relative flex flex-col items-center mt-8">
-            <p className="mb-4 bg-white px-4 text-2xl before:content-[''] before:w-full before:h-1 before:bg-gray-200 before:absolute before:left-0 before:top-3 before:-z-10">
-              or
-            </p>
-            <div className="flex gap-2">
-              <span className="p-4 rounded-full cursor-pointer hover:bg-gray-200">
-                <FaGoogle size={20} className="text-gray-700" />
-              </span>
-              <span className="p-4 rounded-full cursor-pointer hover:bg-gray-200">
-                <FaGithub size={20} className="text-gray-700" />
-              </span>
-              <span className="p-4 rounded-full cursor-pointer hover:bg-gray-200">
-                <FaTwitter size={20} className="text-gray-700" />
-              </span>
-              <span className="p-4 rounded-full cursor-pointer hover:bg-gray-200">
-                <FaFacebook size={20} className="text-gray-700" />
-              </span>
+          <div className="relative flex flex-col items-center mt-4">
+            {/* <p className="mb-4 bg-white px-4 before:content-[''] before:w-full before:h-1 before:bg-gray-200 before:absolute before:left-0 before:top-3 before:-z-10">
+            or
+          </p> */}
+            <div className="relative flex w-full justify-center">
+              <div className="absolute top-1/2 left-0 block h-[1px] w-full bg-slate-300" />
+              <span className="z-50 bg-white px-2 text-center">or</span>
+            </div>
+            <div className="flex gap-2 mt-2">
+              <Button variant="ghost" size="sm" className="h-10">
+                <FcGoogle size={24} className="" />
+              </Button>
+              <Button variant="ghost" size="sm" className="h-10 ">
+                <FaGithub size={24} className="" />
+              </Button>
+              <Button variant="ghost" size="sm" className="h-10">
+                <SiDiscord size={24} className="text-[#5865F2]" />
+              </Button>
             </div>
           </div>
         </div>
@@ -126,4 +159,5 @@ const RegisterPage = () => {
   );
 };
 
+RegisterPage.PageLayout = BlankLayout;
 export default RegisterPage;

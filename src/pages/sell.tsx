@@ -3,6 +3,7 @@ import { Formik, Form, useFormikContext, useFormik } from 'formik';
 import { Camera } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
 
 import ErrorMessage from '@/components/common/ErrorMessage';
@@ -42,28 +43,13 @@ const validationSchema = Yup.object().shape({
 
 const SellPage: WithPageLayout = () => {
   const router = useRouter();
+  const [previewImage, setPreviewImage] = useState(
+    'https://res.cloudinary.com/wesbos/image/upload/v1579815920/sick-fits-keystone/5e2a13f0689b2835ae71d1a5.jpg'
+  );
   const [createProduct, { error, loading }] =
     useMutation<CreateProductMutation>(CREATE_PRODUCT_MUTATION);
 
-  // const handleSubmit = async (inputs: typeof initialValues) => {
-  //   const res = await createProduct({
-  //     variables: {
-  //       name: inputs.name,
-  //       description: inputs.description,
-  //       price: +inputs.price,
-  //       stock: +inputs.stock,
-  //       photo: inputs.image,
-  //     },
-  //   });
-
-  //   if (!error) {
-  //     router
-  //       .push(`/products/${res.data!.createProduct.id}`)
-  //       .catch(console.error);
-  //   }
-  // };
-
-  const { values, handleSubmit } = useFormik({
+  const { values, handleSubmit, handleChange, setFieldValue } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (inputs: typeof initialValues) => {
@@ -85,12 +71,10 @@ const SellPage: WithPageLayout = () => {
     },
   });
 
-  console.log({ values });
-
   return (
     <>
       <ErrorMessage error={error!} />
-      <div className="flex justify-between mt-20">
+      <div className="flex justify-between mt-10">
         <form
           className="w-full p-8 border border-slate-200 rounded-lg max-w-3xl"
           onSubmit={handleSubmit}
@@ -99,7 +83,19 @@ const SellPage: WithPageLayout = () => {
             <Label htmlFor="file" className="flex gap-4 items-center">
               <div className="w-36 h-32 bg-slate-100 rounded-lg flex items-center justify-center">
                 <Camera className="w-12 h-12 text-slate-400" />
-                <Input name="image" type="file" id="file" className="hidden" />
+                <Input
+                  name="image"
+                  type="file"
+                  id="file"
+                  className="hidden"
+                  onChange={(e) => {
+                    let { type, name, value } = e.currentTarget;
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    value = e.currentTarget.files?.[0] as any;
+                    setFieldValue(name, value).catch(console.error);
+                  }}
+                  value={values.image}
+                />
               </div>
               <div>
                 <Button variant="subtle">Browse</Button>
@@ -108,15 +104,35 @@ const SellPage: WithPageLayout = () => {
             </Label>
             <div className="flex flex-col gap-2 mt-4">
               <Label htmlFor="name">Name</Label>
-              <Input name="name" id="name" placeholder="Airmax..." />
+              <Input
+                name="name"
+                id="name"
+                placeholder="Airmax..."
+                onChange={handleChange}
+                value={values.name}
+              />
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="price">Price</Label>
-              <Input name="price" id="price" placeholder="$100" />
+              <Input
+                name="price"
+                type="number"
+                id="price"
+                placeholder="$100"
+                onChange={handleChange}
+                value={values.price}
+              />
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="stock">Stock</Label>
-              <Input name="stock" id="stock" placeholder="5" />
+              <Input
+                name="stock"
+                id="stock"
+                type="number"
+                placeholder="5"
+                onChange={handleChange}
+                value={values.stock}
+              />
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="description">Stock</Label>
@@ -124,6 +140,8 @@ const SellPage: WithPageLayout = () => {
                 name="description"
                 id="description"
                 placeholder="A cool shoes..."
+                onChange={handleChange}
+                value={values.description}
               />
             </div>
           </fieldset>
@@ -152,12 +170,7 @@ const SellPage: WithPageLayout = () => {
           <div className="border border-slate-200 rounded-lg p-4 mt-4 max-w-lg max-h-[450px] items-end">
             <div className="w-full">
               <Image
-                src={
-                  values.image
-                    ? fileToBase64(values.image as any)
-                    : 'https://res.cloudinary.com/wesbos/image/upload/v1579815920/sick-fits-keystone/5e2a13f0689b2835ae71d1a5.jpg'
-                }
-                // src="https://res.cloudinary.com/wesbos/image/upload/v1579815920/sick-fits-keystone/5e2a13f0689b2835ae71d1a5.jpg"
+                src={previewImage}
                 alt="Preview Image"
                 className="object-cover rounded-lg"
                 width={400}

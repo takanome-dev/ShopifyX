@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import React, { ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import Cart from '@/components/cart/cart';
 import Header from '@/components/header';

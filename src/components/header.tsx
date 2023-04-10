@@ -1,13 +1,23 @@
 import { Search, ShoppingBag, Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
+import products from '@/components/products.json';
 import { Button } from '@/components/ui/button';
 import { useCartItems } from '@/context/CartProvider';
 import useCurrentUser from '@/hooks/useCurrentUser';
 
 import SearchDialog from './search-dialog';
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from './ui/command';
 import UserAvatar from './user-avatar';
 
 interface HeaderProps {
@@ -25,57 +35,58 @@ const HeaderLink = ({ path, title }: { path: string; title: string }) => (
 
 export default function Header({ handleOpen }: HeaderProps) {
   const [openSearch, setOpenSearch] = useState(false);
+  const [query, setSearchQuery] = useState('');
   const { user } = useCurrentUser();
   const { cartItems } = useCartItems();
 
+  const router = useRouter();
+
+  const filteredProducts =
+    query === ''
+      ? products
+      : products.filter((product) =>
+          product.name
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, ''))
+        );
+
   return (
-    <>
-      <header className="sticky top-0 z-10 bg-white shadow-md bg-opacity-80 backdrop-blur-md">
-        <nav className="grid grid-cols-[auto_1fr_auto] h-16 items-center max-w-screen-xl mx-auto px-10 xl:px-0">
-          <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.svg" alt="ShopifyX logo" width={36} height={36} />
-            <span className="text-3xl font-semibold text-slate-700">
-              Shopify
-              <small className="from-primary to-secondary bg-clip-text text-transparent bg-gradient-to-b text-4xl">
-                X
-              </small>
-            </span>
-          </Link>
-          {user && (
-            <nav className="justify-center hidden md:flex gap-8">
-              <HeaderLink path="/products" title="Products" />
-              <HeaderLink path="/sell" title="Sell" />
-              <HeaderLink path="/orders" title="Orders" />
-            </nav>
-          )}
-          <div className="flex justify-end items-center gap-8">
-            <Button
-              className="border border-gray-200"
-              onClick={() => setOpenSearch(true)}
-            >
-              <Search className="w-5 h-5 mr-3 text-slate-600" />
-              Search...
-            </Button>
-            <div className="cart-icon relative">
-              <ShoppingBag
-                className="text-slate-700 w-6 h-6 cursor-pointer"
-                onClick={handleOpen}
-              />
-              {cartItems.length > 0 && (
-                <p className="total-cart-items absolute -top-3 -right-3 bg-red-500 w-6 h-6 flex items-center justify-center text-white font-semibold rounded-full">
-                  {cartItems.length}
-                </p>
-              )}
-            </div>
-            <Menu className="block text-gray-700 w-6 h-6 cursor-pointer md:hidden" />
-            <UserAvatar />
+    <header className="sticky top-0 z-10 bg-white shadow-md bg-opacity-80 backdrop-blur-md">
+      <nav className="grid grid-cols-[auto_1fr_auto] h-16 items-center max-w-screen-xl mx-auto px-10 xl:px-0">
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/logo.svg" alt="ShopifyX logo" width={36} height={36} />
+          <span className="text-3xl font-semibold text-slate-700">
+            Shopify
+            <small className="from-primary to-secondary bg-clip-text text-transparent bg-gradient-to-b text-4xl">
+              X
+            </small>
+          </span>
+        </Link>
+        {user && (
+          <nav className="justify-center hidden md:flex gap-8">
+            <HeaderLink path="/products" title="Products" />
+            <HeaderLink path="/sell" title="Sell" />
+            <HeaderLink path="/orders" title="Orders" />
+          </nav>
+        )}
+        <div className="flex justify-end items-center gap-8">
+          <SearchDialog />
+          <div className="cart-icon relative">
+            <ShoppingBag
+              className="text-slate-700 w-6 h-6 cursor-pointer"
+              onClick={handleOpen}
+            />
+            {cartItems.length > 0 && (
+              <p className="total-cart-items absolute -top-3 -right-3 bg-red-500 w-6 h-6 flex items-center justify-center text-white font-semibold rounded-full">
+                {cartItems.length}
+              </p>
+            )}
           </div>
-        </nav>
-      </header>
-      <SearchDialog
-        isSearchOpen={openSearch}
-        onSearchClose={() => setOpenSearch(false)}
-      />
-    </>
+          <Menu className="block text-gray-700 w-6 h-6 cursor-pointer md:hidden" />
+          <UserAvatar />
+        </div>
+      </nav>
+    </header>
   );
 }

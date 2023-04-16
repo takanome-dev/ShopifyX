@@ -1,4 +1,4 @@
-import { Search, ShoppingBag, Menu } from 'lucide-react';
+import { ShoppingCartIcon, ShoppingBag, Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -8,7 +8,9 @@ import products from '@/components/products.json';
 import { Button } from '@/components/ui/button';
 import { useCartItems } from '@/context/CartProvider';
 import useCurrentUser from '@/hooks/useCurrentUser';
+import formatMoney from '@/utils/formatMoney';
 
+import CartItem from './cart/cart-item';
 import SearchDialog from './search-dialog';
 import {
   CommandDialog,
@@ -18,6 +20,16 @@ import {
   CommandItem,
   CommandList,
 } from './ui/command';
+import { Label } from './ui/label';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from './ui/sheet';
 import UserAvatar from './user-avatar';
 
 interface HeaderProps {
@@ -40,16 +52,6 @@ export default function Header({ handleOpen }: HeaderProps) {
   const { cartItems } = useCartItems();
 
   const router = useRouter();
-
-  const filteredProducts =
-    query === ''
-      ? products
-      : products.filter((product) =>
-          product.name
-            .toLowerCase()
-            .replace(/\s+/g, '')
-            .includes(query.toLowerCase().replace(/\s+/g, ''))
-        );
 
   return (
     <header className="sticky top-0 z-10 bg-white shadow-md bg-opacity-80 backdrop-blur-md">
@@ -85,6 +87,61 @@ export default function Header({ handleOpen }: HeaderProps) {
           </div>
           <Menu className="block text-gray-700 w-6 h-6 cursor-pointer md:hidden" />
           <UserAvatar />
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button>Open sheet</Button>
+            </SheetTrigger>
+            <SheetContent position="left" size="content">
+              <SheetHeader>
+                <SheetTitle>My Cart</SheetTitle>
+              </SheetHeader>
+              <div className="">
+                {products?.length > 0 ? (
+                  <>
+                    <div className="cart-items-scrollbar max-h-[84%] pr-2 mt-4 overflow-auto">
+                      {products.map((item) => (
+                        <CartItem
+                          key={item.id}
+                          item={{ product: item, quantity: 1 }}
+                        />
+                      ))}
+                    </div>
+                    <div className="absolute bottom-0 w-[92%] p-4 bg-white border-t border-gray-200">
+                      <div className="flex items-center justify-between">
+                        <p className="text-2xl">
+                          SubTotal:{' '}
+                          <span className="text-2xl font-semibold">
+                            {formatMoney(1000)}
+                          </span>
+                        </p>
+                        <Button
+                          title="Proceed to checkout"
+                          className="border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
+                          size="sm"
+                        />
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex items-center justify-center flex-col h-[60vh]">
+                    <ShoppingCartIcon size={150} />
+                    <div className="mt-8 text-center">
+                      <h3 className="text-3xl font-semibold mb-8">
+                        Your cart is Empty
+                      </h3>
+                      <p className="text-2xl">
+                        looks like you haven&apos;t added anything to your cart
+                        yet.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <SheetFooter>
+                <Button type="submit">Save changes</Button>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
         </div>
       </nav>
     </header>

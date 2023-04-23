@@ -67,8 +67,8 @@ devDependencies:
     specifier: ^17.0.2
     version: 17.0.2(react-dom@18.2.0)(react@18.2.0)
   '@types/node':
-    specifier: 18.11.9
-    version: 18.11.9
+    specifier: 18.16.0
+    version: 18.16.0
   '@types/nprogress':
     specifier: ^0.2.0
     version: 0.2.0
@@ -1565,7 +1565,7 @@ packages:
       cosmiconfig-typescript-loader: 4.2.0(@types/node@14.18.33)(cosmiconfig@7.0.1)(ts-node@10.9.1)(typescript@4.8.4)
       lodash: 4.17.21
       resolve-from: 5.0.0
-      ts-node: 10.9.1(@types/node@18.11.9)(typescript@5.0.4)
+      ts-node: 10.9.1(@types/node@18.16.0)(typescript@5.0.4)
       typescript: 4.8.4
     transitivePeerDependencies:
       - '@swc/core'
@@ -1925,7 +1925,7 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@types/node': 18.11.9
+      '@types/node': 18.16.0
       playwright-core: 1.27.1
     dev: true
 
@@ -1993,8 +1993,8 @@ packages:
     resolution: {integrity: sha512-qelS/Ra6sacc4loe/3MSjXNL1dNQ/GjxNHVzuChwMfmk7HuycRLVQN2qNY3XahK+fZc5E2szqQSKUyAF0E+2bg==}
     dev: true
 
-  /@types/node@18.11.9:
-    resolution: {integrity: sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==}
+  /@types/node@18.16.0:
+    resolution: {integrity: sha512-BsAaKhB+7X+H4GnSjGhJG9Qi8Tw+inU9nJDwmD5CgOmBLEI6ArdhikpLX7DjbjDRDTbqZzU2LSQNZg8WGPiSZQ==}
 
   /@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -2621,7 +2621,7 @@ packages:
     dependencies:
       '@types/node': 14.18.33
       cosmiconfig: 7.0.1
-      ts-node: 10.9.1(@types/node@18.11.9)(typescript@5.0.4)
+      ts-node: 10.9.1(@types/node@18.16.0)(typescript@5.0.4)
       typescript: 4.8.4
     dev: true
 
@@ -4420,7 +4420,7 @@ packages:
     dependencies:
       lilconfig: 2.0.6
       postcss: 8.4.18
-      ts-node: 10.9.1(@types/node@18.11.9)(typescript@5.0.4)
+      ts-node: 10.9.1(@types/node@18.16.0)(typescript@5.0.4)
       yaml: 1.10.2
 
   /postcss-nested@6.0.0(postcss@8.4.18):
@@ -5066,7 +5066,7 @@ packages:
     dependencies:
       tslib: 2.4.1
 
-  /ts-node@10.9.1(@types/node@18.11.9)(typescript@5.0.4):
+  /ts-node@10.9.1(@types/node@18.16.0)(typescript@5.0.4):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -5085,7 +5085,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.9
+      '@types/node': 18.16.0
       acorn: 8.8.1
       acorn-walk: 8.2.0
       arg: 4.1.3

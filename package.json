@@ -37,7 +37,7 @@
     "@types/apollo-upload-client": "^17.0.2",
     "@types/node": "18.11.9",
     "@types/nprogress": "^0.2.0",
-    "@types/react": "18.0.34",
+    "@types/react": "18.0.38",
     "@types/react-dom": "18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.34.0",
     "@typescript-eslint/parser": "^5.34.0",

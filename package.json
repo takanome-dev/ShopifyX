@@ -2,15 +2,15 @@
   "name": "shopify-x",
   "description": "The One-Stop Shop for All Your E-Commerce Needs 🛒",
   "version": "2.0.0",
-  "author": "TAKANOME-DEV <takanomedev221@gmail.com>",
+  "author": "takanome-dev <takanomedev221@gmail.com>",
   "private": true,
-  "homepage": "https://github.com/TAKANOME-DEV/ShopifyX#readme",
+  "homepage": "https://github.com/takanome-dev/ShopifyX#readme",
   "bugs": {
-    "url": "https://github.com/TAKANOME-DEV/ShopifyX/issues"
+    "url": "https://github.com/takanome-dev/ShopifyX/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/TAKANOME-DEV/ShopifyX.git"
+    "url": "git+ssh://git@github.com/takanome-dev/ShopifyX.git"
   },
   "engines": {
     "node": ">= 16.7.0",
@@ -21,7 +21,6 @@
     "dev": "next dev -p 8080",
     "lint": "npx eslint . --fix --report-unused-disable-directives",
     "start": "next start",
-    "postinstall": "husky install",
     "test": "npx playwright test"
   },
   "dependencies": {
@@ -32,6 +31,7 @@
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-dropdown-menu": "^2.0.3",
     "@radix-ui/react-label": "^2.0.0",
+    "@radix-ui/react-scroll-area": "^1.0.3",
     "apollo-upload-client": "^17.0.0",
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
@@ -48,8 +48,6 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.1.0",
     "@playwright/test": "^1.27.1",
     "@tailwindcss/forms": "^0.5.3",
     "@types/apollo-upload-client": "^17.0.2",
@@ -72,7 +70,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^8.0.1",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
     "react-is": "^18.2.0",

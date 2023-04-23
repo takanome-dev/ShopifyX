@@ -18,12 +18,13 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-use-before-define": "off",
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "react/button-has-type": "off",
     "react/require-default-props": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/restrict-template-expressions": "off",
     "comma-dangle": "off",
     "react/function-component-definition": [
       2,

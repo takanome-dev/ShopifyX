@@ -1,87 +1,76 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
-import { GiShoppingCart } from 'react-icons/gi';
+import { ShoppingCartIcon, ShoppingBag } from 'lucide-react';
 
-import Button from '@/components/common/Button';
-import { useCartItems } from '@/context/CartProvider';
-import formatMoney from '@/utils/formatMoney';
+import { Button } from '~/components/ui/button';
+import { ScrollArea } from '~/components/ui/scroll-area';
+import {
+  Sheet,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '~/components/ui/sheet';
+import { useCartItems } from '~/context/CartProvider';
+import formatMoney from '~/utils/formatMoney';
 
 import CartItem from './cart-item';
 
-interface CartProps {
-  handleClose: () => void;
-  cartOpen: boolean;
-}
-
 // TODO: drop pr-2 if cart items > 4
-const Cart = ({ handleClose, cartOpen }: CartProps) => {
+const Cart = () => {
   const { cartItems, subTotal } = useCartItems();
 
   // TODO: update product quantity when it's already in the cart
 
   return (
-    <>
-      <div
-        className={`cart-overlay inset-0 z-10 transition ease-in-out bg-gray-900 ${
-          cartOpen ? 'fixed bg-opacity-40' : 'bg-opacity-0 hidden'
-        }`}
-        onClick={handleClose}
-      />
-      <div
-        className={`cart fixed top-0 right-0 z-10 w-1/3 h-full p-8 overflow-hidden transition duration-300 ease-in-out bg-white shadow-2xl ${
-          cartOpen ? 'translate-x-0 block' : 'translate-x-full hidden'
-        }`}
-      >
-        <div className="flex items-center justify-between">
-          <h2 className="cart-title text-4xl font-semibold">My Cart</h2>
-          <button
-            type="button"
-            className="cart-btn-close p-4 rounded-full hover:bg-gray-100"
-            onClick={handleClose}
-          >
-            <AiOutlineClose size={20} />
-          </button>
+    <Sheet>
+      <SheetTrigger asChild>
+        <div className="cart-icon relative">
+          <ShoppingBag className="text-slate-600 w-6 h-6 cursor-pointer" />
+          {cartItems.length > 0 && (
+            <p className="total-cart-items absolute -top-3 -right-3 bg-red-500 w-6 h-6 flex items-center justify-center text-white font-semibold rounded-full cursor-pointer">
+              {cartItems.length}
+            </p>
+          )}
         </div>
-        {cartItems?.length > 0 ? (
-          <>
-            <div className="cart-items-scrollbar max-h-[84%] pr-2 mt-4 overflow-auto">
-              {cartItems.map((item) => (
-                <CartItem key={item.product.id} item={item} />
-              ))}
-            </div>
-            <div className="absolute bottom-0 w-[92%] p-4 bg-white border-t border-gray-200">
-              <div className="flex items-center justify-between">
-                <p className="text-2xl">
+      </SheetTrigger>
+      <SheetContent position="right" size="content">
+        <SheetHeader>
+          <SheetTitle>My Cart</SheetTitle>
+        </SheetHeader>
+        <div className="">
+          {cartItems?.length > 0 ? (
+            <>
+              <ScrollArea className="cart-items-scrollbar max-h-[510px] sm:max-h-[535px] pr-2 mt-4 overflow-auto">
+                {cartItems.map((item) => (
+                  <CartItem key={item.product.id} item={item} />
+                ))}
+              </ScrollArea>
+              <SheetFooter className="px-2 py-4 flex-col gap-4 sm:justify-between sm:items-center">
+                <p className="">
                   SubTotal:{' '}
-                  <span className="text-2xl font-semibold">
-                    {formatMoney(subTotal)}
-                  </span>
+                  <span className="font-semibold">{formatMoney(subTotal)}</span>
                 </p>
-                <Button
-                  title="Proceed to checkout"
-                  className="border-none shadow-md hover:opacity-80 bg-gradient-to-r from-cyan to-teal shadow-cyan2-500/20"
-                  size="sm"
-                />
+                <Button variant="primary" className="font-bold">
+                  Proceed to checkout
+                </Button>
+              </SheetFooter>
+            </>
+          ) : (
+            <div className="flex items-center justify-center flex-col h-[60vh]">
+              <ShoppingCartIcon size={100} />
+              <div className="mt-8 text-center">
+                <h3 className="text-2xl font-semibold mb-8">
+                  Your cart is Empty
+                </h3>
+                <p className="text-xl">
+                  looks like you haven&apos;t added anything to your cart yet.
+                </p>
               </div>
             </div>
-          </>
-        ) : (
-          <div className="flex items-center justify-center flex-col h-[60vh]">
-            <GiShoppingCart size={150} />
-            <div className="mt-8 text-center">
-              <h3 className="text-3xl font-semibold mb-8">
-                Your cart is Empty
-              </h3>
-              <p className="text-2xl">
-                looks like you haven&apos;t added anything to your cart yet.
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-    </>
+          )}
+        </div>
+      </SheetContent>
+    </Sheet>
   );
 };
 export default Cart;

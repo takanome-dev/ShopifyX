@@ -1,9 +1,13 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@apollo/client':
     specifier: ^3.6.9
-    version: 3.7.1(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0)
+    version: 3.7.1(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
   '@headlessui/react':
     specifier: ^1.7.3
     version: 1.7.4(react-dom@18.2.0)(react@18.2.0)
@@ -27,7 +31,7 @@ dependencies:
     version: 1.0.3(react-dom@18.2.0)(react@18.2.0)
   apollo-upload-client:
     specifier: ^17.0.0
-    version: 17.0.0(@apollo/client@3.7.1)(graphql@16.6.0)
+    version: 17.0.0(@apollo/client@3.7.1)(graphql@16.8.1)
   class-variance-authority:
     specifier: ^0.6.0
     version: 0.6.0(typescript@5.0.4)
@@ -41,8 +45,8 @@ dependencies:
     specifier: ^2.2.9
     version: 2.2.9(react@18.2.0)
   graphql:
-    specifier: ^16.6.0
-    version: 16.6.0
+    specifier: ^16.8.1
+    version: 16.8.1
   lucide-react:
     specifier: ^0.187.0
     version: 0.187.0(react@18.2.0)
@@ -156,7 +160,7 @@ devDependencies:
 
 packages:
 
-  /@apollo/client@3.7.1(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0):
+  /@apollo/client@3.7.1(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-xu5M/l7p9gT9Fx7nF3AQivp0XukjB7TM7tOd5wifIpI8RskYveL4I+rpTijzWrnqCPZabkbzJKH7WEAKdctt9w==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
@@ -174,12 +178,12 @@ packages:
       subscriptions-transport-ws:
         optional: true
     dependencies:
-      '@graphql-typed-document-node/core': 3.1.1(graphql@16.6.0)
+      '@graphql-typed-document-node/core': 3.1.1(graphql@16.8.1)
       '@wry/context': 0.7.0
       '@wry/equality': 0.5.3
       '@wry/trie': 0.3.2
-      graphql: 16.6.0
-      graphql-tag: 2.12.6(graphql@16.6.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
       hoist-non-react-statics: 3.3.2
       optimism: 0.16.2
       prop-types: 15.8.1
@@ -266,12 +270,12 @@ packages:
       - '@types/react'
     dev: false
 
-  /@graphql-typed-document-node/core@3.1.1(graphql@16.6.0):
+  /@graphql-typed-document-node/core@3.1.1(graphql@16.8.1):
     resolution: {integrity: sha512-NQ17ii0rK1b34VZonlmT2QMJFI70m0TRwbknO/ihlbatXyaktDhN/98vBiUU6kNBPljqGqyIrl2T4nY2RpFANg==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
-      graphql: 16.6.0
+      graphql: 16.8.1
 
   /@headlessui/react@1.7.4(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-D8n5yGCF3WIkPsjEYeM8knn9jQ70bigGGb5aUvN6y4BGxcT3OcOQOKcM3zRGllRCZCFxCZyQvYJF6ZE7bQUOyQ==}
@@ -1007,9 +1011,9 @@ packages:
   /@types/apollo-upload-client@17.0.2(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-NphAiBqzZv3iY8Cq+qWyi0QUFFzJ+nVd7QKI/iKV8RfILrpYDL69F/vlhjn4BNxKlmc3LxJHymcf3gFzLBwuZQ==}
     dependencies:
-      '@apollo/client': 3.7.1(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0)
+      '@apollo/client': 3.7.1(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@types/extract-files': 8.1.1
-      graphql: 16.6.0
+      graphql: 16.8.1
     transitivePeerDependencies:
       - graphql-ws
       - react
@@ -1269,16 +1273,16 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /apollo-upload-client@17.0.0(@apollo/client@3.7.1)(graphql@16.6.0):
+  /apollo-upload-client@17.0.0(@apollo/client@3.7.1)(graphql@16.8.1):
     resolution: {integrity: sha512-pue33bWVbdlXAGFPkgz53TTmxVMrKeQr0mdRcftNY+PoHIdbGZD0hoaXHvO6OePJAkFz7OiCFUf98p1G/9+Ykw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >= 16.0.0}
     peerDependencies:
       '@apollo/client': ^3.0.0
       graphql: 14 - 16
     dependencies:
-      '@apollo/client': 3.7.1(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0)
+      '@apollo/client': 3.7.1(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       extract-files: 11.0.0
-      graphql: 16.6.0
+      graphql: 16.8.1
     dev: false
 
   /arg@5.0.2:
@@ -2339,17 +2343,17 @@ packages:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: true
 
-  /graphql-tag@2.12.6(graphql@16.6.0):
+  /graphql-tag@2.12.6(graphql@16.8.1):
     resolution: {integrity: sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==}
     engines: {node: '>=10'}
     peerDependencies:
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
-      graphql: 16.6.0
+      graphql: 16.8.1
       tslib: 2.4.1
 
-  /graphql@16.6.0:
-    resolution: {integrity: sha512-KPIBPDlW7NxrbT/eh4qPXz5FiFdL5UbaA0XUNz2Rp3Z3hqBSkbj0GVjwFDztsWVauZUWsbKHgMg++sk8UX0bkw==}
+  /graphql@16.8.1:
+    resolution: {integrity: sha512-59LZHPdGZVh695Ud9lRzPBVTtlX9ZCV150Er2W43ro37wVof0ctenSaskPPjN7lVTIN8mSZt8PHUNKZuNQUuxw==}
     engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
 
   /has-bigints@1.0.2:
